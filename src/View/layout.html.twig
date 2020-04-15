@@ -16,17 +16,15 @@
 </head>
 
 <body>
-{% include '/src/View/Layout/navbar.html.twig' %}
+{% include ('./Layout/navbar.html.twig') %}
 
 {% block content %}{% endblock %}
 
-{% include '/src/View/Layout/footer.html.twig' %}
+{% include ('./Layout/footer.html.twig') %}
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/js/uikit-icons.min.js"></script>
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/js/uikit-icons.min.js"></script>
 {% block javascript %}{% endblock %}
 </body>
 </html>
-
-
