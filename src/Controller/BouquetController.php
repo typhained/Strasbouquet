@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Model\BouquetManager;
@@ -24,7 +23,6 @@ class BouquetController extends AbstractController
      */
     public function add()
     {
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $bouquetManager = new BouquetManager();
             $bouquet = [
@@ -36,7 +34,6 @@ class BouquetController extends AbstractController
             $id = $bouquetManager->insert($bouquet);
             header('Location:/bouquet/show/' . $id);
         }
-
         return $this->twig->render('Bouquet/add.html.twig');
     }
 }
