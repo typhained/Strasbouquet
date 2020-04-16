@@ -36,4 +36,15 @@ class BouquetController extends AbstractController
         }
         return $this->twig->render('Bouquet/add.html.twig');
     }
+    /**
+     * Handle item deletion
+     *
+     * @param int $id
+     */
+    public function delete(int $id)
+    {
+        $bouquetManager = new BouquetManager();
+        $bouquetManager->delete($id);
+        header('Location:/bouquet/index');
+    }
 }
