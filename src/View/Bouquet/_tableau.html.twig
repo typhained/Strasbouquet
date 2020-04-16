@@ -1,0 +1,22 @@
+<table class="uk-table">
+    <tr>
+        <td>&nbsp;</td>
+        <td>ID</td>
+        <td>Nom</td>
+        <td>Prix</td>
+        <td>Description</td>
+        <td>Saisonnier</td>
+    </tr>
+    {% for bouquet in bouquets %}
+    <tr>
+        <td>&nbsp;</td>
+        <td>{{ bouquet.id }}</td>
+        <td>{{ bouquet.nom}}</td>
+        <td>{{ bouquet.prix }}</td>
+        <td>{{ bouquet.description }}</td>
+        <td>{{ bouquet.saisonnier }}</td>
+        <td><a href="/bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a></td>
+        <td><a href="/bouquet/delete/{{bouquet.id}}"><span uk-icon="trash"></span></a></td>
+    </tr>
+    {% endfor %}
+</table>
