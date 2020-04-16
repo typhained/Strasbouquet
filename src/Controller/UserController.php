@@ -25,7 +25,8 @@ class UserController extends AbstractController
         $message="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
-                echo "Adresse email invalide";
+                $message= "L'adresse mail est invalide";
+                return $this->twig->render('User/add.html.twig', ['message'=>$message]);
             } else {
                 $userManager = new UserManager();
                 $user = [

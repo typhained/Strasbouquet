@@ -34,7 +34,6 @@ class UserManager extends AbstractManager
         $statement->bindValue('tel', $user['tel'], \PDO::PARAM_INT);
         $statement->bindValue('role', 'client', \PDO::PARAM_STR);
 
-
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
