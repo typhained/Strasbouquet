@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} Créer un bouquet
+{% endblock %}
+
+{% block content %}
+    <h1>Créer un bouquet</h1>
+
+    <h2>Items disponibles</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Couleur</th>
+            <th>Prix</th>
+        </tr>
+        {% for unit in units %}
+            <tr>
+                <td>{{ unit.id }}</td>
+                <td>{{ unit.nom }}</td>
+                <td>{{ unit.type }}</td>
+                <td>{{ unit.couleur }}</td>
+                <td>{{ unit.prix }}€</td>
+                <td><a href="#">Ajouter</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Mon bouquet</h2>
+{% endblock %}
