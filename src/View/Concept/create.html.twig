@@ -5,28 +5,31 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Créer un bouquet</h1>
+    <div class="uk-container">
+        <h1>Créer un bouquet</h1>
 
-    <h2>Items disponibles</h2>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Couleur</th>
-            <th>Prix</th>
-        </tr>
-        {% for unit in units %}
+        <h2>Items disponibles</h2>
+        <table class="uk-table uk-table-striped">
             <tr>
-                <td>{{ unit.id }}</td>
-                <td>{{ unit.nom }}</td>
-                <td>{{ unit.type }}</td>
-                <td>{{ unit.couleur }}</td>
-                <td>{{ unit.prix }}€</td>
-                <td><a href="#">Ajouter</a></td>
+                <th>id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Couleur</th>
+                <th>Prix</th>
+                <th>Ajouter</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for unit in units %}
+                <tr>
+                    <td>{{ unit.id }}</td>
+                    <td>{{ unit.nom }}</td>
+                    <td>{{ unit.type }}</td>
+                    <td>{{ unit.couleur }}</td>
+                    <td>{{ unit.prix }}€</td>
+                    <td><a href="#" uk-icon="icon: plus-circle"></a></td>
+                </tr>
+            {% endfor %}
+        </table>
 
-    <h2>Mon bouquet</h2>
+        <h2>Mon bouquet</h2>
+    </div>
 {% endblock %}

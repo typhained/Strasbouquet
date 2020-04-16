@@ -28,6 +28,13 @@ class ConceptController extends AbstractController
         return $this->twig->render('Concept/index.html.twig', ['concepts' => $concepts]);
     }
 
+    /**
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function show(int $id)
     {
         $conceptManager = new ConceptManager();

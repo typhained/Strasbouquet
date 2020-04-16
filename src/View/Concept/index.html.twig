@@ -5,12 +5,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Bouquets personnalisés</h1>
-    <ul>
-        {% for concept in concepts %}
-        <li>{{ concept.id }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/Concept/create">Créer un bouquet</a>
-
+    <div class="uk-container">
+        <h1>Bouquets personnalisés</h1>
+        <ul>
+            {% for concept in concepts %}
+                <li>{{ concept.id }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/Concept/create"><span uk-icon="plus-circle"></span> Créer un bouquet</a>
+    </div>
 {% endblock %}
