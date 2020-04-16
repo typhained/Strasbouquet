@@ -39,4 +39,17 @@ class UserManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+
+    public function checkEmail($user): bool
+    {
+        $statement = $this->pdo->query("SELECT `mail` FROM ".self::TABLE." WHERE `mail` ='".$user['mail']."'");
+
+        $result = $statement->rowCount();
+        if ($result == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

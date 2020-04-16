@@ -22,20 +22,29 @@ class UserController extends AbstractController
 
     public function add()
     {
+        $message="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userManager = new UserManager();
-            $user = [
-                'firstname' => $_POST['firstname'],
-                'lastname' => $_POST['lastanme'],
-                'password' => $_POST['password'],
-                'mail' => $_POST['mail'],
-                'tel' => $_POST['tel'],
-                'role' => $_POST['role'],
-            ];
-            $id = $userManager->insert($user);
-            header('Location:/item/show/' . $id);
+            if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
+                echo "Adresse email invalide";
+            } else {
+                $userManager = new UserManager();
+                $user = [
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
+                    'password' => $_POST['password'],
+                    'mail' => $_POST['mail'],
+                    'tel' => $_POST['tel'],
+                ];
+                if ($userManager->checkEmail($user) === false) {
+                    $userManager->insert($user);
+                    header('Location:/User/index/');
+                } else {
+                    $message = "L'adresse mail est déjà enregistrée. 
+                   Veuillez vous connecter ou tenter avec une autre adresse email.";
+                    return $this->twig->render('User/add.html.twig', ['message'=>$message]);
+                }
+            }
         }
-
         return $this->twig->render('User/add.html.twig');
     }
 }
