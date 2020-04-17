@@ -25,11 +25,12 @@
                     <td>{{ unit.type }}</td>
                     <td>{{ unit.couleur }}</td>
                     <td>{{ unit.prix }}€</td>
-                    <td><a href="#" uk-icon="icon: plus-circle"></a></td>
+                    <td><a href="?id={{ unit.id }}" uk-icon="icon: plus-circle"></a></td>
                 </tr>
             {% endfor %}
         </table>
 
         <h2>Mon bouquet</h2>
+        {% include './show.html.twig' %}
     </div>
 {% endblock %}
