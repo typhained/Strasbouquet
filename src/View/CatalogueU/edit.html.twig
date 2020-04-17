@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section class="uk-container uk-padding-large">
+       <article class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-height-medium" uk-grid>
+            <div class="uk-card-media-left uk-cover-container uk-height-medium">
+                <img src="https://getuikit.com/docs/images/light.jpg" alt="" uk-cover>
+                <canvas width="600" height="400"></canvas>
+            </div>
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">Fiche produit</h3>
+                    <ul>
+                        <li class="uk-margin">Nom : {{ catalogueU.nom }}</li>
+                        <li class="uk-margin">Type : {{ catalogueU.type }}</li>
+                        <li class="uk-margin">Prix : {{ catalogueU.prix }} €</li>
+                        <li class="uk-margin">Couleur : {{ catalogueU.couleur }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <form class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large" method="post">
+            <legend class="uk-text-center">Modifier le produit</legend>
+            <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
+                {{ message }}
+            </div>
+            <input type="hidden" name="id" value="{{ catalogueU.id }}">
+            <input class="uk-inline uk-input uk-margin" value="{{ catalogueU.nom }}" type="text" name="nom" placeholder="Nom" required>
+            <select class="uk-select uk-margin uk-inline" name="type" required>
+                <option value="">Veuillez selectionner un type de produit</option>
+                <option value="fleurs">Fleurs</option>
+                <option value="feuilles">Feuilles</option>
+                <option value="herbes">Herbes</option>
+                <option value="accessoires">Accessoires</option>
+                <option value="autres">Autres</option>
+            </select>
+            <input class="uk-inline uk-input uk-margin" value="{{ catalogueU.prix }}" type="text" name="prix" placeholder="Prix" required>
+            <select class="uk-select uk-margin uk-inline" name="couleur" required>
+                <option value="">Veuillez selectionner une couleur</option>
+                <option value="rose">Rose</option>
+                <option value="jaune">Jaune</option>
+                <option value="orange">Orange</option>
+                <option value="rouge">Rouge</option>
+                <option value="violet">Violet</option>
+                <option value="fleurs">Fleurs</option>
+                <option value="bleu">Bleu</option>
+                <option value="blanc">Blanc</option>
+                <option value="noir">Noir</option>
+            </select>
+            <input class="uk-button uk-button-primary uk-margin uk-width-1-1" type="submit" value="Valider">
+        </form>
+       </article>
+        <div class="uk-text-right">
+            <a href="/CatalogueU/delete/{{catalogueU.id}}" class="uk-button uk-button-primary">Supprimer</a>
+            <a href="/CatalogueU/index" class="uk-button uk-button-primary uk-margin">Retour</a>
+        </div>
+    </section>
+{% endblock %}

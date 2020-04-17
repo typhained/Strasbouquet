@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section class="uk-container uk-padding-large">
+        <table class="uk-table uk-table-striped uk-box-shadow-large">
+            <caption class="uk-text-center uk-margin uk-text-bold">Liste des produits unitaires</caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Prix</th>
+                    <th>Couleur</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for catalogueU in catalogueUs %}
+                    <tr>
+                        <td>{{ catalogueU.id }}</td>
+                        <td>{{ catalogueU.nom }}</td>
+                        <td>{{ catalogueU.type }}</td>
+                        <td>{{ catalogueU.prix }}</td>
+                        <td>{{ catalogueU.couleur }}</td>
+                        <td><a href="/CatalogueU/edit/{{ catalogueU.id }}"><span uk-icon="pencil"></span></a>
+                        <a href="/CatalogueU/delete/{{catalogueU.id}}"><span uk-icon="trash"></span></a>
+                        <a href="/CatalogueU/show/{{ catalogueU.id }}"><span uk-icon="info"></span</a></td>
+                    </tr>
+                {% else %}
+                    <td>Nothing to display</td>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="uk-text-right">
+            <a href="/CatalogueU/add" class="uk-button uk-button-primary uk-margin">Ajouter</a>
+        </div>
+    </section>
+{% endblock %}
+
