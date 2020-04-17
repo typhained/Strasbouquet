@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Bouquet {{ bouquet.nom }}</h1>
+    <h2>Bouquet {{ bouquet.nom }}</h2>
     <p>{{ bouquet.id }}. {{ bouquet.nom }}</p>
     <a href="/bouquet/edit/{{ bouquet.id }}">Edit</a>
     <a href="/bouquet/delete/{{bouquet.id}}">Supprimer</a>
