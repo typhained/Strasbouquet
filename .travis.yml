@@ -14,8 +14,11 @@ script:
     - ./vendor/bin/phpmd src text phpmd.xml
 notifications:
     email:
-        - TRAINER@wildcodeschool.fr
-        - STUDENT_MAIL
+        - yavuz@wildcodeschool.fr
+        - bauduin.yann.59@gmail.com
+        - franck7980@gmail.com
+        - typhaine.demangeon@gmail.com
+        - pierremanu.muller@gmail.com
 branches:
     only:
         - master
