@@ -16,8 +16,9 @@
             <td>{{ bouquet.prix }}</td>
             <td>{{ bouquet.description }}</td>
             <td>{{ bouquet.saisonnier }}</td>
-            <td><a href="/bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a></td>
-            <td><a href="/bouquet/delete/{{bouquet.id}}"><span uk-icon="trash"></span></a></td>
+            <td><a href="/bouquet/update/{{bouquet.id}}"><span uk-icon="info"></span></a>
+            <a href="/bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
+            <a href="/bouquet/delete/{{bouquet.id}}"><span uk-icon="trash"></span></a></td>
         </tr>
         {% endfor %}
     </table>

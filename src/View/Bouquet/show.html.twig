@@ -1,9 +1,30 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h2>Bouquet {{ bouquet.nom }}</h2>
-    <p>{{ bouquet.id }}. {{ bouquet.nom }}</p>
-    <a href="/bouquet/edit/{{ bouquet.id }}">Edit</a>
-    <a href="/bouquet/delete/{{bouquet.id}}">Supprimer</a>
-    <a href="/bouquet/index">Back</a>
+    <section class="uk-container uk-padding-large">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <div class="uk-card-media-left uk-cover-container">
+                <img src="https://getuikit.com/docs/images/light.jpg" alt="" uk-cover>
+                <canvas width="600" height="400"></canvas>
+            </div>
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">Fiche produit bouquet</h3>
+                    <ul>
+                        <li class="uk-margin">Nom : {{ bouquet.nom }}</li>
+                        <li class="uk-margin">Prix : {{ bouquet.prix }} €</li>
+                        <li class="uk-margin">Description : {{ bouquet.description }}</li>
+                        <li class="uk-margin">Saisonnier : {{ bouquet.saisonnier }}</li>
+                    </ul>
+                    <div>
+                        <a href="/CatalogueU/edit/{{ bouquet.id }}" class="uk-button uk-button-primary">Modifier</a>
+                        <a href="/CatalogueU/delete/{{bouquet.id}}" class="uk-button uk-button-primary">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-text-right">
+            <a href="/Bouquet/index" class="uk-button uk-button-primary uk-margin">Retour</a>
+        </div>
+    </section>
 {% endblock %}
