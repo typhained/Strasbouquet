@@ -17,17 +17,31 @@
             <tbody>
                 {% for catalogueU in catalogueUs %}
                     <tr>
+                        <div id="modal-example-{{ catalogueU.id }}" uk-modal class="uk-modal-container">
+                            <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+                                <h3 class="uk-modal-title uk-text-danger ">Suppression de votre produit</h3>
+                                <p class="uk-text-center">Attention, cette action est irréversible</p>
+                                <p>
+                                    <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                                    <button class="uk-button uk-button-danger " type="button">
+                                        <a class="uk-text-secondary" href="/catalogueU/delete/{{ catalogueU.id }}">Supprimer</a>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
                         <td>{{ catalogueU.id }}</td>
                         <td>{{ catalogueU.nom }}</td>
                         <td>{{ catalogueU.type }}</td>
                         <td>{{ catalogueU.prix }}</td>
                         <td>{{ catalogueU.couleur }}</td>
-                        <td><a href="/CatalogueU/edit/{{ catalogueU.id }}"><span uk-icon="pencil"></span></a>
-                        <a href="/CatalogueU/delete/{{catalogueU.id}}"><span uk-icon="trash"></span></a>
-                        <a href="/CatalogueU/show/{{ catalogueU.id }}"><span uk-icon="info"></span</a></td>
+                        <td>
+                            <a href="/CatalogueU/edit/{{ catalogueU.id }}"><span uk-icon="pencil"></span></a>
+                            <a href="#modal-example-{{ catalogueU.id }}" uk-toggle><span uk-icon="trash"></span></a>
+                            <a href="/CatalogueU/show/{{ catalogueU.id }}"><span uk-icon="info"></span</a>
+                        </td>
                     </tr>
                 {% else %}
-                    <td>Nothing to display</td>
+                    <td>Vous n'avez pas de produit</td>
                 {% endfor %}
             </tbody>
         </table>

@@ -18,9 +18,21 @@
                 </ul>
                 <div>
                     <a href="/CatalogueU/edit/{{ catalogueU.id }}" class="uk-button uk-button-primary">Modifier</a>
-                    <a href="/CatalogueU/delete/{{catalogueU.id}}" class="uk-button uk-button-primary">Supprimer</a>
+                    <a href="#modal-example" class="uk-button uk-button-danger" uk-toggle>Supprimer</a>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="modal-example" uk-modal class="uk-modal-container">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+            <h3 class="uk-modal-title uk-text-danger ">Suppression de votre produit</h3>
+            <p class="uk-text-center">Attention, cette action est irréversible</p>
+            <p>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                <button class="uk-button uk-button-danger " type="button">
+                    <a class="uk-text-secondary" href="/catalogueU/delete/{{ catalogueU.id }}">Supprimer</a>
+                </button>
+            </p>
         </div>
     </div>
     <div class="uk-text-right">
