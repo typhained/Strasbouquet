@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+
     <h1>Bouquet {{ bouquet.nom }}</h1>
     <p>{{ bouquet.id }}. {{ bouquet.nom }}</p>
     <a href="/bouquet/edit/{{ bouquet.id }}">Edit</a>
