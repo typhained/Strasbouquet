@@ -55,4 +55,30 @@ class BouquetController extends AbstractController
         $bouquetManager->delete($id);
         header('Location:/bouquet/index');
     }
+    
+    public function edit(int $id): string
+    {
+        $bouquetManager = new bouquetManager();
+        $bouquet = $bouquetManager->selectOneById($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if (empty($_POST['nom']) || !preg_match("/^[a-zA-Z ]*$/", $_POST['nom'])) {
+                $message = "Veuillez remplir correctement le champ NOM s'il vous plaît";
+
+                return $this->twig->render('Bouquet/edit.html.twig', ['message' => $message]);
+            }
+
+            if (empty($_POST['prix']) ||
+                !preg_match("/^([1-9][0-9]{,2}(,[0-9]{3})*|[0-9]+)(\.[0-9]{1,9})?/", $_POST['prix'])) {
+                $message = "Veuillez remplir correctement le champ Prix s'il vous plaît";
+
+                return $this->twig->render('Bouquet/edit.html.twig', ['message' => $message]);
+            }
+            $bouquet['nom'] = $_POST['nom'];
+            $bouquet['prix'] = $_POST['prix'];
+            $bouquet['description'] = $_POST['description'];
+            $bouquet['saisonnier'] = $_POST['saisonnier'];
+            $bouquetManager->update($bouquet);
+            header('Location:/Bouquet/index');
+        }
+    }
 }
