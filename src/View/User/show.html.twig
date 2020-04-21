@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="uk-container uk-margin-top">
+        <h3 class="uk-text-center">Mon profil</h3>
+        <div class="uk-card uk-card-default uk-width-1-1@m">
+            <div class="uk-card-header uk-background-muted">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-card-title uk-margin-remove-bottom">{{ user.firstname }} {{ user.lastname }}</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">Adresse mail: {{ user.mail }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-card-body">
+                <p class="uk-text-meta uk-margin-remove-top">Numéro de téléphone: {{ user.num_Tel }}</p>
+                <h3>Ma dernière commande</h3>
+                <p>Dernière commande affichée ici</p>
+            </div>
+            <div class="uk-card-footer uk-text-center">
+                <a href="../update/{{ user.id }}" class="uk-button-text uk-alert uk-alert-success">Modifier</a>
+                <a href="../delete/{{ user.id }}" class="uk-button-text uk-alert uk-alert-danger">Supprimer mon compte</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
