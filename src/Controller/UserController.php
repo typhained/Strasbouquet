@@ -35,7 +35,6 @@ class UserController extends AbstractController
             } elseif (!empty($_POST['tel']) && (preg_match($patternTel, $_POST['tel']) === 0)) {
                 $message = "Il y a un problème avec le numéro de téléphone.";
                 return $this->twig->render('User/add.html.twig', ['message' => $message]);
-
             } elseif (preg_match($patternPass, $_POST['password']) === 0) {
                 $message= "Votre mot de passe doit faire minimum 6 caractères 
                 et contenir au moins une majuscule et un chiffre";
