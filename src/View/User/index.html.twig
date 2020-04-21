@@ -11,8 +11,10 @@
         <th>Mail</th>
         <th>Téléphone</th>
         <th>Dernière commande</th>
+        <th class="uk-table-expand"></th>
         </thead>
         <tbody>
+
     {% for user in users %}
         <tr>
             <td>{{ user.lastname }}</td>
@@ -20,6 +22,9 @@
             <td>{{ user.mail }}</td>
             <td>{{ user.num_Tel }}
             <td class="uk-table-expand">{{ user.historique }}</td>
+            <td><a href="/User/update/{{ user.id }}"><span uk-icon="pencil"></span></a>
+                <a href="#modal-example-{{ user.id }}" uk-toggle><span uk-icon="trash"></span></a>
+            </td>
         </tr>
     {% endfor  %}
         </tbody>
