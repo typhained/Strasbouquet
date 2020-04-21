@@ -14,4 +14,9 @@ class ConceptManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
+
+    public function insert()
+    {
+        $statement = $this->pdo->prepare("INSERT INTO ");
+    }
 }

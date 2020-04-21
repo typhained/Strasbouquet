@@ -35,6 +35,7 @@ class ConceptController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+    /*
     public function show(int $id)
     {
         $conceptManager = new ConceptManager();
@@ -42,6 +43,7 @@ class ConceptController extends AbstractController
 
         return $this->twig->render('Concept/show.html.twig', ['concept' => $concept]);
     }
+    */
 
     /**
      * @return string

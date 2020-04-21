@@ -1,5 +1,28 @@
-{% extends 'layout.hyml.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}
 {{ parent() }} Bouquet créé
+{% endblock %}
+
+{% block content %}
+    <table class="uk-table uk-table-striped">
+        <tr>
+            <th>id bouquet</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Couleur</th>
+            <th>Prix</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            {% for item in bouquet %}
+                <td>{{ item.id_bouquet_concept }}</td>
+                <td>{{ item.nom }}</td>
+                <td>{{ item.type }}</td>
+                <td>{{ item.couleur }}</td>
+                <td>{{ item.prix }}</td>
+                <td>Action</td>
+            {% endfor %}
+        </tr>
+    </table>
 {% endblock %}
