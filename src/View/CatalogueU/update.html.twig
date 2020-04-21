@@ -1,0 +1,7 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Edit catalogue unitaire {{ catalogueU.nom }}</h1>
+    {% include 'CatalogueU/_form.html.twig' %}
+    <a href="/CatalogueU/index/{{ catalogueU.id }}">Retour</a>
+{% endblock %}

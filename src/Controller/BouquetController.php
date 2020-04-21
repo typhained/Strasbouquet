@@ -36,6 +36,14 @@ class BouquetController extends AbstractController
         }
         return $this->twig->render('Bouquet/add.html.twig');
     }
+
+    public function show(int $id)
+    {
+        $bouquetManager = new BouquetManager();
+        $bouquet = $bouquetManager->selectOneById($id);
+
+        return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet]);
+    }
     /**
      * Handle item deletion
      *
