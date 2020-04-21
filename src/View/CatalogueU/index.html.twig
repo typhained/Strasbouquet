@@ -2,6 +2,9 @@
 
 {% block content %}
     <section class="uk-container uk-padding-large">
+        <div class="uk-text-right">
+            <a href="/CatalogueU/add" title="Ajouter un produit" class="uk-button uk-button-primary uk-margin">Ajouter</a>
+        </div>
         <table class="uk-table uk-table-striped uk-box-shadow-large">
             <caption class="uk-text-center uk-margin uk-text-bold">Liste des produits unitaires</caption>
             <thead>
@@ -32,12 +35,12 @@
                         <td>{{ catalogueU.id }}</td>
                         <td>{{ catalogueU.nom }}</td>
                         <td>{{ catalogueU.type }}</td>
-                        <td>{{ catalogueU.prix }}</td>
+                        <td>{{ catalogueU.prix }} €</td>
                         <td>{{ catalogueU.couleur }}</td>
                         <td>
-                            <a href="/CatalogueU/edit/{{ catalogueU.id }}"><span uk-icon="pencil"></span></a>
-                            <a href="#modal-example-{{ catalogueU.id }}" uk-toggle><span uk-icon="trash"></span></a>
-                            <a href="/CatalogueU/show/{{ catalogueU.id }}"><span uk-icon="info"></span</a>
+                            <a href="/CatalogueU/edit/{{ catalogueU.id }}" title="Modifier"><span uk-icon="pencil"></span></a>
+                            <a href="#modal-example-{{ catalogueU.id }}" title="Supprimer" uk-toggle><span uk-icon="trash"></span></a>
+                            <a href="/CatalogueU/show/{{ catalogueU.id }}" title="Détails"><span uk-icon="info"></span</a>
                         </td>
                     </tr>
                 {% else %}
@@ -46,7 +49,7 @@
             </tbody>
         </table>
         <div class="uk-text-right">
-            <a href="/CatalogueU/add" class="uk-button uk-button-primary uk-margin">Ajouter</a>
+            <a href="/CatalogueU/add" title="Ajouter un produit" class="uk-button uk-button-primary uk-margin">Ajouter</a>
         </div>
     </section>
 {% endblock %}
