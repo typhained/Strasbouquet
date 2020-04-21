@@ -1,7 +1,50 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Edit Bouquet {{ bouquet.nom }}</h1>
-    {% include 'Bouquet/_form.html.twig' %}
-    <a href="/bouquet/show/{{ bouquet.id }}">Back</a>
+    <section class="uk-container uk-padding-large">
+       <article class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-height-medium" uk-grid>
+            <div class="uk-card-media-left uk-cover-container uk-height-medium">
+                <img src="https://getuikit.com/docs/images/light.jpg" alt="" uk-cover>
+                <canvas width="600" height="400"></canvas>
+            </div>
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">Fiche produit</h3>
+                    <ul>
+                        <li class="uk-margin">Nom : {{ bouquet.nom }}</li>
+                        <li class="uk-margin">Prix : {{ bouquet.prix }} €</li>
+                        <li class="uk-margin">Description : {{ bouquet.description }}</li>
+                        <li class="uk-margin">Saisonnier : {{ bouquet.saisonnier }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+           <div id="modal-example" uk-modal class="uk-modal-container">
+               <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+                   <h3 class="uk-modal-title uk-text-danger ">Suppression de votre produit</h3>
+                   <p class="uk-text-center">Attention, cette action est irréversible</p>
+                   <p>
+                       <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                       <button class="uk-button uk-button-danger " type="button">
+                           <a class="uk-text-secondary" href="/bouquet/delete/{{ catalogueU.id }}">Supprimer</a>
+                       </button>
+                   </p>
+               </div>
+           </div>
+        <form class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large" method="post">
+            <legend class="uk-text-center">Modifier le produit</legend>
+            <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
+                {{ message }}
+            </div>
+            <input type="hidden" name="id" value="{{ bouquet.id }}">
+            
+            <input class="uk-button uk-button-primary uk-margin uk-width-1-1" type="submit" value="Valider">
+        </form>
+       </article>
+        <div class="uk-text-right">
+            <a href="#modal-example" class="uk-button uk-button-danger" uk-toggle>Supprimer</a>
+            <a href="/Bouquet/index" class="uk-button uk-button-primary uk-margin">Retour</a>
+        </div>
+    </section>
 {% endblock %}

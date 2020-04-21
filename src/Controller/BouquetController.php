@@ -56,11 +56,11 @@ class BouquetController extends AbstractController
         header('Location:/bouquet/index');
     }
     
-    public function edit(int $id): string
+    public function update(int $id): string
     {
         $bouquetManager = new bouquetManager();
         $bouquet = $bouquetManager->selectOneById($id);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['nom']) || !preg_match("/^[a-zA-Z ]*$/", $_POST['nom'])) {
                 $message = "Veuillez remplir correctement le champ NOM s'il vous plaît";
 

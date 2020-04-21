@@ -37,9 +37,9 @@ class BouquetManager extends AbstractManager
      * @param array $bouquet
      * @return bool
      */
-    public function upadte(array $bouquet): bool
+    public function update(array $bouquet): bool
     {
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . 
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE .
         "SET nom=:nom, prix=:prix, description=:description, saisonnier=:saisonnier Where id=:id");
         $statement->bindValue('nom', $bouquet['nom'], \PDO::PARAM_STR);
         $statement->bindValue('prix', $bouquet['pirx'], \PDO::PARAM_INT);
