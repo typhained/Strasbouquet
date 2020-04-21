@@ -14,7 +14,7 @@ class BouquetController extends AbstractController
         return $this->twig->render('Bouquet/index.html.twig', ['bouquets' => $bouquets]);
     }
     /**
-     * Display item creation page
+     * Display user creation page
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -36,8 +36,17 @@ class BouquetController extends AbstractController
         }
         return $this->twig->render('Bouquet/add.html.twig');
     }
+
+    public function show(int $id)
+    {
+        $bouquetManager = new BouquetManager();
+        $bouquet = $bouquetManager->selectOneById($id);
+
+        return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet]);
+    }
+
     /**
-     * Handle item deletion
+     * Handle user deletion
      *
      * @param int $id
      */
