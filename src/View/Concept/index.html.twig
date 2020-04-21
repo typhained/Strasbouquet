@@ -9,7 +9,7 @@
         <h1>Bouquets personnalisés</h1>
         <ul>
             {% for concept in concepts %}
-                <li>{{ concept.id }}</li>
+                <li>{{ concept.id }} <a href="show/{{ concept.id }}">Modifier</a></li>
             {% endfor %}
         </ul>
         <form action="create/{{ concept.id }}" method="post">

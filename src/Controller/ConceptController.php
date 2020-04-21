@@ -29,23 +29,6 @@ class ConceptController extends AbstractController
     }
 
     /**
-     * @param int $id
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    /*
-    public function show(int $id)
-    {
-        $conceptManager = new ConceptManager();
-        $concept = $conceptManager->selectOneById($id);
-
-        return $this->twig->render('Concept/show.html.twig', ['concept' => $concept]);
-    }
-    */
-
-    /**
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -63,6 +46,13 @@ class ConceptController extends AbstractController
         header('location: /Concept/show/' . $id);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function show($id)
     {
         $conceptManager = new ConceptManager();
@@ -78,6 +68,6 @@ class ConceptController extends AbstractController
     {
         $conceptManager = new ConceptManager();
         $conceptManager->delete($id);
-        header('location: /Concept/index/');
+        header('location: /Concept/index');
     }
 }
