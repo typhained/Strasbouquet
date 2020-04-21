@@ -53,21 +53,14 @@ class ConceptController extends AbstractController
      */
     public function create()
     {
-        $catUnitManager = new CatUnitManager();
-        $units = $catUnitManager->selectAll();
+        $conceptManager = new ConceptManager();
+        $concept = [
+            'id_user' => $_POST['id_user'],
+            'id_panier' => $_POST['id_panier'],
+        ];
+        $id = $conceptManager->insert($concept);
 
-        if (isset($_POST['create'])) {
-            $conceptManager = new ConceptManager();
-            $concept = [
-                'id_user' => $_POST['id_user'],
-                'id_panier' => $_POST['id_panier'],
-            ];
-            $id = $conceptManager->insert($concept);
-
-            header('location: /Concept/show/' . $id);
-        }
-
-        return $this->twig->render('Concept/create.html.twig', ['units' => $units]);
+        header('location: /Concept/show/' . $id);
     }
 
     public function show($id)

@@ -1,11 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }} Bouquet créé
+{{ parent() }} Création bouquet
 {% endblock %}
 
 {% block content %}
+    <!-- Catalogue unitaire -->
     {% include 'Concept/create.html.twig' %}
+
+    <!-- Création bouquet -->
     <div class="uk-container">
         <h2>Mon bouquet</h2>
         <table class="uk-table uk-table-striped">
@@ -20,8 +23,6 @@
                 {{ concept.id_panier }}
             </td>
         </table>
-        <form action="delete/{{ concept.id }}" method="post">
-            <button type="submit" name="delete">Supprimer</button>
-        </form>
+        <a href="../delete/{{ concept.id }}">Supprimer</a>
     </div>
 {% endblock %}
