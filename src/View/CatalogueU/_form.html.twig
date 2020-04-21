@@ -1,0 +1,32 @@
+<section class="uk-container uk-padding-large">
+    <form class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large" method="post">
+        <legend class="uk-text-center">Ajouter un produit au catalogue</legend>
+        <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
+            {{ message }}
+        </div>
+        <input type="hidden" name="id" value="{{ catalogueU.id }}">
+        <input class="uk-inline uk-input uk-margin" value="{{ catalogueU.nom }}" type="text" name="nom" placeholder="Nom" required>
+        <select class="uk-select uk-margin uk-inline" name="type" required>
+            <option value="">Veuillez selectionner un type de produit</option>
+            <option value="fleurs">Fleurs</option>
+            <option value="feuilles">Feuilles</option>
+            <option value="herbes">Herbes</option>
+            <option value="accessoires">Accessoires</option>
+            <option value="autres">Autres</option>
+        </select>
+        <input class="uk-inline uk-input uk-margin" value="{{ catalogueU.prix }}" type="text" name="prix" placeholder="Prix" required>
+        <select class="uk-select uk-margin uk-inline" name="couleur" required>
+            <option value="">Veuillez selectionner une couleur</option>
+            <option value="rose">Rose</option>
+            <option value="jaune">Jaune</option>
+            <option value="orange">Orange</option>
+            <option value="rouge">Rouge</option>
+            <option value="violet">Violet</option>
+            <option value="fleurs">Fleurs</option>
+            <option value="bleu">Bleu</option>
+            <option value="blanc">Blanc</option>
+            <option value="noir">Noir</option>
+        </select>
+        <input class="uk-button uk-button-primary uk-margin uk-width-1-1" type="submit" value="Valider">
+    </form>
+</section>
