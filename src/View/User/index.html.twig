@@ -2,8 +2,27 @@
 
 {% block content %}
 
-Liste des utilisateurs
+    <h2 class="uk-text-center">Liste des utilisateurs</h2>
 
-{{ dump(users) }}
+    <table class="uk-table uk-table-divider uk-table-hover uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+        <thead class="uk-background-muted">
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Mail</th>
+        <th>Téléphone</th>
+        <th>Dernière commande</th>
+        </thead>
+        <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.mail }}</td>
+            <td>{{ user.num_Tel }}
+            <td class="uk-table-expand">{{ user.historique }}</td>
+        </tr>
+    {% endfor  %}
+        </tbody>
+    </table>
 
 {% endblock content %}

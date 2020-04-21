@@ -14,7 +14,7 @@ class BouquetController extends AbstractController
         return $this->twig->render('Bouquet/index.html.twig', ['bouquets' => $bouquets]);
     }
     /**
-     * Display item creation page
+     * Display user creation page
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -23,7 +23,12 @@ class BouquetController extends AbstractController
      */
     public function add()
     {
+        $message="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(strlen($_POST['description'])>249){
+                $message = "votre déscription est trop longue!";
+                return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet', 'message'=>$message]); 
+            }else{
             $bouquetManager = new BouquetManager();
             $bouquet = [
                 'nom' => $_POST['nom'],
@@ -33,8 +38,9 @@ class BouquetController extends AbstractController
             ];
             $id = $bouquetManager->insert($bouquet);
             header('Location:/bouquet/show/' . $id);
+            }
         }
-        return $this->twig->render('Bouquet/add.html.twig');
+        return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet']);
     }
 
     public function show(int $id)
@@ -44,8 +50,9 @@ class BouquetController extends AbstractController
 
         return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet]);
     }
+
     /**
-     * Handle item deletion
+     * Handle user deletion
      *
      * @param int $id
      */
@@ -53,32 +60,21 @@ class BouquetController extends AbstractController
     {
         $bouquetManager = new BouquetManager();
         $bouquetManager->delete($id);
-        header('Location:/bouquet/index');
+        header('Location:/Bouquet/index');
     }
-    
     public function update(int $id): string
     {
-        $bouquetManager = new bouquetManager();
+        $bouquetManager = new BouquetManager();
         $bouquet = $bouquetManager->selectOneById($id);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (empty($_POST['nom']) || !preg_match("/^[a-zA-Z ]*$/", $_POST['nom'])) {
-                $message = "Veuillez remplir correctement le champ NOM s'il vous plaît";
-
-                return $this->twig->render('Bouquet/edit.html.twig', ['message' => $message]);
-            }
-
-            if (empty($_POST['prix']) ||
-                !preg_match("/^([1-9][0-9]{,2}(,[0-9]{3})*|[0-9]+)(\.[0-9]{1,9})?/", $_POST['prix'])) {
-                $message = "Veuillez remplir correctement le champ Prix s'il vous plaît";
-
-                return $this->twig->render('Bouquet/edit.html.twig', ['message' => $message]);
-            }
             $bouquet['nom'] = $_POST['nom'];
             $bouquet['prix'] = $_POST['prix'];
             $bouquet['description'] = $_POST['description'];
             $bouquet['saisonnier'] = $_POST['saisonnier'];
             $bouquetManager->update($bouquet);
-            header('Location:/Bouquet/index');
+            header('Location:/Bouquet/show/'. $id);
         }
+        return $this->twig->render('Bouquet/edit.html.twig', ['bouquet' => $bouquet, 'title' => $bouquet['nom']]);
     }
 }

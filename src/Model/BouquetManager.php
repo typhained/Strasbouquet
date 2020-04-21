@@ -40,12 +40,13 @@ class BouquetManager extends AbstractManager
     public function update(array $bouquet): bool
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE .
-        "SET nom=:nom, prix=:prix, description=:description, saisonnier=:saisonnier Where id=:id");
+        " SET nom = :nom, prix = :prix, description = :description, saisonnier = :saisonnier WHERE id=:id");
+        $statement->bindValue('id', $bouquet['id'], \PDO::PARAM_INT);
         $statement->bindValue('nom', $bouquet['nom'], \PDO::PARAM_STR);
-        $statement->bindValue('prix', $bouquet['pirx'], \PDO::PARAM_INT);
+        $statement->bindValue('prix', $bouquet['prix'], \PDO::PARAM_INT);
         $statement->bindValue('description', $bouquet['description'], \PDO::PARAM_STR);
         $statement->bindValue('saisonnier', $bouquet['saisonnier'], \PDO::PARAM_BOOL);
-
+        
         return $statement->execute();
     }
     /**

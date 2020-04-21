@@ -1,0 +1,40 @@
+<div class="uk-container">
+    <table class="uk-table">
+        <thead>
+            <tr>
+                <td>&nbsp;</td>
+                <td>ID</td>
+                <td>Nom</td>
+                <td>Prix</td>
+                <td>Description</td>
+                <td>Saisonnier</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bouquet in bouquets %}
+            <tr>
+                <div id="modal-example-{{ bouquet.id }}" uk-modal class="uk-modal-container">
+                    <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+                        <h3 class="uk-modal-title uk-text-danger ">Suppression de votre bouquet</h3>
+                        <p class="uk-text-center">Attention, cette action est irréversible</p>
+                        <p>
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                            <button class="uk-button uk-button-danger " type="button"><a class="uk-text-secondary"
+                            href="/Bouquet/delete/{{ bouquet.id }}">Supprimer</a></button>
+                        </p>
+                    </div>
+                </div>
+                <td>&nbsp;</td>
+                <td>{{ bouquet.id }}</td>
+                <td>{{ bouquet.nom}}</td>
+                <td>{{ bouquet.prix }}</td>
+                <td>{{ bouquet.description }}</td>
+                <td>{{ bouquet.saisonnier }}</td>
+                <td><a href="/Bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
+                    <a href="/Bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a>
+                    <a href="#modal-example-{{ bouquet.id }}" uk-toggle><span uk-icon="trash"></span></a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
