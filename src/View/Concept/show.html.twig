@@ -5,24 +5,23 @@
 {% endblock %}
 
 {% block content %}
-    <table class="uk-table uk-table-striped">
-        <tr>
-            <th>id bouquet</th>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Couleur</th>
-            <th>Prix</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            {% for item in bouquet %}
-                <td>{{ item.id_bouquet_concept }}</td>
-                <td>{{ item.nom }}</td>
-                <td>{{ item.type }}</td>
-                <td>{{ item.couleur }}</td>
-                <td>{{ item.prix }}</td>
-                <td>Action</td>
-            {% endfor %}
-        </tr>
-    </table>
+    {% include 'Concept/create.html.twig' %}
+    <div class="uk-container">
+        <h2>Mon bouquet</h2>
+        <table class="uk-table uk-table-striped">
+            <tr>
+                <th>id user</th>
+                <th>id panier</th>
+            </tr>
+            <td>
+                {{ concept.id_user }}
+            </td>
+            <td>
+                {{ concept.id_panier }}
+            </td>
+        </table>
+        <form action="delete/{{ concept.id }}" method="post">
+            <button type="submit" name="delete">Supprimer</button>
+        </form>
+    </div>
 {% endblock %}

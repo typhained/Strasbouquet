@@ -12,6 +12,10 @@
                 <li>{{ concept.id }}</li>
             {% endfor %}
         </ul>
-        <a href="create"><span uk-icon="plus-circle"></span> Créer un bouquet</a>
+        <form action="create/{{ concept.id }}" method="post">
+            <input type="hidden" name="id_user" value="1">
+            <input type="hidden" name="id_panier" value="1">
+            <button type="submit" name="create">Créer</button>
+        </form>
     </div>
 {% endblock %}
