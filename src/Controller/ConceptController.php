@@ -47,7 +47,7 @@ class ConceptController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -64,6 +64,9 @@ class ConceptController extends AbstractController
         return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units]);
     }
 
+    /**
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $conceptManager = new ConceptManager();
