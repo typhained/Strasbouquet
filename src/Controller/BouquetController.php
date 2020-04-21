@@ -14,7 +14,7 @@ class BouquetController extends AbstractController
         return $this->twig->render('Bouquet/index.html.twig', ['bouquets' => $bouquets]);
     }
     /**
-     * Display item creation page
+     * Display user creation page
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -46,7 +46,7 @@ class BouquetController extends AbstractController
     }
 
     /**
-     * Handle item deletion
+     * Handle user deletion
      *
      * @param int $id
      */
