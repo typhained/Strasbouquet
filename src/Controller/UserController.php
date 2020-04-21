@@ -60,4 +60,11 @@ class UserController extends AbstractController
         }
         return $this->twig->render('User/add.html.twig');
     }
+
+    public function show(int $id)
+    {
+        $userManager = new UserManager();
+        $user = $userManager->selectOneById($id);
+        return $this->twig->render('User/show.html.twig', ['user' => $user]);
+    }
 }
