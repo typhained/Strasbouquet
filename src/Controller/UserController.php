@@ -67,4 +67,11 @@ class UserController extends AbstractController
         $user = $userManager->selectOneById($id);
         return $this->twig->render('User/show.html.twig', ['user' => $user]);
     }
+
+    public function delete(int $id)
+    {
+        $userManager = new UserManager();
+        $userManager->delete($id);
+        header('Location:/user/index');
+    }
 }
