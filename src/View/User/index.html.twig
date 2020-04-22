@@ -17,6 +17,20 @@
 
     {% for user in users %}
         <tr>
+
+            <div id="modal-example-{{ user.id }}" uk-modal class="uk-modal-container">
+                <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+                    <h3 class="uk-modal-title uk-text-danger">Suppression de l'utilisateur {{ user.firstname}} {{ user.lastname}}</h3>
+                    <p class="uk-text-center">Attention, cette action est irréversible</p>
+                    <p>
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                        <button class="uk-button uk-button-danger " type="button">
+                            <a class="uk-text-secondary" href="/User/delete/{{ user.id }}">Supprimer</a>
+                        </button>
+                    </p>
+                </div>
+            </div>
+
             <td>{{ user.lastname }}</td>
             <td>{{ user.firstname }}</td>
             <td>{{ user.mail }}</td>
@@ -26,6 +40,8 @@
                 <a href="#modal-example-{{ user.id }}" uk-toggle><span uk-icon="trash"></span></a>
             </td>
         </tr>
+
+
     {% endfor  %}
         </tbody>
     </table>
