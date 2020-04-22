@@ -9,8 +9,8 @@
     {% include 'Concept/create.html.twig' %}
 
     <!-- Création bouquet -->
-    <div class="uk-container">
-        <h2>Mon bouquet</h2>
+    <div class="uk-container uk-margin-medium uk-width-1-2@m">
+        <h3>Mon bouquet</h3>
         <table class="uk-table uk-table-striped">
             <tr>
                 <th>id user</th>
@@ -23,6 +23,10 @@
                 {{ concept.id_panier }}
             </td>
         </table>
-        <a href="../delete/{{ concept.id }}">Supprimer</a>
+        <div>
+            <a class="uk-button uk-button-default" href="../index">Retour</a>
+            <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
+            <a class="uk-button uk-button-danger" href="../delete/{{ concept.id }}">Supprimer</a>
+        </div>
     </div>
 {% endblock %}

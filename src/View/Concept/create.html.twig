@@ -1,8 +1,8 @@
-    <div class="uk-container">
-        <h1>Créer un bouquet</h1>
+    <div class="uk-container uk-margin uk-width-1-2@m">
+        <h2>Créer un bouquet</h2>
 
-        <h2>Items disponibles</h2>
-        <table class="uk-table uk-table-striped">
+        <h3>Items disponibles</h3>
+        <table class="uk-table uk-table-striped uk-table-hover">
             <tr>
                 <th>id</th>
                 <th>Nom</th>
@@ -18,7 +18,7 @@
                     <td>{{ unit.type }}</td>
                     <td>{{ unit.couleur }}</td>
                     <td>{{ unit.prix }}€</td>
-                    <td><a href="?id={{ unit.id }}" uk-icon="icon: plus-circle"></a></td>
+                    <td><a href="../add/{{ unit.id }}" uk-icon="icon: plus-circle"></a></td>
                 </tr>
             {% endfor %}
         </table>

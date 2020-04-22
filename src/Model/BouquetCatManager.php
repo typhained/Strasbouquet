@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Model;
 
 class BouquetCatManager extends AbstractManager
@@ -16,5 +15,17 @@ class BouquetCatManager extends AbstractManager
     {
         return $this->pdo->query("SELECT bc.id_bouquet_concept, cu.nom, cu.type, cu.couleur, cu.prix 
         FROM " . self::TABLE . " bc JOIN catalogue_unitaire cu ON cu.id=bc.id_catalogue_unitaire");
+    }
+
+    public function add(int $concept, int $unit)
+    {
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+            " VALUES :id_bouquet_concept, :id_catalogue_unitaire, :quantite");
+        $statement->bindValue('id_bouquet_concept', $concept = 'id', \PDO::PARAM_INT);
+        $statement->bindValue('id_catalogue_unitaire', $unit = 'id');
+
+        if ($statement->execute()) {
+            return (int)$this->pdo->lastInsertId();
+        }
     }
 }

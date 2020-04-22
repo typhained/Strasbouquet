@@ -5,17 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <div class="uk-container">
-        <h1>Bouquets personnalisés</h1>
+    <div class="uk-container uk-width-1-2@m uk-margin-medium">
+        <h2 class="uk-text-center">Bouquets personnalisés</h2>
         <ul>
-            {% for concept in concepts %}
-                <li>{{ concept.id }} <a href="show/{{ concept.id }}">Modifier</a></li>
-            {% endfor %}
+                <table class="uk-table uk-table-striped">
+                    <tr>
+                        <th>ID Bouquet</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for concept in concepts %}
+                    <tr>
+                        <td><a href="show/{{ concept.id }}">Bouquet {{ concept.id }}</a></td>
+                        <td><a href="delete/{{ concept.id }}" uk-icon="icon: trash"></a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
         </ul>
-        <form action="create/{{ concept.id }}" method="post">
+        <form action="create/{{ concept.id }}" method="post" class="uk-text-center">
             <input type="hidden" name="id_user" value="1">
             <input type="hidden" name="id_panier" value="1">
-            <button type="submit" name="create">Créer</button>
+            <button type="submit" name="create" class="uk-button uk-button-primary">Je crée mon bouquet</button>
         </form>
     </div>
 {% endblock %}
