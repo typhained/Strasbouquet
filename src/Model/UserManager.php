@@ -67,6 +67,7 @@ class UserManager extends AbstractManager
         $statement->bindValue('password', $user['password'], \PDO::PARAM_STR);
 
         return $statement->execute();
+    }
 
     /**
      * @param int $id
