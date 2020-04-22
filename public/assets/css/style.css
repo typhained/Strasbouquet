@@ -1,0 +1,35 @@
+body {
+    display: flex;
+}
+section {
+    width: 100%;
+}
+#navbar #admin {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 110%;
+    background-color: #2d3436;
+    position: sticky;
+    top:0px;
+    height: 100vh;
+    overflow: auto;
+}
+#navbar li {
+    margin: 20px 0;
+}
+#navbar li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition-duration: 1s;
+}
+#navbar li a:hover {
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+}
+#navbar a:first-of-type:before{
+    background-image: ;
+}
