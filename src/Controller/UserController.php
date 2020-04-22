@@ -89,7 +89,6 @@ class UserController extends AbstractController
         }
         return $this->twig->render('User/update.html.twig', ['user' => $user]);
     }
-
     public function show(int $id)
     {
         $userManager = new UserManager();
