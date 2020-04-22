@@ -81,9 +81,9 @@ CREATE TABLE `catalogue_unitaire` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `prix` int(11) NOT NULL,
+  `prix` float NOT NULL,
   `couleur` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
