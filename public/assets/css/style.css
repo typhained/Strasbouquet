@@ -1,6 +1,18 @@
 body {
+    background: lightgray;
+    min-height: 100vh;
     display: flex;
 }
+
+table {
+    background: white;
+}
+
+#logo {
+    width: 4vw;
+    margin-top: -3vh;
+}
+
 section {
     width: 100%;
 }
@@ -29,7 +41,4 @@ section {
     background-color: #4CAF50;
     color: white;
     text-decoration: none;
-}
-#navbar a:first-of-type:before{
-    background-image: ;
 }
