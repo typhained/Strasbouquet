@@ -20,9 +20,12 @@
 </head>
 
 <body>
-{% include ('./Layout/navbar.html.twig') %}
 
-{% block content %}{% endblock %}
+{% include ('./Layout/navbarAdmin.html.twig') %}
+<section class="uk-container uk-padding-large">
+    {% block content %}{% endblock %}
+</section>
+
 <!-- UIkit JS -->
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/js/uikit-icons.min.js"></script>

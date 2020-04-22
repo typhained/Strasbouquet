@@ -31,7 +31,7 @@ class UserManager extends AbstractManager
         $statement->bindValue('lastname', $user['lastname'], \PDO::PARAM_STR);
         $statement->bindValue('password', $user['password'], \PDO::PARAM_STR);
         $statement->bindValue('mail', $user['mail'], \PDO::PARAM_STR);
-        $statement->bindValue('tel', $user['tel'], \PDO::PARAM_INT);
+        $statement->bindValue('tel', $user['tel'], \PDO::PARAM_STR);
         $statement->bindValue('role', 'client', \PDO::PARAM_STR);
 
         if ($statement->execute()) {

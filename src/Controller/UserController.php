@@ -32,9 +32,9 @@ class UserController extends AbstractController
             } elseif (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
                 $message= "L'adresse mail est invalide";
                 return $this->twig->render('User/add.html.twig', ['message'=>$message]);
-            } elseif (preg_match($patternTel, $_POST['tel']) === 0) {
-                $message= "Il y a un problème avec le numéro de téléphone.";
-                return $this->twig->render('User/add.html.twig', ['message'=>$message]);
+            } elseif (!empty($_POST['tel']) && (preg_match($patternTel, $_POST['tel']) === 0)) {
+                    $message = "Il y a un problème avec le numéro de téléphone.";
+                    return $this->twig->render('User/add.html.twig', ['message' => $message]);
             } elseif (preg_match($patternPass, $_POST['password']) === 0) {
                 $message= "Votre mot de passe doit faire minimum 6 caractères 
                 et contenir au moins une majuscule et un chiffre";
@@ -44,7 +44,7 @@ class UserController extends AbstractController
                 $user = [
                     'firstname' => ucfirst($_POST['firstname']),
                     'lastname' => strtoupper($_POST['lastname']),
-                    'password' => $_POST['password'],
+                    'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
                     'mail' => strtolower($_POST['mail']),
                     'tel' => $_POST['tel'],
                 ];

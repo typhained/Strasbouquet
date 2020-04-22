@@ -17,8 +17,8 @@
                     <li class="uk-margin">Couleur : {{ catalogueU.couleur }}</li>
                 </ul>
                 <div>
-                    <a href="/CatalogueU/edit/{{ catalogueU.id }}" class="uk-button uk-button-primary">Modifier</a>
-                    <a href="#modal-example" class="uk-button uk-button-danger" uk-toggle>Supprimer</a>
+                    <a href="/CatalogueU/edit/{{ catalogueU.id }}" title="Modification du produit" class="uk-button uk-button-primary">Modifier</a>
+                    <a href="#modal-example" title="Supprimer le produit" class="uk-button uk-button-danger" uk-toggle>Supprimer</a>
                 </div>
             </div>
         </div>
@@ -28,15 +28,15 @@
             <h3 class="uk-modal-title uk-text-danger ">Suppression de votre produit</h3>
             <p class="uk-text-center">Attention, cette action est irréversible</p>
             <p>
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                <button class="uk-button uk-button-default uk-modal-close" title="Annuler la suppréssion du produit" type="button">Annuler</button>
                 <button class="uk-button uk-button-danger " type="button">
-                    <a class="uk-text-secondary" href="/catalogueU/delete/{{ catalogueU.id }}">Supprimer</a>
+                    <a class="uk-text-secondary" title="Supprimer le produit" href="/catalogueU/delete/{{ catalogueU.id }}">Supprimer</a>
                 </button>
             </p>
         </div>
     </div>
     <div class="uk-text-right">
-        <a href="/CatalogueU/index" class="uk-button uk-button-primary uk-margin">Retour</a>
+        <a href="/CatalogueU/index" title="Retour vers le catalogue unitaire" class="uk-button uk-button-primary uk-margin">Retour</a>
     </div>
 </section>
 {% endblock %}
