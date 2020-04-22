@@ -27,7 +27,7 @@ class BouquetController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (strlen($_POST['description'])>249) {
                 $message = "votre déscription est trop longue!";
-                return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet', 'message'=>$message]);
+                return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer votre bouquet', 'message'=>$message]);
             } else {
                         $bouquetManager = new BouquetManager();
                         $bouquet = [
