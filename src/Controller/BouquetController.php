@@ -40,7 +40,7 @@ class BouquetController extends AbstractController
                         header('Location:/bouquet/show/' . $id);
             }
         }
-        return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer votre bouquet']);
+        return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet']);
     }
 
     public function show(int $id)
