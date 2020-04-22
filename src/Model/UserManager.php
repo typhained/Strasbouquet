@@ -39,7 +39,9 @@ class UserManager extends AbstractManager
         }
     }
 
-
+    /**
+     * @return bool
+     */
     public function checkEmail($user): bool
     {
         $statement = $this->pdo->query("SELECT `mail` FROM ".self::TABLE." WHERE `mail` ='".$user['mail']."'");
@@ -65,5 +67,15 @@ class UserManager extends AbstractManager
         $statement->bindValue('password', $user['password'], \PDO::PARAM_STR);
 
         return $statement->execute();
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 }
