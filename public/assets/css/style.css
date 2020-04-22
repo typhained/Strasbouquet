@@ -6,7 +6,11 @@ body {
 
 table {
     background: white;
+}
 
+#logo {
+    width: 4vw;
+    margin-top: -3vh;
 }
 section {
     width: 100%;
