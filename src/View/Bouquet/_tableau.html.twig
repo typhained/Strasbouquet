@@ -1,5 +1,5 @@
 <div class="uk-container">
-    <table class="uk-table">
+    <table class="uk-table uk-box-shadow-large">
         <thead>
             <tr>
                 <td>&nbsp;</td>
@@ -20,7 +20,7 @@
                         <p>
                             <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
                             <button class="uk-button uk-button-danger " type="button"><a class="uk-text-secondary"
-                            href="/bouquet/delete/{{ bouquet.id }}">Supprimer</a></button>
+                            href="/Bouquet/delete/{{ bouquet.id }}">Supprimer</a></button>
                         </p>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                 <td>{{ bouquet.prix }}</td>
                 <td>{{ bouquet.description }}</td>
                 <td>{{ bouquet.saisonnier }}</td>
-                <td><a href="/bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
-                    <a href="/bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a>
+                <td><a href="/Bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
+                    <a href="/Bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a>
                     <a href="#modal-example-{{ bouquet.id }}" uk-toggle><span uk-icon="trash"></span></a></td>
             </tr>
         </tbody>

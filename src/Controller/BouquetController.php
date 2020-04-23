@@ -23,18 +23,24 @@ class BouquetController extends AbstractController
      */
     public function add()
     {
+        $message="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $bouquetManager = new BouquetManager();
-            $bouquet = [
-                'nom' => $_POST['nom'],
-                'prix' => $_POST['prix'],
-                'description' => $_POST['description'],
-                'saisonnier' =>$_POST['saisonnier'],
-            ];
-            $id = $bouquetManager->insert($bouquet);
-            header('Location:/bouquet/show/' . $id);
+            if (strlen($_POST['description'])>249) {
+                $message = "votre déscription est trop longue!";
+                return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet','message'=>$message]);
+            } else {
+                        $bouquetManager = new BouquetManager();
+                        $bouquet = [
+                            'nom' => $_POST['nom'],
+                            'prix' => $_POST['prix'],
+                            'description' => $_POST['description'],
+                            'saisonnier' => $_POST['saisonnier'],
+                        ];
+                        $id = $bouquetManager->insert($bouquet);
+                        header('Location:/bouquet/show/' . $id);
+            }
         }
-        return $this->twig->render('Bouquet/add.html.twig');
+        return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet']);
     }
 
     public function show(int $id)
@@ -54,6 +60,21 @@ class BouquetController extends AbstractController
     {
         $bouquetManager = new BouquetManager();
         $bouquetManager->delete($id);
-        header('Location:/bouquet/index');
+        header('Location:/Bouquet/index');
+    }
+    public function update(int $id): string
+    {
+        $bouquetManager = new BouquetManager();
+        $bouquet = $bouquetManager->selectOneById($id);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $bouquet['nom'] = $_POST['nom'];
+            $bouquet['prix'] = $_POST['prix'];
+            $bouquet['description'] = $_POST['description'];
+            $bouquet['saisonnier'] = $_POST['saisonnier'];
+            $bouquetManager->update($bouquet);
+            header('Location:/Bouquet/show/'. $id);
+        }
+        return $this->twig->render('Bouquet/edit.html.twig', ['bouquet' => $bouquet, 'title' => $bouquet['nom']]);
     }
 }
