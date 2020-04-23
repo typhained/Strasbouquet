@@ -17,7 +17,6 @@ class UserManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-
     /**
      * @param array $user
      * @return int
