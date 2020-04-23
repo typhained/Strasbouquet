@@ -1,7 +1,6 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Edit Bouquet {{ bouquet.nom }}</h1>
     {% include 'Bouquet/_form.html.twig' %}
-    <a href="/bouquet/show/{{ bouquet.id }}">Back</a>
+    <a href="/Bouquet/show/{{ bouquet.id }}">Back</a>
 {% endblock %}

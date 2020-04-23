@@ -75,7 +75,6 @@ class UserController extends AbstractController
                 return $this->twig->render('User/update.html.twig', ['user' => $user, 'message' => $message]);
             } else {
                 $userManager = new UserManager();
-
                 $user['firstname'] = ucfirst($_POST['firstname']);
                 $user['lastname'] = strtoupper($_POST['lastname']);
                 $user['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
