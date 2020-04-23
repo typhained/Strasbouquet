@@ -65,15 +65,6 @@ class ConceptController extends AbstractController
         return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units]);
     }
 
-    public function add(int $concept, int $unit)
-    {
-        $conceptManager = new ConceptManager();
-        $bouquetCatManager = new BouquetCatManager();
-        $catUnitManager = new CatUnitManager();
-
-
-    }
-
     /**
      * @param int $id
      */
