@@ -21,8 +21,8 @@ class BouquetCatManager extends AbstractManager
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
             " VALUES :id_bouquet_concept, :id_catalogue_unitaire, :quantite");
-        $statement->bindValue('id_bouquet_concept', $concept = 'id', \PDO::PARAM_INT);
-        $statement->bindValue('id_catalogue_unitaire', $unit = 'id');
+        $statement->bindValue('id_bouquet_concept', $concept, \PDO::PARAM_INT);
+        $statement->bindValue('id_catalogue_unitaire', $unit, \PDO::PARAM_INT);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
