@@ -21,7 +21,8 @@ class CatalogueUController extends AbstractController
     {
         $catalogueUManager = new CatalogueUManager();
         $catalogueU = $catalogueUManager->selectOneById($id);
-        $catalogueU['prix'] = number_format($catalogueU['prix'],2,'.','');
+        $catalogueU['prix'] = number_format($catalogueU['prix'], 2, '.', '');
+
         return $this->twig->render('CatalogueU/show.html.twig', ['catalogueU' => $catalogueU]);
     }
 
@@ -30,7 +31,7 @@ class CatalogueUController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $catalogueUManager = new CatalogueUManager();
 
-            if (empty($_POST['nom']) || !is_string ($_POST['nom'])) {
+            if (empty($_POST['nom']) || !is_string($_POST['nom'])) {
                 $message = "Veuillez remplir correctement le champ NOM s'il vous plaît";
                 return $this->twig->render('CatalogueU/add.html.twig', ['message' => $message]);
             }
@@ -47,7 +48,6 @@ class CatalogueUController extends AbstractController
                 ];
                 $catalogueUManager->insert($catalogueU);
                 header('Location:/CatalogueU/index');
-
         }
         return $this->twig->render('CatalogueU/add.html.twig');
     }
@@ -57,7 +57,7 @@ class CatalogueUController extends AbstractController
         $catalogueUManager = new CatalogueUManager();
         $catalogueU = $catalogueUManager->selectOneById($id);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (empty($_POST['nom']) || !is_string ($_POST['nom'])) {
+            if (empty($_POST['nom']) || !is_string($_POST['nom'])) {
                 $message = "Veuillez remplir correctement le champ NOM s'il vous plaît";
 
                 return $this->twig->render('CatalogueU/edit.html.twig', ['message' => $message]);
@@ -71,7 +71,7 @@ class CatalogueUController extends AbstractController
 
             $catalogueU['nom'] = $_POST['nom'];
             $catalogueU['type'] = $_POST['type'];
-            $catalogueU['prix'] = number_format($_POST['prix'], 2, ".","");
+            $catalogueU['prix'] = number_format($_POST['prix'], 2, ".", "");
             $catalogueU['couleur'] = $_POST['couleur'];
             $catalogueUManager->update($catalogueU);
             header('Location:/CatalogueU/index');
