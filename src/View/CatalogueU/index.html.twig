@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
-
+{% block title %}
+    {{ parent()}} Catalogue unitaire.
+{% endblock %}
 {% block content %}
     <section class="uk-container uk-padding-large">
         <div class="uk-text-right">
@@ -38,7 +40,7 @@
                         <td>{{ catalogueU.prix }} €</td>
                         <td>{{ catalogueU.couleur }}</td>
                         <td>
-                            <a href="/CatalogueU/edit/{{ catalogueU.id }}" title="Modifier"><span uk-icon="pencil"></span></a>
+                            <a href="/CatalogueU/update/{{ catalogueU.id }}" title="Modifier"><span uk-icon="pencil"></span></a>
                             <a href="#modal-example-{{ catalogueU.id }}" title="Supprimer" uk-toggle><span uk-icon="trash"></span></a>
                             <a href="/CatalogueU/show/{{ catalogueU.id }}" title="Détails"><span uk-icon="info"></span</a>
                         </td>
