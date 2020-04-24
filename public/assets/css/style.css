@@ -20,10 +20,10 @@ section {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 110%;
+    width: 12rem;
     background-color: #2d3436;
     position: sticky;
-    top:0px;
+    top:0;
     height: 100vh;
     overflow: auto;
 }
