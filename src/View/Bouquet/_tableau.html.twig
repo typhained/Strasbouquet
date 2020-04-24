@@ -3,7 +3,6 @@
         <caption class="uk-text-center uk-margin uk-text-bold">Liste des bouqets</caption>
         <thead>
             <tr>
-                <td>&nbsp;</td>
                 <td>ID</td>
                 <td>Nom</td>
                 <td>Prix</td>
@@ -25,7 +24,6 @@
                         </p>
                     </div>
                 </div>
-                <td>&nbsp;</td>
                 <td>{{ bouquet.id }}</td>
                 <td>{{ bouquet.nom}}</td>
                 <td>{{ bouquet.prix }}</td>
@@ -35,7 +33,7 @@
                     <a href="#modal-example-{{ bouquet.id }}" uk-toggle><span uk-icon="trash"></span></a>
                     <a href="/Bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a></td>
             </tr>
-        </tbody>
         {% endfor %}
+         </tbody>
     </table>
 </div>
