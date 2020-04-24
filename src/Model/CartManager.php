@@ -34,11 +34,13 @@ class CartManager extends AbstractManager
     //voir le panier complet
     public function showCartContent($id)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM " . self::BOUQUETJOIN . " c
-        INNER JOIN " .self::BOUQUETJOIN. " bj INNER JOIN ". self::BOUQUET . " b 
-        ON bj.id_bouquet=b.id WHERE bj.id_panier= :id ");
+        $statement = $this->pdo->prepare("SELECT * FROM " . self::BOUQUETJOIN . " bp INNER JOIN 
+        ". self::TABLE ." p ON p.id = bp.id_panier INNER JOIN ". self::BOUQUET." b 
+        ON bp.id_bouquet=b.id WHERE bp.id_panier=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+
+        return $statement->fetchAll();
     }
 
 

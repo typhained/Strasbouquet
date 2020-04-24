@@ -36,7 +36,7 @@ class CartController extends AbstractController
     public function showCart($id)
     {
         $cartManager = new CartManager();
-        $cart = $cartManager->showCartContent($id);
-        return $this->twig->render('Front/cart.html.twig', ["cart" => $cart]);
+        $panier = $cartManager->showCartContent($id);
+        return $this->twig->render('Front/cart.html.twig', ["panier" => $panier]);
     }
 }
