@@ -23,11 +23,11 @@ class GallerieManager extends AbstractManager
      *
      * @return array
      */
-    public function selectOneImage(int $id)
+    public function selectImageBouquet(int $id)
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM gallerie 
-        INNER JOIN bouquet WHERE :bouquet.id = gallerie.id_bouquet");
+        $statement = $this->pdo->prepare("SELECT * FROM ". self::TABLE ."
+        INNER JOIN ".self::BOUQUET." WHERE :bouquet.id = gallerie.id_bouquet");
         $statement->bindValue('bouquet.id', $id, \PDO::PARAM_INT);
         $statement->execute();
 

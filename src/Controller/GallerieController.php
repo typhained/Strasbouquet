@@ -16,10 +16,10 @@ class GallerieController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function show(int $id)
+    public function showImageBouquet(int $id)
     {
         $gallerieManager = new GallerieManager();
-        $gallerie = $gallerieManager->selectOneImage($id);
+        $gallerie = $gallerieManager->selectImageBouquet($id);
 
         return $this->twig->render('Gallerie/show.html.twig', ['gallerie' => $gallerie]);
     }
