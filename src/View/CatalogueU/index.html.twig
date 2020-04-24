@@ -3,6 +3,7 @@
     {{ parent()}} Catalogue unitaire.
 {% endblock %}
 {% block content %}
+    {{ dump(catalogueUs) }}
     <section class="uk-container uk-padding-large">
         <div class="uk-text-right">
             <a href="/CatalogueU/add" title="Ajouter un produit" class="uk-button uk-button-primary uk-margin">Ajouter</a>
