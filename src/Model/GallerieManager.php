@@ -16,17 +16,21 @@ class GallerieManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function insert(array $gallerie): int
+    /**
+     * Get one row from database by ID.
+     *
+     * @param  int $id
+     *
+     * @return array
+     */
+    public function selectOneImage(int $id)
     {
         // prepared request
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (nom, prix, description, saisonnier)
-        VALUES (:nom, :prix, :description, :saisonnier)");
-        $statement->bindValue('nom', $gallerie['nom'], \PDO::PARAM_STR);
-        $statement->bindValue('file1', $gallerie['file1'], \PDO::PARAM_INT);
-        $statement->bindValue('file2', $gallerie['file2'], \PDO::PARAM_STR);
+        $statement = $this->pdo->prepare("SELECT * FROM gallerie 
+        INNER JOIN bouquet WHERE bouquet.id = gallerie.id_bouquet");
+        $statement->bindValue('bouquet.id', $id, \PDO::PARAM_INT);
+        $statement->execute();
 
-        if ($statement->execute()) {
-            return (int)$this->pdo->lastInsertId();
-        }
+        return $statement->fetch();
     }
 }
