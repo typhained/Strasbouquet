@@ -6,7 +6,25 @@
 
 {% block content %}
 
+    <table class="uk-table uk-table-divider uk-box-shadow-large">
+        <thead>
+        <tr>
+            <th>Nom du bouquet</th>
+            <th>Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bouquet in panier %}
+            <tr>
+                <td>{{ bouquet.nom }}</td>
+                <td>{{ bouquet.prix }}</td>
+            </tr>
 
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total: {{ price.total }} </h3>
 
 
 {% endblock %}

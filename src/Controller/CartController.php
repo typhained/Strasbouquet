@@ -37,6 +37,7 @@ class CartController extends AbstractController
     {
         $cartManager = new CartManager();
         $panier = $cartManager->showCartContent($id);
-        return $this->twig->render('Front/cart.html.twig', ["panier" => $panier]);
+        $price = $cartManager->priceCart($id);
+        return $this->twig->render('Front/cart.html.twig', ["panier" => $panier, "price" => $price]);
     }
 }
