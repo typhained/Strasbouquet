@@ -14,11 +14,11 @@ class CatalogueUManager extends AbstractManager
     public function insert(array $catalogueU): int
     {
         // prepared request
+        $prix = $catalogueU['prix'];
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-            " (nom, type, prix, couleur) VALUES (:nom, :type, :prix, :couleur)");
+            " (nom, type, prix, couleur) VALUES (:nom, :type, ".$prix.", :couleur)");
         $statement->bindValue('nom', $catalogueU['nom'], \PDO::PARAM_STR);
         $statement->bindValue('type', $catalogueU['type'], \PDO::PARAM_STR);
-        $statement->bindValue('prix', $catalogueU['prix'], \PDO::PARAM_INT);
         $statement->bindValue('couleur', $catalogueU['couleur'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
@@ -38,12 +38,12 @@ class CatalogueUManager extends AbstractManager
     {
 
         // prepared request
+        $prix = $catalogueU['prix'];
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE ."
-             SET nom=:nom, type=:type, prix=:prix, couleur=:couleur WHERE id=:id");
+             SET nom=:nom, type=:type, prix=".$prix.", couleur=:couleur WHERE id=:id");
         $statement->bindValue('id', $catalogueU['id'], \PDO::PARAM_INT);
         $statement->bindValue('nom', $catalogueU['nom'], \PDO::PARAM_STR);
         $statement->bindValue('type', $catalogueU['type'], \PDO::PARAM_STR);
-        $statement->bindValue('prix', $catalogueU['prix'], \PDO::PARAM_INT);
         $statement->bindValue('couleur', $catalogueU['couleur'], \PDO::PARAM_STR);
 
         return $statement->execute();
