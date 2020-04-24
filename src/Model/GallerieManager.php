@@ -27,7 +27,7 @@ class GallerieManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM gallerie 
-        INNER JOIN bouquet WHERE bouquet.id = gallerie.id_bouquet");
+        INNER JOIN bouquet WHERE :bouquet.id = gallerie.id_bouquet");
         $statement->bindValue('bouquet.id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
