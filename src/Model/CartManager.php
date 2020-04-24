@@ -5,7 +5,7 @@ namespace App\Model;
 
 class CartManager extends AbstractManager
 {
-    const TABLE = "cart";
+    const TABLE = "panier";
     const BOUQUETJOIN = "bouquet_panier";
     const BOUQUET = "bouquet";
     const CONCEPT = "concept";
@@ -19,7 +19,6 @@ class CartManager extends AbstractManager
     }
 
 
-    // créer un panier pour un user
     public function insert($user)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
@@ -35,26 +34,21 @@ class CartManager extends AbstractManager
     //voir le panier complet
     public function showCartContent($id)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM" . self::BOUQUETJOIN . " c
-        INNER JOIN" .self::BOUQUETJOIN. " bj INNER JOIN ". self::BOUQUET . " b 
+        $statement = $this->pdo->prepare("SELECT * FROM " . self::BOUQUETJOIN . " c
+        INNER JOIN " .self::BOUQUETJOIN. " bj INNER JOIN ". self::BOUQUET . " b 
         ON bj.id_bouquet=b.id WHERE bj.id_panier= :id ");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 
 
-
-    // ajouter des produits au panier (bouquet et bouquet concept)
-
-
-    public function addBouquetCart($id)
+    public function addBouquetCart($idBouquet)
     {
-        $statement = $this->pdo->prepare("INSERT INTO" . self::BOUQUETJOIN . " 
+        $statement = $this->pdo->prepare("INSERT INTO " . self::BOUQUETJOIN . " 
         (id_panier, id_bouquet) 
         VALUES (:id_panier, :id_bouquet)");
-        $statement->bindValue('id_panier', $_SESSION['id_panier'], \PDO::PARAM_STR);
-        $statement->bindValue('id_bouquet', $id, \PDO::PARAM_STR);
+        $statement->bindValue('id_panier', $_SESSION['id_panier'], \PDO::PARAM_INT);
+        $statement->bindValue('id_bouquet', $idBouquet, \PDO::PARAM_INT);
+        $statement->execute();
     }
-
-
-
 }
