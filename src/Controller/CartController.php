@@ -12,8 +12,19 @@ class CartController extends AbstractController
     {
         $bouquetManager= new BouquetManager();
         $bouquets = $bouquetManager->selectAll();
-        return $this->twig->render('Front/index.html.twig', ["bouquets" => $bouquets]);
+        if (!isset($_SESSION['id_panier'])) {
+            $class = "hidden";
+            $panier="";
+        } else {
+            $class = "";
+            $panier = $_SESSION['id_panier'];
+        }
+        return $this->twig->render(
+            'Front/index.html.twig',
+            ["bouquets" => $bouquets, "class" => $class, "panier" => $panier]
+        );
     }
+
 
     public function addBouquetCart($idBouquet)
     {
