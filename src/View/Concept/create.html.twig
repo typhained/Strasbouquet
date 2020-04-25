@@ -2,15 +2,17 @@
         <h2>Créer un bouquet</h2>
 
         <h3>Items disponibles</h3>
-        <table class="uk-table uk-table-striped uk-table-hover">
-            <tr>
-                <th>id</th>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Couleur</th>
-                <th>Prix</th>
-                <th>Ajouter</th>
-            </tr>
+        <table class="uk-table uk-table-striped uk-table-hover uk-box-shadow-large">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Couleur</th>
+                    <th>Prix</th>
+                    <th>Ajouter</th>
+                </tr>
+            </thead>
             {% for unit in units %}
                 <tr>
                     <td>{{ unit.id }}</td>

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\ConceptManager;
 use App\Model\CatUnitManager;
+use App\Model\CatalogueUManager;
 use App\Model\BouquetCatManager;
 
 /**
@@ -59,8 +60,8 @@ class ConceptController extends AbstractController
         $conceptManager = new ConceptManager();
         $concept = $conceptManager->selectOneById($id);
 
-        $catUnitManager = new CatUnitManager();
-        $units = $catUnitManager->selectAll();
+        $catalogueUManager = new CatalogueUManager();
+        $units = $catalogueUManager->selectAll();
 
         return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units]);
     }

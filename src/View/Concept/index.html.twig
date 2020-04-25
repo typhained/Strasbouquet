@@ -8,11 +8,13 @@
     <div class="uk-container uk-width-1-2@m uk-margin-medium">
         <h2 class="uk-text-center">Bouquets personnalisés</h2>
         <ul>
-                <table class="uk-table uk-table-striped">
-                    <tr>
-                        <th>ID Bouquet</th>
-                        <th>Action</th>
-                    </tr>
+                <table class="uk-table uk-table-striped uk-box-shadow-large">
+                    <thead>
+                        <tr>
+                            <th>ID Bouquet</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
                     {% for concept in concepts %}
                     <tr>
                         <td><a href="show/{{ concept.id }}">Bouquet {{ concept.id }}</a></td>
