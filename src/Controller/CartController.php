@@ -25,14 +25,13 @@ class CartController extends AbstractController
         );
     }
 
-
     public function addBouquetCart($idBouquet)
     {
         $cartManager = new CartManager();
-        $user['id_user'] = ($_SESSION['user']);
+        $user= ($_SESSION['user']);
 
         if (!isset($_SESSION['id_panier'])) {
-            $id = $cartManager->insert($user['id_user']);
+            $id = $cartManager->insert($user);
             $_SESSION['id_panier'] =  $id;
             $cartManager->addBouquetCart($idBouquet);
         } else {

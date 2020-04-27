@@ -24,7 +24,7 @@ class CartManager extends AbstractManager
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
         (id_user) 
         VALUES (:id_user)");
-        $statement->bindValue('id_user', $user['id_user'], \PDO::PARAM_INT);
+        $statement->bindValue('id_user', $user, \PDO::PARAM_INT);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
