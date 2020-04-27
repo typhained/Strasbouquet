@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
-
+{% block title %}
+    {{ parent()}} Modifier le produit.
+{% endblock %}
 {% block content %}
     <section class="uk-container uk-padding-large">
        <article class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
@@ -56,13 +58,13 @@
             </select>
             <input class="uk-inline uk-input uk-margin" value="{{ catalogueU.prix }}" type="text" name="prix" placeholder="Prix" required>
             <select class="uk-select uk-margin uk-inline" name="couleur" required>
-                <option value="">Veuillez selectionner une couleur</option>
+                <option value="{{ catalogueU.couleur }}" selected>{{catalogueU.couleur}}</option>
                 <option value="rose">Rose</option>
                 <option value="jaune">Jaune</option>
                 <option value="orange">Orange</option>
                 <option value="rouge">Rouge</option>
                 <option value="violet">Violet</option>
-                <option value="fleurs">Fleurs</option>
+                <option value="vert">Vert</option>
                 <option value="bleu">Bleu</option>
                 <option value="blanc">Blanc</option>
                 <option value="noir">Noir</option>
