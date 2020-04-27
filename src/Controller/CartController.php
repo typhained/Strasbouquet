@@ -32,7 +32,7 @@ class CartController extends AbstractController
         $user['id_user'] = ($_SESSION['user']);
 
         if (!isset($_SESSION['id_panier'])) {
-            $id = $cartManager->insert($user);
+            $id = $cartManager->insert($user['id_user']);
             $_SESSION['id_panier'] =  $id;
             $cartManager->addBouquetCart($idBouquet);
         } else {
