@@ -33,4 +33,15 @@ class GallerieManager extends AbstractManager
 
         return $statement->fetch();
     }
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . "
+         INNER JOIN ".self::BOUQUET. "WHERE :bouquet.id = gallerie.id_bouquet");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
