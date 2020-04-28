@@ -1,5 +1,13 @@
 {% extends 'layout.html.twig' %}
+{% block title %}
+    {{ parent() }} Bouquet
+{% endblock %}
 
 {% block content %}
-    {% include 'Gallerie/upload.html.twig' %}
+    <div class="uk-text-center">
+        <img id="logo"src="/assets/images/logo.png">
+        <p>Stras'Bouquet</p>
+    </div>
+    <h1 class="uk-heading-line uk-text-center uk-text-uppercase"><span>Espace de gestion</span></h1>
+    {% include 'Gallerie/show.html.twig' %}
 {% endblock %}
