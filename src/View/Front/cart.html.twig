@@ -11,6 +11,7 @@
         <tr>
             <th>Nom du bouquet</th>
             <th>Prix</th>
+            <td>Quantité</td>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ bouquet.nom }}</td>
                 <td>{{ bouquet.prix }}</td>
+                <td>{{ bouquet.quantite }}</td>
             </tr>
 
         {% endfor %}
@@ -28,6 +30,5 @@
 
 
     <button><a href="/Cart/showBouquet">RETOUR</a></button>
-
 
 {% endblock %}

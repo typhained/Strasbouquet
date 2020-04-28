@@ -33,17 +33,31 @@ class CartController extends AbstractController
             $cartManager = new CartManager();
             $user = ($_SESSION['user']);
 
-            if (!isset($_SESSION['id_panier'])) {
-                $id = $cartManager->insert($user);
-                $_SESSION['id_panier'] =  $id;
-                $cartManager->addBouquetCart($idBouquet);
-            } else {
-                $cartManager->addBouquetCart($idBouquet);
-            }
             $bouquetManager= new BouquetManager();
             $bouquets = $bouquetManager->selectAll();
             $panier = $_SESSION['id_panier'];
-            return $this->twig->render('Front/index.html.twig', ["bouquets" => $bouquets, "panier" => $panier]);
+
+
+            if (!isset($_SESSION['id_panier'])) {
+                $id = $cartManager->insert($user);
+                $_SESSION['id_panier'] =  $id;
+            }
+            if ($cartManager->bouquetInCart($idBouquet) === false) {
+                $cartManager->addBouquetCart($idBouquet);
+            } else {
+                $qte = $cartManager->selectQuantiteBouquet($idBouquet);
+                $qte['quantite'] += 1;
+                $qte = $qte['quantite'];
+                $cartManager->updateBouquetCart($idBouquet, $qte);
+                return $this->twig->render(
+                    'Front/index.html.twig',
+                    ["bouquets" => $bouquets, "panier" => $panier, "qte" => $qte]
+                );
+            }
+            return $this->twig->render(
+                'Front/index.html.twig',
+                ["bouquets" => $bouquets, "panier" => $panier]
+            );
         }
     }
 
