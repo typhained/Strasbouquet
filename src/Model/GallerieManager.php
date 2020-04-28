@@ -26,14 +26,14 @@ class GallerieManager extends AbstractManager
     public function selectImageBouquet(int $id)
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM ". self::TABLE ."
-        INNER JOIN ".self::BOUQUET." WHERE :bouquet.id = gallerie.id_bouquet");
-        $statement->bindValue('bouquet.id', $id, \PDO::PARAM_INT);
+        $statement = $this->pdo->query("SELECT * FROM ". self::TABLE .
+        " WHERE id_bouquet = $id");
         $statement->execute();
 
         return $statement->fetch();
     }
-    /**
+    /**id_bouquet            | int          | YES  | MUL | NULL    |                |
+    | id_catalogue_
      * @param int $id
      */
     public function delete(int $id): void
@@ -47,14 +47,13 @@ class GallerieManager extends AbstractManager
     /**
      * insert into
      */
-    public function insertBouquet(array $gallerie)
+    public function insertBouquet($gallerie, $bouquet)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-        " SET nom =nom, file1 = :file1, file2 = :file2, id_bouquet = :id_bouquet WHERE id=:id");
-        $statement->bindValue('nom', $gallerie['nom'], \PDO::PARAM_STR);
-        $statement->bindValue('file1', $gallerie['file1'], \PDO::PARAM_STR);
-        $statement->bindValue('file2', $gallerie['file2'], \PDO::PARAM_STR);
-        $statement->bindValue('id_bouquet', $gallerie['id_bouquet'], \PDO::PARAM_INT);
+        " (nom, file1, id_bouquet) VALUES (:nom, :file1, :id_bouquet) ");
+        $statement->bindValue('nom', $bouquet['nom'], \PDO::PARAM_STR);
+        $statement->bindValue('file1', $gallerie, \PDO::PARAM_STR);
+        $statement->bindValue('id_bouquet', $bouquet['id'], \PDO::PARAM_INT);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
