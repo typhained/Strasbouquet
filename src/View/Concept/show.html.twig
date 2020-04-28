@@ -18,6 +18,7 @@
                     <th>TYPE</th>
                     <th>COULEUR</th>
                     <th>PRIX</th>
+                    <th>QUANTITÉ</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,13 +28,15 @@
                     <td>{{ unit.type }}</td>
                     <td>{{ unit.couleur }}</td>
                     <td>{{ unit.prix }}</td>
+                    <td></td>
+                    <td><a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: minus-circle"></a></td>
                 </tr>
             {% endfor %}
         </table>
         <div>
             <a class="uk-button uk-button-default" href="../index">Retour</a>
             <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
-            <a class="uk-button uk-button-danger" href="../delete/{{ concept.id }}">Supprimer</a>
+            <a class="uk-button uk-button-danger" href="../delete/{{ id }}">Supprimer</a>
         </div>
     </div>
 {% endblock %}

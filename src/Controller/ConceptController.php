@@ -72,7 +72,7 @@ class ConceptController extends AbstractController
         $catalogueUManager = new CatalogueUManager();
         $units = $catalogueUManager->selectAll();
 
-        return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units]);
+        return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units, 'id' => $id]);
     }
 
     /**

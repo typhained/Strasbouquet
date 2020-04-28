@@ -17,11 +17,25 @@ class BouquetCatController extends AbstractController
         return $this->twig->render('/Concept/show.html.twig', ['bouquet' => $bouquet]);
     }
 
+    /**
+     * Add into joint table
+     *
+     * @param int $unit
+     */
     public function add(int $unit)
     {
         $idConcept = $_SESSION['id_bouquet_concept'];
         $bouquetCatManager = new BouquetCatManager();
         $bouquetCatManager->insert($idConcept, $unit);
+
+        header('location: /Concept/show/' . $_SESSION['id_bouquet_concept']);
+    }
+
+    public function delete(int $unit)
+    {
+        $idConcept = $_SESSION['id_bouquet_concept'];
+        $bouquetCatManager = new BouquetCatManager();
+        $bouquetCatManager->delete($idConcept, $unit);
 
         header('location: /Concept/show/' . $_SESSION['id_bouquet_concept']);
     }

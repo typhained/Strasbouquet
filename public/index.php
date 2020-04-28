@@ -16,5 +16,3 @@ if (getenv('ENV') === false) {
 }
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../src/routing.php';
-
-var_dump($_SESSION);
