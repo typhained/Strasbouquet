@@ -21,6 +21,18 @@ class BouquetCatManager extends AbstractManager
     }
 
     /**
+     * @param int $unit
+     * @return array
+     */
+    public function unitInConcept(int $unit)
+    {
+        $statement = $this->pdo->query("SELECT quantite FROM " . self::TABLE . " 
+        WHERE id_catalogue_unitaire = " . $unit);
+
+        return $statement->fetch(\PDO::FETCH_NUM);
+    }
+
+    /**
      * INSERT joint table
      *
      * @param int $idConcept
@@ -30,6 +42,26 @@ class BouquetCatManager extends AbstractManager
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
             " VALUES (:id_bouquet_concept, :id_catalogue_unitaire, 1)");
+        $statement->bindValue('id_bouquet_concept', $idConcept, \PDO::PARAM_INT);
+        $statement->bindValue('id_catalogue_unitaire', $unit, \PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
+    public function updateQuantUp(int $idConcept, int $unit)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " bc SET bc.quantite = bc.quantite + 1 
+        WHERE bc.id_bouquet_concept = :id_bouquet_concept AND bc.id_catalogue_unitaire = :id_catalogue_unitaire");
+        $statement->bindValue('id_bouquet_concept', $idConcept, \PDO::PARAM_INT);
+        $statement->bindValue('id_catalogue_unitaire', $unit, \PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
+    public function updateQuantDwn(int $idConcept, int $unit)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " bc SET bc.quantite = bc.quantite - 1 
+        WHERE bc.id_bouquet_concept = :id_bouquet_concept AND bc.id_catalogue_unitaire = :id_catalogue_unitaire");
         $statement->bindValue('id_bouquet_concept', $idConcept, \PDO::PARAM_INT);
         $statement->bindValue('id_catalogue_unitaire', $unit, \PDO::PARAM_INT);
 

@@ -13,27 +13,27 @@
             <h3 class="uk-heading-line"><span>Mon bouquet</span></h3>
             <table class="uk-table uk-table-striped uk-table-hover">
                 <thead>
-                <tr>
-                    <th>NOM</th>
-                    <th>TYPE</th>
-                    <th>COULEUR</th>
-                    <th>PRIX</th>
-                    <th>QUANTITÉ</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>NOM</th>
+                        <th>COULEUR</th>
+                        <th>TYPE</th>
+                        <th>PRIX</th>
+                        <th>QUANTITÉ</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 {% for unit in concept %}
                     <tr>
                         <td>{{ unit.nom }}</td>
-                        <td>{{ unit.type }}</td>
                         <td>{{ unit.couleur }}</td>
+                        <td>{{ unit.type }}</td>
                         <td>{{ unit.prix }}€</td>
-                        <td></td>
-                        <td><a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: minus-circle"></a></td>
+                        <td>{{ unit.quantite }}</td>
+                        <td><a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: minus-circle"></a><a href="./../../BouquetCat/add/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: plus-circle"></a></td>
                     </tr>
                 {% endfor %}
             </table>
-            <div class="uk-text-center uk-margin-top">
+            <div class="uk-flex uk-flex-between">
                 <a class="uk-button uk-button-default" href="../index">Retour</a>
                 <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
                 <a class="uk-button uk-button-danger" href="../delete/{{ id }}">Supprimer</a>
