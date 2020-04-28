@@ -31,7 +31,7 @@ class CartController extends AbstractController
             return $this->twig->render('User/add.html.twig', ["message" => $message]);
         } else {
             $cartManager = new CartManager();
-            $user['id_user'] = ($_SESSION['user']);
+            $user = ($_SESSION['user']);
             $bouquetManager= new BouquetManager();
             $bouquets = $bouquetManager->selectAll();
             $panier = $_SESSION['id_panier'];
