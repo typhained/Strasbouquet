@@ -5,23 +5,24 @@
 {% endblock %}
 
 {% block content %}
-    <div class="uk-container uk-width-1-2@m uk-margin-medium">
-        <h2 class="uk-text-center">Bouquets personnalisés</h2>
-        <ul>
-                <table class="uk-table uk-table-striped uk-box-shadow-large">
-                    <thead>
-                        <tr>
-                            <th>ID Bouquet</th>
-                        </tr>
-                    </thead>
-                    {% for concept in concepts %}
-                    <tr>
-                        <td>Bouquet {{ concept.id }}</td>
-                        <td><a href="show/{{ concept.id }}" uk-icon="icon: file-edit"></a><a href="delete/{{ concept.id }}" uk-icon="icon: trash"></a></td>
-                    </tr>
-                    {% endfor %}
-                </table>
-        </ul>
+    <div class="uk-background-default uk-padding uk-box-shadow-large">
+        <h2 class="uk-heading-line uk-text-center"><span>Bouquets personnalisés</span></h2>
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>ID Bouquet</th>
+                </tr>
+            </thead>
+            {% for concept in concepts %}
+            <tr>
+                <td>Bouquet {{ concept.id }}</td>
+                <td>
+                    <a href="show/{{ concept.id }}"><span uk-icon="icon: file-edit"></span></a>
+                    <a href="delete/{{ concept.id }}"><span uk-icon="icon: trash"></span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
         <form action="create/{{ concept.id }}" method="post" class="uk-text-center">
             <input type="hidden" name="id_user" value="1">
             <input type="hidden" name="id_panier" value="1">
