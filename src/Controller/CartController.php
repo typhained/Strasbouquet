@@ -32,13 +32,16 @@ class CartController extends AbstractController
         } else {
             $cartManager = new CartManager();
             $user = ($_SESSION['user']);
+
             $bouquetManager= new BouquetManager();
             $bouquets = $bouquetManager->selectAll();
             $panier = $_SESSION['id_panier'];
 
+
             if (!isset($_SESSION['id_panier'])) {
                 $id = $cartManager->insert($user);
                 $_SESSION['id_panier'] =  $id;
+
             }
             if ($cartManager->bouquetInCart($idBouquet) === false) {
                 $cartManager->addBouquetCart($idBouquet);
