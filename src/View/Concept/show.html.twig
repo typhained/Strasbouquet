@@ -7,12 +7,12 @@
 {% block content %}
     <!-- Catalogue unitaire -->
     {% include 'Concept/create.html.twig' %}
-
     <!-- Création bouquet -->
-    <div class="uk-container uk-margin-medium uk-width-1-2@m">
-        <h3>Mon bouquet</h3>
-        <table class="uk-table uk-table-striped uk-box-shadow-large">
-            <thead>
+    <div class="uk-container uk-margin uk-width-1-2@m">
+        <div class="uk-background-default uk-padding uk-box-shadow-large">
+            <h3 class="uk-heading-line"><span>Mon bouquet</span></h3>
+            <table class="uk-table uk-table-striped uk-table-hover">
+                <thead>
                 <tr>
                     <th>NOM</th>
                     <th>TYPE</th>
@@ -21,22 +21,23 @@
                     <th>QUANTITÉ</th>
                     <th></th>
                 </tr>
-            </thead>
-            {% for unit in concept %}
-                <tr>
-                    <td>{{ unit.nom }}</td>
-                    <td>{{ unit.type }}</td>
-                    <td>{{ unit.couleur }}</td>
-                    <td>{{ unit.prix }}</td>
-                    <td></td>
-                    <td><a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: minus-circle"></a></td>
-                </tr>
-            {% endfor %}
-        </table>
-        <div>
-            <a class="uk-button uk-button-default" href="../index">Retour</a>
-            <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
-            <a class="uk-button uk-button-danger" href="../delete/{{ id }}">Supprimer</a>
+                </thead>
+                {% for unit in concept %}
+                    <tr>
+                        <td>{{ unit.nom }}</td>
+                        <td>{{ unit.type }}</td>
+                        <td>{{ unit.couleur }}</td>
+                        <td>{{ unit.prix }}€</td>
+                        <td></td>
+                        <td><a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: minus-circle"></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="uk-text-center uk-margin-top">
+                <a class="uk-button uk-button-default" href="../index">Retour</a>
+                <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
+                <a class="uk-button uk-button-danger" href="../delete/{{ id }}">Supprimer</a>
+            </div>
         </div>
     </div>
 {% endblock %}
