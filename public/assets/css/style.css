@@ -12,6 +12,7 @@ table {
     width: 4vw;
     margin-top: -3vh;
 }
+
 section {
     width: 100%;
 }
@@ -22,7 +23,7 @@ section {
     width: 12rem;
     background-color: #2d3436;
     position: sticky;
-    top:0px;
+    top:0;
     height: 100vh;
     overflow: auto;
 }
@@ -40,4 +41,8 @@ section {
     background-color: #4CAF50;
     color: white;
     text-decoration: none;
+}
+
+.hidden {
+    display: none;
 }

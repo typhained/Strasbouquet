@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    {{ parent()}} Accueil
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="uk-container">
+        <table class="uk-table">
+            <thead>
+            <tr>
+                <td>&nbsp;</td>
+                <td>ID</td>
+                <td>Nom</td>
+                <td>Prix</td>
+                <td>Description</td>
+                <td>Saisonnier</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bouquet in bouquets %}
+            <tr>
+                <td>&nbsp;</td>
+                <td>{{ bouquet.id }}</td>
+                <td>{{ bouquet.nom}}</td>
+                <td>{{ bouquet.prix }}</td>
+                <td>{{ bouquet.description }}</td>
+                <td>{{ bouquet.saisonnier }}</td>
+                <td><a href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+    <button id="panier" class="{{ class }}"><a href="/Cart/showCart/{{ panier }}"> Voir le panier</a></button>
+
+{% endblock %}
