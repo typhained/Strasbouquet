@@ -46,3 +46,8 @@ section {
 .hidden {
     display: none;
 }
+/* Login */
+#login span{
+    z-index: 2;
+}
+/* Login */
