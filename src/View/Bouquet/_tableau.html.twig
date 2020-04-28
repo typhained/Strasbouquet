@@ -2,10 +2,10 @@
     <div class="uk-text-right">
         <a href="/Bouquet/add" title="Ajouter un bouquet" class="uk-button uk-button-primary uk-margin">Ajouter</a>
     </div>
-    <table class="uk-table uk-box-shadow-large">
+    <table class="uk-table uk-table-striped uk-box-shadow-large">
+    <caption class="uk-text-center uk-margin uk-text-bold">Liste des bouqets</caption>
         <thead>
             <tr>
-                <td>&nbsp;</td>
                 <td>ID</td>
                 <td>Nom</td>
                 <td>Prix</td>
@@ -27,18 +27,17 @@
                         </p>
                     </div>
                 </div>
-                <td>&nbsp;</td>
                 <td>{{ bouquet.id }}</td>
                 <td>{{ bouquet.nom}}</td>
                 <td>{{ bouquet.prix }}</td>
                 <td>{{ bouquet.description }}</td>
                 <td>{{ bouquet.saisonnier }}</td>
                 <td><a href="/Bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
-                    <a href="/Bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a>
-                    <a href="#modal-example-{{ bouquet.id }}" uk-toggle><span uk-icon="trash"></span></a></td>
+                    <a href="#modal-example-{{ bouquet.id }}" uk-toggle><span uk-icon="trash"></span></a>
+                    <a href="/Bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a></td>
             </tr>
-        </tbody>
         {% endfor %}
+         </tbody>
     </table>
     <div class="uk-text-right">
         <a href="/Bouquet/add" title="Ajouter un bouquet" class="uk-button uk-button-primary uk-margin">Ajouter</a>

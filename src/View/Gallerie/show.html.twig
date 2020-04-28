@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <section class="uk-container uk-padding-large">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <div class="uk-card-media-left uk-cover-container">
+                <img src= "{{ galerie.file1 }}" alt="" uk-cover>
+                <canvas width="600" height="400"></canvas>
+            </div>
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">Votre image</h3>
+                    <ul>
+                        <li class="uk-margin">Nom : {{ gallerie.nom }}</li>
+                        <li class="uk-margin">image 1 : {{ gallerie.file1 }}</li>
+                        <li class="uk-margin">image 2 : {{ gallerie.file2 }}</li>
+                    </ul>
+                    <div>
+                        <a href="/gallerie/update/{{ gallerie.id }}" class="uk-button uk-button-primary">Modifier</a>
+                        <a href="#modal-example" class="uk-button uk-button-danger"
+                           uk-toggle>Supprimer cette image</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-text-right">
+            <a href="/Bouquet/index" class="uk-button uk-button-primary uk-margin">Retour</a>
+        </div>
+    </section>
+    <!-- This is the modal -->
+    <div id="modal-example" uk-modal class="uk-modal-container">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+            <h3 class="uk-modal-title uk-text-danger ">Suppression de votre image</h3>
+            <p class="uk-text-center">Attention, cette action est irréversible</p>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+            <button class="uk-button uk-button-danger " type="button"><a class="uk-text-secondary"
+            href="/bouquet/delete/{{gallerie.id}}">Supprimer</a></button>
+        </div>
+    </div>
+{% endblock %}

@@ -6,7 +6,6 @@ class BouquetManager extends AbstractManager
 {
     const TABLE = "bouquet";
 
-
   /**
    *init this class.
    */
