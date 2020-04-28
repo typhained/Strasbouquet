@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    {{ parent()}} Accueil
+{% endblock %}
+
+
+{% block content %}
+
+    <table class="uk-table uk-table-divider uk-box-shadow-large">
+        <thead>
+        <tr>
+            <th>Nom du bouquet</th>
+            <th>Prix</th>
+            <td>Quantité</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bouquet in panier %}
+            <tr>
+                <td>{{ bouquet.nom }}</td>
+                <td>{{ bouquet.prix }}</td>
+                <td>{{ bouquet.quantite }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total: {{ price.total }} </h3>
+
+
+    <button><a href="/Cart/showBouquet">RETOUR</a></button>
+
+{% endblock %}

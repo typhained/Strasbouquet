@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
+{% block title %}
+    {{ parent() }} Ajouter un bouquet
+{% endblock %}
 
 {% block content %}
+    <div>{{message}}</div>
     {% include 'Bouquet/_form.html.twig' %}
 {% endblock %}

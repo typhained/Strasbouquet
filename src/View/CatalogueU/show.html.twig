@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
-
+{% block title %}
+    {{ parent()}} Détails du produit.
+{% endblock %}
 {% block content %}
 <section class="uk-container uk-padding-large">
     <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
@@ -17,7 +19,7 @@
                     <li class="uk-margin">Couleur : {{ catalogueU.couleur }}</li>
                 </ul>
                 <div>
-                    <a href="/CatalogueU/edit/{{ catalogueU.id }}" title="Modification du produit" class="uk-button uk-button-primary">Modifier</a>
+                    <a href="/CatalogueU/update/{{ catalogueU.id }}" title="Modification du produit" class="uk-button uk-button-primary">Modifier</a>
                     <a href="#modal-example" title="Supprimer le produit" class="uk-button uk-button-danger" uk-toggle>Supprimer</a>
                 </div>
             </div>

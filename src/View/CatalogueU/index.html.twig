@@ -1,7 +1,15 @@
 {% extends 'layout.html.twig' %}
-
+{% block title %}
+    {{ parent()}} Catalogue unitaire.
+{% endblock %}
 {% block content %}
-    <section class="uk-container uk-padding-large">
+
+    <div class="uk-text-center">
+        <img id="logo"src="/assets/images/logo.png">
+        <p>Stras'Bouquet</p>
+    </div>
+    <h1 class="uk-heading-line uk-text-center uk-text-uppercase"><span>Espace de gestion</span></h1>
+    <section class="uk-container">
         <div class="uk-text-right">
             <a href="/CatalogueU/add" title="Ajouter un produit" class="uk-button uk-button-primary uk-margin">Ajouter</a>
         </div>
@@ -38,7 +46,7 @@
                         <td>{{ catalogueU.prix }} €</td>
                         <td>{{ catalogueU.couleur }}</td>
                         <td>
-                            <a href="/CatalogueU/edit/{{ catalogueU.id }}" title="Modifier"><span uk-icon="pencil"></span></a>
+                            <a href="/CatalogueU/update/{{ catalogueU.id }}" title="Modifier"><span uk-icon="pencil"></span></a>
                             <a href="#modal-example-{{ catalogueU.id }}" title="Supprimer" uk-toggle><span uk-icon="trash"></span></a>
                             <a href="/CatalogueU/show/{{ catalogueU.id }}" title="Détails"><span uk-icon="info"></span</a>
                         </td>

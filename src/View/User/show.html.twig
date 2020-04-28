@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}
+    {{ parent()}} Profil
+{% endblock %}
+
 {% block content %}
     <div class="uk-container uk-margin-top">
         <h3 class="uk-text-center">Mon profil</h3>
@@ -18,9 +22,23 @@
                 <p>Dernière commande affichée ici</p>
             </div>
             <div class="uk-card-footer uk-text-center">
-                <a href="../update/{{ user.id }}" class="uk-button-text uk-alert uk-alert-success">Modifier</a>
-                <a href="../delete/{{ user.id }}" class="uk-button-text uk-alert uk-alert-danger">Supprimer mon compte</a>
+                <a href="../update/{{ user.id }}" class="uk-button">Modifier</a>
+                    <a href="#modal-example" class="uk-button uk-button-danger" uk-toggle>Supprimer mon compte</a>
+                <a href="../delete/{{ user.id }}" class=""></a>
             </div>
+        </div>
+    </div>
+
+
+    <!-- This is the modal -->
+    <div id="modal-example" uk-modal class="uk-modal-container">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
+            <h3 class="uk-modal-title uk-text-danger ">Suppression de votre compte utilisateur</h3>
+            <p class="uk-text-center">Attention, cette action est irréversible</p>
+            <p>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                <button class="uk-button uk-button-danger " type="button"><a class="uk-text-secondary" href="../delete/{{ user.id }}">Supprimer</a></button>
+            </p>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section class="uk-container uk-padding-large">
+        <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
+            {{ message }}
+        </div>
+        <a href="/Account/logout/" title="Deconnexion">Déconnexion</a>
+    </section>
+{% endblock %}

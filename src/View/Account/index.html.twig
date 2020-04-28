@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section class="uk-container uk-padding-large" id="login">
+        <form action="" class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large" method="post">
+            <legend class="uk-text-center">Authentification</legend>
+            <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
+                {{ message }}
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                    <input class="uk-inline uk-input" type="text" name="mail" placeholder="Adresse e-mail" required>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                    <input class="uk-inline uk-input" type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+            </div>
+            <input class="uk-button uk-button-primary uk-margin uk-width-1-1" type="submit" value="Se connecter">
+        </form>
+    </section>
+{% endblock %}
