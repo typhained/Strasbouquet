@@ -17,15 +17,13 @@ class BouquetCatManager extends AbstractManager
         FROM " . self::TABLE . " bc JOIN catalogue_unitaire cu ON cu.id=bc.id_catalogue_unitaire");
     }
 
-    public function add(int $concept, int $unit)
+    public function insert(int $idConcept, int $unit)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-            " VALUES :id_bouquet_concept, :id_catalogue_unitaire, :quantite");
-        $statement->bindValue('id_bouquet_concept', $concept, \PDO::PARAM_INT);
+            " VALUES (:id_bouquet_concept, :id_catalogue_unitaire, 1)");
+        $statement->bindValue('id_bouquet_concept', $idConcept, \PDO::PARAM_INT);
         $statement->bindValue('id_catalogue_unitaire', $unit, \PDO::PARAM_INT);
 
-        if ($statement->execute()) {
-            return (int)$this->pdo->lastInsertId();
-        }
+        $statement->execute();
     }
 }

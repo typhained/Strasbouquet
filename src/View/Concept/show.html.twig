@@ -14,16 +14,21 @@
         <table class="uk-table uk-table-striped uk-box-shadow-large">
             <thead>
                 <tr>
-                    <th>id user</th>
-                    <th>id panier</th>
+                    <th>NOM</th>
+                    <th>TYPE</th>
+                    <th>COULEUR</th>
+                    <th>PRIX</th>
+                    <th></th>
                 </tr>
             </thead>
-            <td>
-                {{ concept.id_user }}
-            </td>
-            <td>
-                {{ concept.id_panier }}
-            </td>
+            {% for unit in concept %}
+                <tr>
+                    <td>{{ unit.nom }}</td>
+                    <td>{{ unit.type }}</td>
+                    <td>{{ unit.couleur }}</td>
+                    <td>{{ unit.prix }}</td>
+                </tr>
+            {% endfor %}
         </table>
         <div>
             <a class="uk-button uk-button-default" href="../index">Retour</a>

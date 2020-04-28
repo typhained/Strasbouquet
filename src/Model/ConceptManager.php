@@ -6,6 +6,8 @@ namespace App\Model;
 class ConceptManager extends AbstractManager
 {
     const TABLE = 'bouquet_concept';
+    const JOIN = 'bouquet_catalogue';
+    const CATALOGUE_U = 'catalogue_unitaire';
 
     /**
      * ConceptManager constructor.
@@ -15,6 +17,20 @@ class ConceptManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    public function showConcept($id)
+    {
+        $statement = $this->pdo->query("SELECT * FROM " . self::JOIN . " bc 
+        JOIN " . self::CATALOGUE_U ." cu ON bc.id_catalogue_unitaire=cu.id 
+        JOIN " . self::TABLE . " c ON bc.id_bouquet_concept=c.id 
+        WHERE c.id = " . $id);
+
+        return $statement->fetchAll();
+    }
+
+    /**
+     * @param array $concept
+     * @return int
+     */
     public function insert(array $concept)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 

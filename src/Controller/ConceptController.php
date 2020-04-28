@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 use App\Model\ConceptManager;
-use App\Model\CatUnitManager;
 use App\Model\CatalogueUManager;
 use App\Model\BouquetCatManager;
 
@@ -38,12 +37,17 @@ class ConceptController extends AbstractController
      */
     public function create()
     {
+
         $conceptManager = new ConceptManager();
         $concept = [
             'id_user' => $_POST['id_user'],
             'id_panier' => $_POST['id_panier'],
         ];
         $id = $conceptManager->insert($concept);
+
+        if (!empty($_SESSION['id_bouquet_concept'])) {
+            $_SESSION['id_bouquet_concept'] = $id;
+        }
 
         header('location: /Concept/show/' . $id);
     }
@@ -55,10 +59,15 @@ class ConceptController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function show($id)
+    public function show(int $id)
     {
         $conceptManager = new ConceptManager();
-        $concept = $conceptManager->selectOneById($id);
+
+        if ($id != $_SESSION['id_bouquet_concept']) {
+            $_SESSION['id_bouquet_concept'] = $id;
+        }
+
+        $concept = $conceptManager->showConcept($id);
 
         $catalogueUManager = new CatalogueUManager();
         $units = $catalogueUManager->selectAll();
