@@ -41,7 +41,6 @@ class CartController extends AbstractController
             if (!isset($_SESSION['id_panier'])) {
                 $id = $cartManager->insert($user);
                 $_SESSION['id_panier'] =  $id;
-
             }
             if ($cartManager->bouquetInCart($idBouquet) === false) {
                 $cartManager->addBouquetCart($idBouquet);
