@@ -42,20 +42,6 @@ class GallerieController extends AbstractController
         $gallerieManager->delete($id);
         header('Location:/Gallerie/index');
     }
-//    public function update(int $id): string
-//    {
-//        $gallerieManager = new GallerieManager();
-//        $gallerie = $gallerieManager->selectOneImage($id);
-//
-//        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//            $gallerie['nom'] = $_POST['nom'];
-//            $gallerie['file1'] = $_POST['file1'];
-//            $gallerie['file2'] = $_POST['file2'];
-//            $gallerieManager->update($gallerie);
-//            header('Location:/Gallerie/show/'. $id);
-//        }
-//        return $this->twig->render('Gallerie/edit.html.twig', ['gallerie' => $gallerie, 'title' => $gallerie['nom']]);
-//    }
     public function upload()
     {
         $targetDir = "assets/uploads/";
