@@ -47,11 +47,10 @@ class GallerieManager extends AbstractManager
     /**
      * insert into
      */
-    public function insertBouquet(array $gallerie): int
+    public function insertBouquet(array $gallerie)
     {
-        // prepared request
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . "(nom, file1, file2, id_bouquet)
-        VALUES (:nom, :file1, :file2, :id_bouquet)");
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+        " SET nom =nom, file1 = :file1, file2 = :file2, id_bouquet = :id_bouquet WHERE id=:id");
         $statement->bindValue('nom', $gallerie['nom'], \PDO::PARAM_STR);
         $statement->bindValue('file1', $gallerie['file1'], \PDO::PARAM_STR);
         $statement->bindValue('file2', $gallerie['file2'], \PDO::PARAM_STR);
