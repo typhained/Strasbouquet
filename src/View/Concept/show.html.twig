@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} Création bouquet
+{% endblock %}
+
+{% block content %}
+    <!-- Catalogue unitaire -->
+    {% include 'Concept/create.html.twig' %}
+
+    <!-- Création bouquet -->
+    <div class="uk-container uk-margin-medium uk-width-1-2@m">
+        <h3>Mon bouquet</h3>
+        <table class="uk-table uk-table-striped uk-box-shadow-large">
+            <thead>
+                <tr>
+                    <th>NOM</th>
+                    <th>TYPE</th>
+                    <th>COULEUR</th>
+                    <th>PRIX</th>
+                    <th></th>
+                </tr>
+            </thead>
+            {% for unit in concept %}
+                <tr>
+                    <td>{{ unit.nom }}</td>
+                    <td>{{ unit.type }}</td>
+                    <td>{{ unit.couleur }}</td>
+                    <td>{{ unit.prix }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div>
+            <a class="uk-button uk-button-default" href="../index">Retour</a>
+            <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
+            <a class="uk-button uk-button-danger" href="../delete/{{ concept.id }}">Supprimer</a>
+        </div>
+    </div>
+{% endblock %}
