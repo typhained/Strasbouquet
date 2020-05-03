@@ -1,27 +1,24 @@
     <div class="uk-container uk-margin uk-width-1-2@m">
-        <h2>Créer un bouquet</h2>
-
-        <h3>Items disponibles</h3>
-        <table class="uk-table uk-table-striped uk-table-hover uk-box-shadow-large">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Nom</th>
-                    <th>Type</th>
-                    <th>Couleur</th>
-                    <th>Prix</th>
-                    <th>Ajouter</th>
-                </tr>
-            </thead>
-            {% for unit in units %}
-                <tr>
-                    <td>{{ unit.id }}</td>
-                    <td>{{ unit.nom }}</td>
-                    <td>{{ unit.type }}</td>
-                    <td>{{ unit.couleur }}</td>
-                    <td>{{ unit.prix }}€</td>
-                    <td><a href="./../../BouquetCat/add/{{ unit.id }}" uk-icon="icon: plus-circle"></a></td>
-                </tr>
-            {% endfor %}
-        </table>
+        <div class="uk-background-default uk-padding uk-box-shadow-large">
+            <h3 class="uk-heading-line"><span>Items disponibles</span></h3>
+            <table class="uk-table uk-table-striped uk-table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Couleur</th>
+                        <th>Type</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                {% for unit in units %}
+                    <tr>
+                        <td>{{ unit.nom }}</td>
+                        <td>{{ unit.couleur }}</td>
+                        <td>{{ unit.type }}</td>
+                        <td>{{ unit.prix }}€</td>
+                        <td><a href="./../../BouquetCat/add/{{ unit.id }}" uk-icon="icon: plus-circle"></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>

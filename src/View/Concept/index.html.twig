@@ -12,13 +12,12 @@
                     <thead>
                         <tr>
                             <th>ID Bouquet</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     {% for concept in concepts %}
                     <tr>
-                        <td><a href="show/{{ concept.id }}">Bouquet {{ concept.id }}</a></td>
-                        <td><a href="delete/{{ concept.id }}" uk-icon="icon: trash"></a></td>
+                        <td>Bouquet {{ concept.id }}</td>
+                        <td><a href="show/{{ concept.id }}" uk-icon="icon: file-edit"></a><a href="delete/{{ concept.id }}" uk-icon="icon: trash"></a></td>
                     </tr>
                     {% endfor %}
                 </table>
