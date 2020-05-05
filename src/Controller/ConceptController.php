@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Model\ConceptManager;
 use App\Model\CatalogueUManager;
 use App\Model\BouquetCatManager;
+use DateTime;
 
 /**
  * Class ConceptController
@@ -37,11 +38,12 @@ class ConceptController extends AbstractController
      */
     public function create()
     {
-
         $conceptManager = new ConceptManager();
+        $date = new DateTime("now");
         $concept = [
             'id_user' => $_POST['id_user'],
             'id_panier' => $_POST['id_panier'],
+            'date' => $date->format('Y-m-d')
         ];
         $_SESSION['user'] = $concept['id_user'];
         $id = $conceptManager->insert($concept);
@@ -63,6 +65,10 @@ class ConceptController extends AbstractController
     public function show(int $id)
     {
         $conceptManager = new ConceptManager();
+
+        if (!isset($_SESSION['id_bouquet_concept'])) {
+            $_SESSION['id_bouquet_concept'] = $id;
+        }
 
         if ($id != $_SESSION['id_bouquet_concept']) {
             $_SESSION['id_bouquet_concept'] = $id;

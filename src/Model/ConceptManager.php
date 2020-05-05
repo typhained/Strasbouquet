@@ -34,9 +34,10 @@ class ConceptManager extends AbstractManager
     public function insert(array $concept)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
-        VALUES (NULL, :id_user, :id_panier, NULL, NULL)");
-        $statement->bindValue('id_user', $concept['id_user'], \PDO::PARAM_INT);
-        $statement->bindValue('id_panier', $concept['id_panier'], \PDO::PARAM_INT);
+        VALUES (NULL, :id_user, :id_panier, NULL, NULL, :date)");
+        $statement->bindValue(':id_user', $concept['id_user'], \PDO::PARAM_INT);
+        $statement->bindValue(':id_panier', $concept['id_panier'], \PDO::PARAM_INT);
+        $statement->bindValue(':date', $concept['date'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
