@@ -51,3 +51,8 @@ section {
     z-index: 2;
 }
 /* Login */
+
+/* User Add */
+.list-none {
+    list-style: none;
+}

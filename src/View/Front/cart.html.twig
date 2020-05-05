@@ -10,7 +10,7 @@
         <thead>
         <tr>
             <th>Nom du bouquet</th>
-            <th>Prix</th>
+            <th>Prix Total</th>
             <td>Quantité</td>
         </tr>
         </thead>
@@ -18,7 +18,7 @@
         {% for bouquet in panier %}
             <tr>
                 <td>{{ bouquet.nom }}</td>
-                <td>{{ bouquet.prix }}</td>
+                <td>{% set priceB = bouquet.prix  * bouquet.quantite  %} {{ priceB }}</td>
                 <td>{{ bouquet.quantite }}</td>
             </tr>
 

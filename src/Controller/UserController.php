@@ -24,7 +24,6 @@ class UserController extends AbstractController
     {
         $message="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $patternTel= '/^0[1-689][0-9]{8}$/';
             $patternPass='/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/' ;
             if (empty($_POST['firstname']) && empty($_POST['lastname'])) {
                 $message= "Veuillez remplir les champs NOM et PRENOM s'il vous plaît";
@@ -32,9 +31,6 @@ class UserController extends AbstractController
             } elseif (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
                 $message= "L'adresse mail est invalide";
                 return $this->twig->render('User/add.html.twig', ['message'=>$message]);
-            } elseif (!empty($_POST['tel']) && (preg_match($patternTel, $_POST['tel']) === 0)) {
-                $message = "Il y a un problème avec le numéro de téléphone.";
-                return $this->twig->render('User/add.html.twig', ['message' => $message]);
             } elseif (preg_match($patternPass, $_POST['password']) === 0) {
                 $message= "Votre mot de passe doit faire minimum 6 caractères 
                 et contenir au moins une majuscule et un chiffre";
