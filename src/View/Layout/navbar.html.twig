@@ -1,44 +1,38 @@
 <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
-
         <ul class="uk-navbar-nav">
-            <li><a href="index">Home</a></li>
+            <li><a href="/Front/index">Stras'bouquet</a></li>
             <li>
-                <a href="/Bouquet/index">Bouquet</a>
+                <a href="/Cart/showBouquet">Bouquet</a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/Bouquet/add">Ajouter</a></li>
-                        <li><a href="/Bouquet/delete">Supprimer</a></li>
-                        <li><a href="/Bouquet/update">Modifier</a></li>
+                        <li><a href="#">Lien 1</a></li>
+                        <li><a href="#">Lien 2</a></li>
+                        <li><a href="#">Lien 3</a></li>
                     </ul>
                 </div>
             </li>
             <li>
-                <a href="/Concept/index">Bouquet Concept</a>
-                <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/Concept/create">Créer</a></li>
-                        <li><a href="/Concept/delete">Supprimer</a></li>
-                        <li><a href="/Concept/update">Modifier</a></li>
-                    </ul>
-                </div>
+                <a href="/Concept/index">Bouquet personnalisé</a>
             </li>
             <li>
-                <a href="/CatalogueU/index">Catalogue Unitaire</a>
+                <a href="/User/add">Inscription</a>
             </li>
             <li>
-                <a href="/User/index">User</a>
-                <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/User/add">Ajouter</a></li>
-                        <li><a href="/User/delete">Supprimer</a></li>
-                        <li><a href="/User/update">Modifier</a></li>
-                    </ul>
-                </div>
+                <a href="/Account/login">Connexion</a>
             </li>
-
-
+            <li>
+                <a href="/Account/logout">Déconnexion</a>
+            </li>
+            <li>
+                <a href="/Cart/showCart/">Panier</a>
+            </li>
+            <li>
+                <a href="/User/show/{{ userid }}">Profil</a>
+            </li>
+            <li>
+                <a href="/Home/index/">Panel admin</a>
+            </li>
         </ul>
-
     </div>
 </nav>
