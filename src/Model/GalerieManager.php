@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-class GallerieManager extends AbstractManager
+class GalerieManager extends AbstractManager
 {
-    const TABLE = "gallerie";
+    const TABLE = "galerie";
     const BOUQUET = "bouquet";
     const CATALOGUE = "catalogue_unitaire";
 
@@ -45,12 +45,12 @@ class GallerieManager extends AbstractManager
     /**
      * insert into
      */
-    public function insertBouquet($gallerie, $bouquet)
+    public function insertBouquet($galerie, $bouquet)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
         " (nom, file1, id_bouquet) VALUES (:nom, :file1, :id_bouquet) ");
         $statement->bindValue('nom', $bouquet['nom'], \PDO::PARAM_STR);
-        $statement->bindValue('file1', $gallerie, \PDO::PARAM_STR);
+        $statement->bindValue('file1', $galerie, \PDO::PARAM_STR);
         $statement->bindValue('id_bouquet', $bouquet['id'], \PDO::PARAM_INT);
 
         if ($statement->execute()) {
