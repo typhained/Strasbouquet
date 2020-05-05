@@ -83,7 +83,7 @@ class BouquetController extends AbstractController
     public function delete(int $id)
     {
         $gallerieManager = new GallerieManager();
-        $gallerieManager->deleteIMG($id);
+        $gallerieManager->delete($id);
         $bouquetManager = new BouquetManager();
         $bouquetManager->delete($id);
         header('Location:/Bouquet/index');
