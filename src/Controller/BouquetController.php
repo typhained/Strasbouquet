@@ -82,8 +82,10 @@ class BouquetController extends AbstractController
         if ($_SESSION['role'] == 'admin') {
             $bouquetManager = new BouquetManager();
             $bouquet = $bouquetManager->selectOneById($id);
+            $galerieManager = new GalerieManager();
+            $image = $galerieManager->selectImageBouquet($id);
 
-            return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet]);
+            return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet, 'image' => $image]);
         } else {
             header('location:/Front/index/');
         }
@@ -97,6 +99,8 @@ class BouquetController extends AbstractController
     public function delete(int $id)
     {
         if ($_SESSION['role'] == 'admin') {
+            $galerieManager = new GalerieManager();
+            $galerieManager->delete($id);
             $bouquetManager = new BouquetManager();
             $bouquetManager->delete($id);
             header('Location:/Bouquet/index');
