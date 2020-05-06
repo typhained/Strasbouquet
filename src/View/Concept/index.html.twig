@@ -23,10 +23,6 @@
             </tr>
             {% endfor %}
         </table>
-        <form action="create/{{ concept.id }}" method="post" class="uk-text-center">
-            <input type="hidden" name="id_user" value="1">
-            <input type="hidden" name="id_panier" value="1">
-            <button type="submit" name="create" class="uk-button uk-button-primary">Je crée mon bouquet</button>
-        </form>
+        <a href="create" class="uk-button uk-button-primary">Je crée mon bouquet</a>
     </div>
 {% endblock %}

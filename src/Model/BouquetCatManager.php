@@ -24,10 +24,10 @@ class BouquetCatManager extends AbstractManager
      * @param int $unit
      * @return array
      */
-    public function unitInConcept(int $unit)
+    public function unitInConcept(int $unit, int $idConcept)
     {
         $statement = $this->pdo->query("SELECT quantite FROM " . self::TABLE . " 
-        WHERE id_catalogue_unitaire = " . $unit);
+        WHERE id_catalogue_unitaire = " . $unit . " AND id_bouquet_concept = " . $idConcept);
 
         return $statement->fetch(\PDO::FETCH_NUM);
     }
