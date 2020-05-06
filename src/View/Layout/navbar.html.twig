@@ -27,13 +27,14 @@
                 <li>
                     <a href="/Account/logout">Déconnexion</a>
                 </li>
+                <li>
+                    <a href="/Cart/showCart/{{ session.panier }}">Panier</a>
+                </li>
+                <li>
+                    <a href="/User/show/{{ session.user }}">Profil</a>
+                </li>
             {% endif %}
-            <li>
-                <a href="/Cart/showCart/{{ session.panier }}">Panier</a>
-            </li>
-            <li>
-                <a href="/User/show/{{ session.user }}">Profil</a>
-            </li>
+
             {% if session.role == "admin" %}
             <li>
                 <a href="/Home/index/">Panel admin</a>
