@@ -30,6 +30,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Create a new Bouquet Concept
+     *
      * @return void
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -58,6 +60,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Display a bouquet concept
+     *
      * @param int $id
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -89,6 +93,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Delete a bouquet concept
+     *
      * @param int $id
      */
     public function delete(int $id)
@@ -99,6 +105,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Add a bouquet concept to the cart
+     *
      * @param int $idConcept
      * @return mixed
      * @throws \Twig\Error\LoaderError
