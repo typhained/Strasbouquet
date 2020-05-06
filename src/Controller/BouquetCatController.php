@@ -27,7 +27,7 @@ class BouquetCatController extends AbstractController
         $idConcept = $_SESSION['id_bouquet_concept'];
         $bouquetCatManager = new BouquetCatManager();
 
-        if (empty($bouquetCatManager->unitInConcept($unit))) {
+        if (empty($bouquetCatManager->unitInConcept($unit, $idConcept))) {
             $bouquetCatManager->insert($idConcept, $unit);
         } else {
             $bouquetCatManager->updateQuantUp($idConcept, $unit);
@@ -45,7 +45,7 @@ class BouquetCatController extends AbstractController
     {
         $idConcept = $_SESSION['id_bouquet_concept'];
         $bouquetCatManager = new BouquetCatManager();
-        if ($bouquetCatManager->unitInConcept($unit)[0] > 1) {
+        if ($bouquetCatManager->unitInConcept($unit, $idConcept)[0] > 1) {
             $bouquetCatManager->updateQuantDwn($idConcept, $unit);
         } else {
             $bouquetCatManager->delete($idConcept, $unit);

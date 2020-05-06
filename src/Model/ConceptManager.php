@@ -17,7 +17,11 @@ class ConceptManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function showConcept($id)
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function showConcept(int $id)
     {
         $statement = $this->pdo->query("SELECT * FROM " . self::JOIN . " bc 
         JOIN " . self::CATALOGUE_U ." cu ON bc.id_catalogue_unitaire=cu.id 
@@ -34,13 +38,23 @@ class ConceptManager extends AbstractManager
     public function insert(array $concept)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
-        VALUES (NULL, :id_user, :id_panier, NULL, NULL)");
-        $statement->bindValue('id_user', $concept['id_user'], \PDO::PARAM_INT);
-        $statement->bindValue('id_panier', $concept['id_panier'], \PDO::PARAM_INT);
+        VALUES (NULL, :id_user, NULL, NULL, NULL, :date)");
+        $statement->bindValue(':id_user', $concept['id_user'], \PDO::PARAM_INT);
+        $statement->bindValue(':date', $concept['date'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
+    }
+
+    public function insertCart(int $id, int $cart)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " 
+        SET id_panier = :id_panier WHERE id = :id");
+        $statement->bindValue(':id_panier', $cart, \PDO::PARAM_INT);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $statement->execute();
     }
 
     public function delete(int $id)

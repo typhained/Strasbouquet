@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Model\ConceptManager;
 use App\Model\CatalogueUManager;
-use App\Model\BouquetCatManager;
+use App\Model\CartManager;
+use DateTime;
 
 /**
  * Class ConceptController
@@ -30,18 +30,23 @@ class ConceptController extends AbstractController
     }
 
     /**
-     * @return string
+     * @return void
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function create()
     {
-
         $conceptManager = new ConceptManager();
+
+        $user = $_SESSION['user'];
+        $date = new DateTime("now");
+        $date = $date->format('Y-m-d');
+
+
         $concept = [
-            'id_user' => $_POST['id_user'],
-            'id_panier' => $_POST['id_panier'],
+            'id_user' => $user,
+            'date' => $date
         ];
         $id = $conceptManager->insert($concept);
 
@@ -63,16 +68,24 @@ class ConceptController extends AbstractController
     {
         $conceptManager = new ConceptManager();
 
+        if (!isset($_SESSION['id_bouquet_concept'])) {
+            $_SESSION['id_bouquet_concept'] = $id;
+        }
+
         if ($id != $_SESSION['id_bouquet_concept']) {
             $_SESSION['id_bouquet_concept'] = $id;
         }
+
+        $idConcept = $_SESSION['id_bouquet_concept'];
 
         $concept = $conceptManager->showConcept($id);
 
         $catalogueUManager = new CatalogueUManager();
         $units = $catalogueUManager->selectAll();
 
-        return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units]);
+        return $this->twig->render('Concept/show.html.twig', [
+            'concept' => $concept, 'units' => $units, 'idConcept' => $idConcept
+        ]);
     }
 
     /**
@@ -83,5 +96,39 @@ class ConceptController extends AbstractController
         $conceptManager = new ConceptManager();
         $conceptManager->delete($id);
         header('location: /Concept/index');
+    }
+
+    /**
+     * @param int $idConcept
+     * @return mixed
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function addToCart(int $idConcept)
+    {
+        if (!isset($_SESSION['user'])) {
+            $message = "Vous devez vous inscrire ou vous connecter pour commmander";
+            return $this->twig->render('User/add.html.twig', ["message" => $message]);
+        } else {
+            if (!isset($_SESSION['id_panier'])) {
+                $cartManager = new CartManager();
+
+                $user = $_SESSION['user'];
+                $date = new DateTime("now");
+                $date = $date->format('Y-m-d');
+
+                $id = $cartManager->insert($user, $date);
+
+                $_SESSION['id_panier'] = $id;
+            }
+
+            $conceptManager = new ConceptManager();
+
+            $cart = $_SESSION['id_panier'];
+            $conceptManager->insertCart($idConcept, $cart);
+
+            header("location: /Cart/showCart/$cart");
+        }
     }
 }
