@@ -50,12 +50,12 @@ class CartController extends AbstractController
                 $qte = $qte['quantite'];
                 $cartManager->updateBouquetCart($idBouquet, $qte);
                 return $this->twig->render(
-                    'Front/index.html.twig',
+                    'Front/bouquets.html.twig',
                     ["bouquets" => $bouquets, "panier" => $panier, "qte" => $qte]
                 );
             }
             return $this->twig->render(
-                'Front/index.html.twig',
+                'Front/bouquets.html.twig',
                 ["bouquets" => $bouquets, "panier" => $panier]
             );
         }
