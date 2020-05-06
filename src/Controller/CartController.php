@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\BouquetManager;
 use App\Model\CartManager;
+use App\Model\CartBouquetManager;
 use DateTime;
 
 class CartController extends AbstractController
@@ -19,11 +20,10 @@ class CartController extends AbstractController
             $panier = $_SESSION['id_panier'];
         }
         return $this->twig->render(
-            'Front/index.html.twig',
+            'Front/boquuets.html.twig',
             ["bouquets" => $bouquets, "panier" => $panier]
         );
     }
-
 
     public function addBouquetCart($idBouquet)
     {
@@ -32,6 +32,7 @@ class CartController extends AbstractController
             return $this->twig->render('User/add.html.twig', ["message" => $message]);
         } else {
             $cartManager = new CartManager();
+            $cartBManager = new CartBouquetManager();
             $user = ($_SESSION['user']);
             $date = new DateTime("now");
             $date = $date->format("Y-m-d");
@@ -45,13 +46,13 @@ class CartController extends AbstractController
                 $id = $cartManager->insert($user, $date);
                 $_SESSION['id_panier'] =  $id;
             }
-            if ($cartManager->bouquetInCart($idBouquet) === false) {
-                $cartManager->addBouquetCart($idBouquet);
+            if ($cartBManager->bouquetInCart($idBouquet) === false) {
+                $cartBManager->addBouquetCart($idBouquet);
             } else {
-                $qte = $cartManager->selectQuantiteBouquet($idBouquet);
+                $qte = $cartBManager->selectQuantiteBouquet($idBouquet);
                 $qte['quantite'] += 1;
                 $qte = $qte['quantite'];
-                $cartManager->updateBouquetCart($idBouquet, $qte);
+                $cartBManager->updateBouquetCart($idBouquet, $qte);
                 return $this->twig->render(
                     'Front/bouquets.html.twig',
                     ["bouquets" => $bouquets, "panier" => $panier, "qte" => $qte]
