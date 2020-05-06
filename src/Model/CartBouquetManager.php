@@ -62,4 +62,11 @@ class CartBouquetManager extends AbstractManager
         quantite = $qte WHERE id_bouquet=$idBouquet");
         $statement->execute();
     }
+
+    public function delete($idBouquet)
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . "
+WHERE id_bouquet=$idBouquet");
+        $statement->execute();
+    }
 }
