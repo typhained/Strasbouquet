@@ -34,6 +34,7 @@ class CartController extends AbstractController
             $cartManager = new CartManager();
             $user = ($_SESSION['user']);
             $date = new DateTime("now");
+            $date = $date->format("Y-m-d");
 
             $bouquetManager= new BouquetManager();
             $bouquets = $bouquetManager->selectAll();
