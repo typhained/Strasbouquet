@@ -9,6 +9,7 @@ class CartManager extends AbstractManager
     const BOUQUETJOIN = "bouquet_panier";
     const BOUQUET = "bouquet";
     const CONCEPT = "concept";
+    const USER = "user";
 
     /**
      *init this class.
@@ -44,7 +45,8 @@ class CartManager extends AbstractManager
 
     public function priceCart($id)
     {
-        $statement = $this->pdo->prepare("SELECT SUM(b.prix) as total FROM " . self::BOUQUETJOIN . " bp INNER JOIN 
+        $statement = $this->pdo->prepare("SELECT SUM(b.prix*bp.quantite) as 
+        total FROM " . self::BOUQUETJOIN . " bp INNER JOIN 
         ". self::TABLE ." p ON p.id = bp.id_panier INNER JOIN ". self::BOUQUET." b 
         ON bp.id_bouquet=b.id WHERE bp.id_panier=:id GROUP BY bp.id_panier");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
@@ -88,5 +90,12 @@ class CartManager extends AbstractManager
         $statement = $this->pdo->prepare("UPDATE " . self::BOUQUETJOIN . " SET
         quantite = $qte WHERE id_bouquet=$idBouquet");
         $statement->execute();
+    }
+
+    public function latestCart()
+    {
+        $statement = $this->pdo->query("SELECT * FROM " . self::TABLE . "   p JOIN " .self::USER. "
+        u ON u.id=p.id_user ORDER BY prix_total limit 5");
+        return $statement->fetchAll();
     }
 }

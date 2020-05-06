@@ -1,0 +1,23 @@
+<div class="uk-container">
+    <div class="uk-text-right">
+        <a href="/Bouquet/add" title="Ajouter un bouquet" class="uk-button uk-button-primary uk-margin">Ajouter</a>
+    </div>
+        <h3 class="uk-text-center uk-margin uk-text-bold">Liste des images</h3>
+            <div class="uk-child-width-1-3@m" uk-grid>
+                    {% for galerie in galeries %}
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-top">
+                            <img src="/{{ galerie.file1 }}" alt="">
+                        </div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">{{ galerie.nom }}</h3>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    <div class="uk-text-right">
+        <a href="/Bouquet/add" title="Ajouter un bouquet" class="uk-button uk-button-primary uk-margin">Ajouter</a>
+    </div>
+</div>
