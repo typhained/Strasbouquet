@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\BouquetManager;
 use App\Model\CartManager;
+use DateTime;
 
 class CartController extends AbstractController
 {
@@ -32,6 +33,8 @@ class CartController extends AbstractController
         } else {
             $cartManager = new CartManager();
             $user = ($_SESSION['user']);
+            $date = new DateTime("now");
+            $date = $date->format("Y-m-d");
 
             $bouquetManager= new BouquetManager();
             $bouquets = $bouquetManager->selectAll();
@@ -39,7 +42,7 @@ class CartController extends AbstractController
 
 
             if (!isset($_SESSION['id_panier'])) {
-                $id = $cartManager->insert($user);
+                $id = $cartManager->insert($user, $date);
                 $_SESSION['id_panier'] =  $id;
             }
             if ($cartManager->bouquetInCart($idBouquet) === false) {
