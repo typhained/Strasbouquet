@@ -30,6 +30,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Create a new Bouquet Concept
+     *
      * @return void
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -58,6 +60,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Display a bouquet concept
+     *
      * @param int $id
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -89,6 +93,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Delete a bouquet concept
+     *
      * @param int $id
      */
     public function delete(int $id)
@@ -99,6 +105,8 @@ class ConceptController extends AbstractController
     }
 
     /**
+     * Add a bouquet concept to the cart
+     *
      * @param int $idConcept
      * @return mixed
      * @throws \Twig\Error\LoaderError
@@ -107,28 +115,27 @@ class ConceptController extends AbstractController
      */
     public function addToCart(int $idConcept)
     {
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user'])) {    // Check if client is logged
             $message = "Vous devez vous inscrire ou vous connecter pour commmander";
-            return $this->twig->render('User/add.html.twig', ["message" => $message]);
-        } else {
-            if (!isset($_SESSION['id_panier'])) {
-                $cartManager = new CartManager();
+            return $this->twig->render('User/add.html.twig', ["message" => $message]);  // If not logged, sign in
+        } else {    // Log check passed
+            if (!isset($_SESSION['id_panier'])) {   // Check if cart ID is not defined
+                $cartManager = new CartManager();   // New CartManager object
 
-                $user = $_SESSION['user'];
-                $date = new DateTime("now");
-                $date = $date->format('Y-m-d');
+                $user = $_SESSION['user'];  // Define a user variable
+                $date = new DateTime("now");    // New current date object
+                $date = $date->format('Y-m-d'); // Passing date to the right format
 
-                $id = $cartManager->insert($user, $date);
-
-                $_SESSION['id_panier'] = $id;
+                $id = $cartManager->insert($user, $date);   // Create a cart and returning the ID
+                $_SESSION['id_panier'] = $id;   // Passing cart ID to SESSION global
             }
 
-            $conceptManager = new ConceptManager();
+            $conceptManager = new ConceptManager(); // New ConceptManager object
 
-            $cart = $_SESSION['id_panier'];
-            $conceptManager->insertCart($idConcept, $cart);
+            $cart = $_SESSION['id_panier']; // Define a cart ID
+            $conceptManager->updateCart($idConcept, $cart); // Assign the custom bouquet to the cart
 
-            header("location: /Cart/showCart/$cart");
+            header("location: /Cart/showCart/$cart");   // Redirect towards the cart
         }
     }
 }

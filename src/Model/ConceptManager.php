@@ -18,6 +18,8 @@ class ConceptManager extends AbstractManager
     }
 
     /**
+     * Select all the bouquets concepts
+     *
      * @param int $id
      * @return array
      */
@@ -32,6 +34,8 @@ class ConceptManager extends AbstractManager
     }
 
     /**
+     * Insert a new bouquet concept
+     *
      * @param array $concept
      * @return int
      */
@@ -47,7 +51,13 @@ class ConceptManager extends AbstractManager
         }
     }
 
-    public function insertCart(int $id, int $cart)
+    /**
+     * Assign a bouquet concept to a cart
+     *
+     * @param int $id
+     * @param int $cart
+     */
+    public function updateCart(int $id, int $cart)
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " 
         SET id_panier = :id_panier WHERE id = :id");
@@ -57,6 +67,11 @@ class ConceptManager extends AbstractManager
         $statement->execute();
     }
 
+    /**
+     * Delete a bouquet concept
+     *
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id= :id");

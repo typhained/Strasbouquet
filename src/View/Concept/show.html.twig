@@ -40,13 +40,18 @@
                 <a class="uk-button uk-button-default" href="../index">Retour</a>
                 <a class="uk-button uk-button-primary" href="../addToCart/{{ idConcept }}">Ajouter au panier</a>
                 <button type="button" class="uk-button uk-button-danger" uk-toggle="target: #delete-concept">Supprimer</button>
-
-                <div id="delete-modal" uk-modal>
+                <!-- Modal -->
+                <div id="delete-concept" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
-                        <h3 class="uk-modal-title"></h3>
-
+                        <h3 class="uk-modal-title uk-text-center uk-text-danger">Suppression du bouquet</h3>
+                        <p class="uk-text-center">Attention cette action est irreversible</p>
+                        <div class="uk-flex uk-flex-around">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                            <a href="/Concept/delete/{{ idConcept }}" class="uk-button uk-button-danger">Supprimer</a>
+                        </div>
                     </div>
                 </div>
+                <!-- End modal -->
             </div>
         </div>
     </div>

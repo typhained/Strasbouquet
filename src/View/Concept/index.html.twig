@@ -18,8 +18,20 @@
                 <td>Bouquet {{ concept.id }}</td>
                 <td>
                     <a href="show/{{ concept.id }}"><span uk-icon="icon: file-edit"></span></a>
-                    <a href="delete/{{ concept.id }}"><span uk-icon="icon: trash"></span></a>
+                    <a href="#delete-concept-{{ concept.id }}" title="Supprimer" uk-toggle><span uk-icon="icon: trash"></span></a>
                 </td>
+                <!-- Modal -->
+                <div id="delete-concept-{{ concept.id }}" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body">
+                        <h3 class="uk-modal-title uk-text-center uk-text-danger">Suppression du bouquet</h3>
+                        <p class="uk-text-center">Attention cette action est irreversible</p>
+                        <div class="uk-flex uk-flex-around">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                            <a href="/Concept/delete/{{ concept.id }}" class="uk-button uk-button-danger">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End modal -->
             </tr>
             {% endfor %}
         </table>
