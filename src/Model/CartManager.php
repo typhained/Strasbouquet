@@ -45,19 +45,6 @@ class CartManager extends AbstractManager
         return $statement->fetchAll();
     }
 
-    public function priceCart($id)
-    {
-        $statement = $this->pdo->prepare("SELECT SUM(b.prix*bp.quantite) as 
-        total FROM " . self::BOUQUETJOIN . " bp INNER JOIN 
-        ". self::TABLE ." p ON p.id = bp.id_panier INNER JOIN ". self::BOUQUET." b 
-        ON bp.id_bouquet=b.id WHERE bp.id_panier=:id GROUP BY bp.id_panier");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        return $statement->fetch();
-    }
-
-
-
     public function latestCart()
     {
         $statement = $this->pdo->query("SELECT * FROM " . self::TABLE . "   p JOIN " .self::USER. "

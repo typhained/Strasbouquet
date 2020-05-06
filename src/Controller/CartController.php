@@ -20,7 +20,7 @@ class CartController extends AbstractController
             $panier = $_SESSION['id_panier'];
         }
         return $this->twig->render(
-            'Front/boquuets.html.twig',
+            'Front/bouquets.html.twig',
             ["bouquets" => $bouquets, "panier" => $panier]
         );
     }
@@ -39,24 +39,19 @@ class CartController extends AbstractController
 
             $bouquetManager= new BouquetManager();
             $bouquets = $bouquetManager->selectAll();
-            $panier = $_SESSION['id_panier'];
-
 
             if (!isset($_SESSION['id_panier'])) {
                 $id = $cartManager->insert($user, $date);
                 $_SESSION['id_panier'] =  $id;
             }
-            if ($cartBManager->bouquetInCart($idBouquet) === false) {
-                $cartBManager->addBouquetCart($idBouquet);
+            $panier = $_SESSION['id_panier'];
+            if ($cartBManager->bouquetInCart($idBouquet, $panier) === false) {
+                $cartBManager->addBouquetCart($idBouquet, $panier);
             } else {
                 $qte = $cartBManager->selectQuantiteBouquet($idBouquet);
-                $qte['quantite'] += 1;
+                $qte['quantite']= $qte['quantite'] + 1;
                 $qte = $qte['quantite'];
                 $cartBManager->updateBouquetCart($idBouquet, $qte);
-                return $this->twig->render(
-                    'Front/bouquets.html.twig',
-                    ["bouquets" => $bouquets, "panier" => $panier, "qte" => $qte]
-                );
             }
             return $this->twig->render(
                 'Front/bouquets.html.twig',
@@ -72,8 +67,9 @@ class CartController extends AbstractController
             return $this->twig->render('User/add.html.twig', ["message" => $message]);
         } else {
             $cartManager = new CartManager();
+            $cartBManager = new CartBouquetManager();
             $panier = $cartManager->showCartContent($id);
-            $price = $cartManager->priceCart($id);
+            $price = $cartBManager->priceCartBouquet($id);
             return $this->twig->render('Front/cart.html.twig', ["panier" => $panier, "price" => $price]);
         }
     }
