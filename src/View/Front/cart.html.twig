@@ -19,7 +19,11 @@
             <tr>
                 <td>{{ bouquet.nom }}</td>
                 <td>{% set priceB = bouquet.prix  * bouquet.quantite  %} {{ priceB }}</td>
-                <td>{{ bouquet.quantite }}</td>
+                <td class="uk-inline">
+                    <a href="/BouquetCat/delete/{{ unit.id_catalogue_unitaire }}"><p uk-icon="icon: minus-circle"></p></a>
+                    <p>{{ bouquet.quantite }}</p>
+                    <a href="/BouquetCat/add/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: plus-circle"></span></a>
+                </td>
             </tr>
 
         {% endfor %}
