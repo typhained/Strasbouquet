@@ -134,7 +134,7 @@ class ConceptController extends AbstractController
             $conceptManager = new ConceptManager();
 
             $cart = $_SESSION['id_panier'];
-            $conceptManager->insertCart($idConcept, $cart);
+            $conceptManager->updateCart($idConcept, $cart);
 
             header("location: /Cart/showCart/$cart");
         }

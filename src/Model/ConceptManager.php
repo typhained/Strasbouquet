@@ -57,7 +57,7 @@ class ConceptManager extends AbstractManager
      * @param int $id
      * @param int $cart
      */
-    public function insertCart(int $id, int $cart)
+    public function updateCart(int $id, int $cart)
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " 
         SET id_panier = :id_panier WHERE id = :id");
