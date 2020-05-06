@@ -30,7 +30,7 @@ class AccountController extends AbstractController
     public function login()
     {
         if (isset($_SESSION['user'])) {
-            header('location:/');
+            header('location:/Front/index/');
         } else {
             if ($_POST) {
                 $account = new AccountManager();
@@ -63,7 +63,7 @@ class AccountController extends AbstractController
 
     public function logout()
     {
-            session_destroy();
-            header('location:/');
+        session_destroy();
+        header('location:/Front/index/');
     }
 }
