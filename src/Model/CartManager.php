@@ -19,12 +19,14 @@ class CartManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function insert($user)
+    public function insert($user, $date)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
-        (id_user) 
-        VALUES (:id_user)");
+        (id_user, date) 
+        VALUES (:id_user, :date)");
         $statement->bindValue('id_user', $user, \PDO::PARAM_INT);
+        $statement->bindValue('date', $date, \PDO::PARAM_STR);
+
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
