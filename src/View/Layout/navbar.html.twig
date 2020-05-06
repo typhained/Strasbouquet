@@ -24,20 +24,21 @@
                 </li>
             {% endif %}
             {% if session.role != "disconnect" %}
-                <li>
+              <li>
                     <a href="/Account/logout">Déconnexion</a>
-                </li>
+              </li>
+              <li>
+                  <a href="/Cart/showCart/{{ session.id_panier }}">Panier</a>
+              </li>
+              <li>
+                  <a href="/User/show/{{ session.user }}">Profil</a>
+              </li>
             {% endif %}
-            <li>
-                <a href="/Cart/showCart/{{ session.id_panier }}">Panier</a>
-            </li>
-            <li>
-                <a href="/User/show/{{ session.user }}">Profil</a>
-            </li>
+
             {% if session.role == "admin" %}
-            <li>
-                <a href="/Home/index/">Panel admin</a>
-            </li>
+              <li>
+                  <a href="/Home/index/">Panel admin</a>
+              </li>
             {% endif %}
         </ul>
     </div>

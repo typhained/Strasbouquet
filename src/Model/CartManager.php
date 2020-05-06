@@ -48,7 +48,7 @@ class CartManager extends AbstractManager
     public function latestCart()
     {
         $statement = $this->pdo->query("SELECT * FROM " . self::TABLE . "   p JOIN " .self::USER. "
-        u ON u.id=p.id_user ORDER BY prix_total limit 5");
+        u ON u.id=p.id_user ORDER BY date limit 5");
         return $statement->fetchAll();
     }
 }
