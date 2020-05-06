@@ -44,7 +44,6 @@ class ConceptController extends AbstractController
             'id_panier' => $_POST['id_panier'],
             'date' => $date->format('Y-m-d')
         ];
-        $_SESSION['user'] = $concept['id_user'];
         $id = $conceptManager->insert($concept);
 
         if (!empty($_SESSION['id_bouquet_concept'])) {
@@ -78,10 +77,7 @@ class ConceptController extends AbstractController
         $catalogueUManager = new CatalogueUManager();
         $units = $catalogueUManager->selectAll();
 
-        return $this->twig->render(
-            'Concept/show.html.twig',
-            ['concept' => $concept, 'units' => $units, 'id' => $id]
-        );
+        return $this->twig->render('Concept/show.html.twig', ['concept' => $concept, 'units' => $units]);
     }
 
     /**
