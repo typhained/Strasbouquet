@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Model\BouquetManager;
-use App\Model\GallerieManager;
+use App\Model\GalerieManager;
 
 class BouquetController extends AbstractController
 {
@@ -30,7 +30,7 @@ class BouquetController extends AbstractController
                 $message = "votre déscription est trop longue!";
                 return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet','message'=>$message]);
             } else {
-                    $gallerieManager = new GallerieManager();
+                    $galerieManager = new GalerieManager();
                     $targetDir = "assets/uploads/";
                     $image = $_FILES['fileToUpload']['name'];
                     $imageFileType = strtolower(pathinfo($image, PATHINFO_EXTENSION));
@@ -45,7 +45,7 @@ class BouquetController extends AbstractController
                     ];
                     $id = $bouquetManager->insert($bouquet);
                     $bouquet = $bouquetManager->selectOneById($id);
-                    $gallerieManager->insertBouquet($targetFile, $bouquet);
+                    $galerieManager->insertBouquet($targetFile, $bouquet);
                     if (file_exists($targetFile)) {
                         echo "Sorry, file already exists.";
                         $uploadOk = 0;
@@ -69,8 +69,8 @@ class BouquetController extends AbstractController
     {
         $bouquetManager = new BouquetManager();
         $bouquet = $bouquetManager->selectOneById($id);
-        $gallerieManager = new GallerieManager();
-        $image = $gallerieManager->selectImageBouquet($id);
+        $galerieManager = new GalerieManager();
+        $image = $galerieManager->selectImageBouquet($id);
 
         return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet, 'image' => $image]);
     }
@@ -82,8 +82,8 @@ class BouquetController extends AbstractController
      */
     public function delete(int $id)
     {
-        $gallerieManager = new GallerieManager();
-        $gallerieManager->delete($id);
+        $galerieManager = new GalerieManager();
+        $galerieManager->delete($id);
         $bouquetManager = new BouquetManager();
         $bouquetManager->delete($id);
         header('Location:/Bouquet/index');
