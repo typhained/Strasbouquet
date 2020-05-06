@@ -101,13 +101,6 @@ CREATE TABLE `galerie` (
   `id_catalogue_unitaire` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Contenu de la table `galerie`
---
-
-INSERT INTO `galerie` (`id`, `nom`, `file1`, `id_bouquet`, `id_catalogue_unitaire`) VALUES
-(1, 'Boquuet', 'assets/uploads/5eb123d2add8d.png', 6, NULL);
-
 -- --------------------------------------------------------
 
 --
