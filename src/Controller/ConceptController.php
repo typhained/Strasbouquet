@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\ConceptManager;
 use App\Model\CatalogueUManager;
+use App\Model\BouquetCatManager;
 use App\Model\CartManager;
 use DateTime;
 
@@ -68,7 +69,7 @@ class ConceptController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function show(int $id)
+    public function show(int $id):string
     {
         $conceptManager = new ConceptManager();
 
@@ -87,9 +88,18 @@ class ConceptController extends AbstractController
         $catalogueUManager = new CatalogueUManager();
         $units = $catalogueUManager->selectAll();
 
-        return $this->twig->render('Concept/show.html.twig', [
-            'concept' => $concept, 'units' => $units, 'idConcept' => $idConcept
-        ]);
+        $price = $conceptManager->fetchPrice($id);
+
+
+        return $this->twig->render(
+            'Concept/show.html.twig',
+            [
+                'concept' => $concept,
+                'units' => $units,
+                'idConcept' => $idConcept,
+                'price' => $price
+            ]
+        );
     }
 
     /**
