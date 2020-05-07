@@ -19,7 +19,29 @@
             <div class="uk-card-body">
                 <p class="uk-text-meta uk-margin-remove-top">Numéro de téléphone: {{ user.num_Tel }}</p>
                 <h3>Ma dernière commande</h3>
-                <p>Dernière commande affichée ici</p>
+                <table class="uk-table">
+                    <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>PRIX</th>
+                    </tr>
+                    </thead>
+
+                    <tr>
+                        <td>{{ cart[0].date }}</td>
+                        <td>{{ cart[0].prix_total }}</td>
+
+                    </tr>
+                    <tr>
+                        <th>CONTENU</th>
+                    </tr>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{ item.quantite }} * {{ item.nom }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+{{ dump(cartid) }}
             </div>
             <div class="uk-card-footer uk-text-center">
                 <a href="../update/{{ user.id }}" class="uk-button">Modifier</a>

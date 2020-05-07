@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\CartManager;
 use App\Model\UserManager;
 
 class UserController extends AbstractController
@@ -98,8 +99,14 @@ class UserController extends AbstractController
             header('location:/Account/login/');
         } else {
             $userManager = new UserManager();
+            $cartManager = new CartManager();
             $user = $userManager->selectOneById($id);
-            return $this->twig->render('User/show.html.twig', ['user' => $user]);
+            $cartid = $cartManager->historiqueID($id);
+            $cart = $cartManager->showCartContent($cartid['id']);
+
+            return $this->twig->render('User/show.html.twig', [
+                'user' => $user, "cart" => $cart, "cartid"=>$cartid
+            ]);
         }
     }
 
