@@ -57,4 +57,9 @@ class BouquetManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
+    public function filter(string $filter): array
+    {
+        $statement = $this->pdo->query(" SELECT * FROM " . self::TABLE . " WHERE saisonnier = '" . $filter . "' ");
+        return $statement->fetchAll();
+    }
 }

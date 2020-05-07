@@ -127,4 +127,11 @@ class BouquetController extends AbstractController
             header('location:/Front/index/');
         }
     }
+    public function filter(string $filter)
+    {
+        $bouquetManager = new BouquetManager();
+        $bouquets = $bouquetManager->filter($filter);
+
+        return $this->twig->render('Bouquet/index.html.twig', ['bouquets' => $bouquets]);
+    }
 }
