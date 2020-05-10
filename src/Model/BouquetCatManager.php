@@ -68,6 +68,19 @@ class BouquetCatManager extends AbstractManager
         $statement->execute();
     }
 
+    /**
+     * @param int $idUnit
+     * @return int
+     */
+    public function getUnitQuant(int $idUnit) : int
+    {
+        $statement = $this->pdo->query("SELECT quantite FROM " . self::TABLE . " 
+        WHERE id_catalogue_unitaire = " . $idUnit);
+
+        $array = $statement->fetch(\PDO::FETCH_NUM);
+        return $array[0];
+    }
+
     public function delete(int $idConcept, int $unit)
     {
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " bc 
