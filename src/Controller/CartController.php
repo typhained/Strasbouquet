@@ -52,6 +52,7 @@ class CartController extends AbstractController
                 $qte['quantite']= $qte['quantite'] + 1;
                 $qte = $qte['quantite'];
                 $cartBManager->updateBouquetCart($idBouquet, $qte);
+                header("location: /Cart/showCart/$panier");
             }
             return $this->twig->render(
                 'Front/bouquets.html.twig',
@@ -71,6 +72,22 @@ class CartController extends AbstractController
             $panier = $cartManager->showCartContent($id);
             $price = $cartBManager->priceCartBouquet($id);
             return $this->twig->render('Front/cart.html.twig', ["panier" => $panier, "price" => $price]);
+        }
+    }
+
+    public function deleteBouquet(int $id)
+    {
+        $cartBManager = new CartBouquetManager();
+        $qte = $cartBManager->selectQuantiteBouquet($id);
+        $idpanier = $_SESSION['id_panier'];
+        if ($qte['quantite'] > 1) {
+            $newQte = $qte['quantite'] - 1;
+            $qte['quantite'] = $newQte;
+            $cartBManager->updateBouquetCart($id, $qte['quantite']);
+            header("Location: /cart/showCart/" . $idpanier);
+        } else {
+            $cartBManager->delete($id);
+            header("Location: /cart/showCart/" . $idpanier);
         }
     }
 }
