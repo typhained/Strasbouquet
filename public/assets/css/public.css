@@ -1,0 +1,36 @@
+/* Footer */
+#footer-flex {
+    display: flex;
+    justify-content: space-around;
+    background-color: #a2a2a2;
+    padding: 20px 0;
+}
+footer ul {
+   padding: 20px 0;
+    margin-top: 0;
+}
+footer li {
+    margin: 10px 0;
+    list-style: none;
+}
+footer li a {
+    color: white;
+}
+#logo-footer {
+    width: 10%;
+    height: auto;
+}
+footer a img {
+    max-width: 48px;
+    max-height: 48px;
+    margin: 0 10px;
+}
+#footer-flex div {
+    display: flex;
+    align-items: center;
+}
+#footer-flex div a {
+    margin: 10px 0;
+    text-decoration: none;
+    color: white;
+}
