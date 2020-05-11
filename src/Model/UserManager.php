@@ -53,7 +53,7 @@ class UserManager extends AbstractManager
         }
     }
 
-    public function update(array $user):bool
+    public function update(array $user):void
     {
         // prepared request
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET firstname = :firstname, 
@@ -64,8 +64,7 @@ class UserManager extends AbstractManager
         $statement->bindValue('mail', $user['mail'], \PDO::PARAM_STR);
         $statement->bindValue('tel', $user['num_Tel'], \PDO::PARAM_STR);
         $statement->bindValue('password', $user['password'], \PDO::PARAM_STR);
-
-        return $statement->execute();
+        $statement->execute();
     }
 
     /**

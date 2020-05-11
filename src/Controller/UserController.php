@@ -82,13 +82,13 @@ class UserController extends AbstractController
     {
         $userManager = new UserManager();
         $user = $userManager->selectOneById($id);
-        $updateUser['id']=$id;
+        $user['id']=$id;
         if ($_SESSION["user"] == $id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $updateUser['firstname'] = ucfirst($_POST['firstname']);
-                $updateUser['lastname'] = strtoupper($_POST['lastname']);
-                $updateUser['mail'] = strtolower($_POST['mail']);
-                $updateUser['num_Tel'] = $_POST['tel'];
+                $user['firstname'] = ucfirst($_POST['firstname']);
+                $user['lastname'] = strtoupper($_POST['lastname']);
+                $user['mail'] = strtolower($_POST['mail']);
+                $user['num_Tel'] = $_POST['tel'];
 
                 if (!empty($_POST['password'])) {
                     $patternPass = '/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/';
@@ -97,30 +97,30 @@ class UserController extends AbstractController
                 et contenir au moins une majuscule et un chiffre";
                         return $this->twig->render('User/update.html.twig', ['user' => $user, 'message' => $message]);
                     } else {
-                        $updateUser['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                        $userManager->update($updateUser);
+                        $user['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                        $userManager->update($user);
+                        $user = $userManager->selectOneById($id);
                         $message = "Votre compte a bien été mis à jour";
                         return $this->twig->render(
                             'User/show.html.twig',
-                            ['user' => $updateUser, 'message' => $message]
+                            ['user' => $user, 'message' => $message]
                         );
                     }
                 } else {
-                    $updateUser['password'] = $user['password'];
-                    $userManager->update($updateUser);
+                    $userManager->update($user);
+                    $user = $userManager->selectOneById($id);
                     $message = "Votre compte a bien été mis à jour";
-                    return $this->twig->render('User/show.html.twig', ['user' => $updateUser, 'message' => $message]);
+                    return $this->twig->render('User/show.html.twig', ['user' => $user, 'message' => $message]);
                 }
             }
             return $this->twig->render('User/update.html.twig', ['user' => $user]);
         } elseif ($_SESSION['role'] == 'admin') {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $updateUser['firstname'] = ucfirst($_POST['firstname']);
-                    $updateUser['lastname'] = strtoupper($_POST['lastname']);
-                    $updateUser['password'] = $user['password'];
-                    $updateUser['mail'] = strtolower($_POST['mail']);
-                    $updateUser['num_Tel'] = $_POST['tel'];
-                    $userManager->update($updateUser);
+                    $user['firstname'] = ucfirst($_POST['firstname']);
+                    $user['lastname'] = strtoupper($_POST['lastname']);
+                    $user['mail'] = strtolower($_POST['mail']);
+                    $user['num_Tel'] = $_POST['tel'];
+                    $userManager->update($user);
                     header("Location: /User/index");
             }
             return $this->twig->render('User/update.html.twig', ['user' => $user]);
