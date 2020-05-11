@@ -52,6 +52,50 @@ class ConceptManager extends AbstractManager
     }
 
     /**
+     * @return array
+     */
+    public function fetchPrice(int $concept) : array
+    {
+        $statement = $this->pdo->prepare("SELECT SUM(cu.prix * bc.quantite) AS total 
+            FROM " . self::CATALOGUE_U . " cu 
+            JOIN " . self::JOIN . " bc ON bc.id_catalogue_unitaire=cu.id 
+            JOIN " . self::TABLE . " c ON c.id=bc.id_bouquet_concept 
+            WHERE c.id=:id");
+        $statement->bindValue(':id', $concept, \PDO::PARAM_INT);
+
+        $statement->execute();
+        return $statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param int $idUnit
+     * @return int
+     */
+    public function getUnitPrice(int $idUnit) : int
+    {
+        $statement = $this->pdo->query("SELECT cu.prix FROM " . self::CATALOGUE_U . " cu 
+            WHERE cu.id=" . $idUnit);
+
+        $array = $statement->fetch(\PDO::FETCH_NUM);
+        return $array[0];
+    }
+
+    /**
+     * Update the price of the custom bouquet
+     *
+     * @param int $price
+     * @param int $unit
+     */
+    public function updatePrice(int $price, int $unit)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET prix_total = :price WHERE id = :unit");
+        $statement->bindValue(':price', $price, \PDO::PARAM_INT);
+        $statement->bindValue(':unit', $unit, \PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
+    /**
      * Assign a bouquet concept to a cart
      *
      * @param int $id
