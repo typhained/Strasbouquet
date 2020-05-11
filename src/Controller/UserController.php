@@ -23,6 +23,12 @@ class UserController extends AbstractController
         }
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function add()
     {
         if ($_SESSION['role'] == 'disconnect') {
@@ -64,53 +70,93 @@ class UserController extends AbstractController
         }
     }
 
+    /**
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function update(int $id)
     {
-        if ($_SESSION['role'] == 'disconnect') {
-            header('location:/Account/login/');
-        } else {
-            $userManager = new UserManager();
-            $user = $userManager->selectOneById($id);
+        $userManager = new UserManager();
+        $user = $userManager->selectOneById($id);
+        $updateUser['id']=$id;
+        if ($_SESSION["user"] == $id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $patternPass = '/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/';
-                if (preg_match($patternPass, $_POST['password']) === 0) {
-                    $message = "Votre mot de passe doit faire minimum 6 caractères 
+                $updateUser['firstname'] = ucfirst($_POST['firstname']);
+                $updateUser['lastname'] = strtoupper($_POST['lastname']);
+                $updateUser['mail'] = strtolower($_POST['mail']);
+                $updateUser['num_Tel'] = $_POST['tel'];
+
+                if (!empty($_POST['password'])) {
+                    $patternPass = '/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/';
+                    if (preg_match($patternPass, $_POST['password']) === 0) {
+                        $message = "Votre mot de passe doit faire minimum 6 caractères 
                 et contenir au moins une majuscule et un chiffre";
-                    return $this->twig->render('User/update.html.twig', ['user' => $user, 'message' => $message]);
+                        return $this->twig->render('User/update.html.twig', ['user' => $user, 'message' => $message]);
+                    } else {
+                        $updateUser['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                        $userManager->update($updateUser);
+                        $message = "Votre compte a bien été mis à jour";
+                        return $this->twig->render(
+                            'User/show.html.twig',
+                            ['user' => $updateUser, 'message' => $message]
+                        );
+                    }
                 } else {
-                    $userManager = new UserManager();
-                    $user['firstname'] = ucfirst($_POST['firstname']);
-                    $user['lastname'] = strtoupper($_POST['lastname']);
-                    $user['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                    $user['mail'] = strtolower($_POST['mail']);
-                    $user['num_Tel'] = $_POST['tel'];
-                    $userManager->update($user);
+                    $updateUser['password'] = $user['password'];
+                    $userManager->update($updateUser);
                     $message = "Votre compte a bien été mis à jour";
-                    return $this->twig->render('User/show.html.twig', ['user' => $user, 'message' => $message]);
+                    return $this->twig->render('User/show.html.twig', ['user' => $updateUser, 'message' => $message]);
                 }
             }
             return $this->twig->render('User/update.html.twig', ['user' => $user]);
-        }
-    }
-    public function show(int $id)
-    {
-        if ($_SESSION['role'] == 'disconnect') {
-            header('location:/Account/login/');
+        } elseif ($_SESSION['role'] == 'admin') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $updateUser['firstname'] = ucfirst($_POST['firstname']);
+                    $updateUser['lastname'] = strtoupper($_POST['lastname']);
+                    $updateUser['password'] = $user['password'];
+                    $updateUser['mail'] = strtolower($_POST['mail']);
+                    $updateUser['num_Tel'] = $_POST['tel'];
+                    $userManager->update($updateUser);
+                    header("Location: /User/index");
+            }
+            return $this->twig->render('User/update.html.twig', ['user' => $user]);
         } else {
-            $userManager = new UserManager();
-            $user = $userManager->selectOneById($id);
-            return $this->twig->render('User/show.html.twig', ['user' => $user]);
+            header('location:/Account/login/');
         }
     }
 
+    /**
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function show(int $id)
+    {
+        if ($_SESSION["user"] == $id) {
+            $userManager = new UserManager();
+            $user = $userManager->selectOneById($id);
+            return $this->twig->render('User/show.html.twig', ['user' => $user]);
+        } else {
+            header('location:/Account/login/');
+        }
+    }
+
+    /**
+     * @param int $id
+     */
     public function delete(int $id)
     {
-        if ($_SESSION['role'] == 'disconnect') {
-            header('location:/Account/login/');
-        } else {
+        if ($_SESSION["user"] == $id || $_SESSION["role"] == "admin") {
             $userManager = new UserManager();
             $userManager->delete($id);
             header('Location:/user/index');
+        } else {
+            header('location:/Account/login/');
         }
     }
 }
