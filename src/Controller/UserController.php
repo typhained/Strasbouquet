@@ -141,6 +141,7 @@ class UserController extends AbstractController
         if ($_SESSION["user"] == $id) {
             $userManager = new UserManager();
             $cartManager = new CartManager();
+
             $user = $userManager->selectOneById($id);
             $cartid = $cartManager->historiqueID($id);
             $cart = $cartManager->showCartContent($cartid['id']);
