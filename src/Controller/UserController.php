@@ -82,6 +82,8 @@ class UserController extends AbstractController
     {
         $userManager = new UserManager();
         $user = $userManager->selectOneById($id);
+        $cartManager = new CartManager();
+
         $user['id']=$id;
         if ($_SESSION["user"] == $id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -100,17 +102,25 @@ class UserController extends AbstractController
                         $user['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
                         $userManager->update($user);
                         $user = $userManager->selectOneById($id);
+                        $cartid = $cartManager->historiqueID($id);
+                        $cart = $cartManager->showCartContent($cartid['id']);
                         $message = "Votre compte a bien été mis à jour";
                         return $this->twig->render(
                             'User/show.html.twig',
-                            ['user' => $user, 'message' => $message]
+                            ['user' => $user, 'message' => $message, "cart"=>$cart]
                         );
                     }
                 } else {
                     $userManager->update($user);
+
                     $user = $userManager->selectOneById($id);
+                    $cartid = $cartManager->historiqueID($id);
+                    $cart = $cartManager->showCartContent($cartid['id']);
                     $message = "Votre compte a bien été mis à jour";
-                    return $this->twig->render('User/show.html.twig', ['user' => $user, 'message' => $message]);
+                    return $this->twig->render(
+                        'User/show.html.twig',
+                        ['user' => $user, 'message' => $message, "cart"=>$cart]
+                    );
                 }
             }
             return $this->twig->render('User/update.html.twig', ['user' => $user]);
