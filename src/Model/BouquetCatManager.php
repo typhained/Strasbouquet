@@ -24,10 +24,10 @@ class BouquetCatManager extends AbstractManager
      * @param int $unit
      * @return array
      */
-    public function unitInConcept(int $unit)
+    public function unitInConcept(int $unit, int $idConcept)
     {
         $statement = $this->pdo->query("SELECT quantite FROM " . self::TABLE . " 
-        WHERE id_catalogue_unitaire = " . $unit);
+        WHERE id_catalogue_unitaire = " . $unit . " AND id_bouquet_concept = " . $idConcept);
 
         return $statement->fetch(\PDO::FETCH_NUM);
     }
@@ -66,6 +66,19 @@ class BouquetCatManager extends AbstractManager
         $statement->bindValue('id_catalogue_unitaire', $unit, \PDO::PARAM_INT);
 
         $statement->execute();
+    }
+
+    /**
+     * @param int $idUnit
+     * @return int
+     */
+    public function getUnitQuant(int $idUnit) : int
+    {
+        $statement = $this->pdo->query("SELECT quantite FROM " . self::TABLE . " 
+        WHERE id_catalogue_unitaire = " . $idUnit);
+
+        $array = $statement->fetch(\PDO::FETCH_NUM);
+        return $array[0];
     }
 
     public function delete(int $idConcept, int $unit)

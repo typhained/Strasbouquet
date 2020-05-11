@@ -9,8 +9,14 @@
         <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.prix }}" name="prix">
         <label for="description">Description:</label>
         <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.description }}" name="description">
-        <label for="saisonnier">Saisonnier</label>
-        <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.saisonnier }}" name="saisonnier">
+        <select class="uk-select uk-margin uk-inline" name="saisonnier">
+            <option type="text" value="Anniversaire">Anniversaire</option>
+            <option type="text" value="Mariage">Mariage</option>
+            <option type="text" value="Naissance">Naissance</option>
+            <option type="text" value="Deuil">Deuil</option>
+            <option type="text" value="Remerciement">Remerciement</option>
+            <option type="text" value="Amour">Amour</option>
+        </select>
         Selection de l'image :
         <div class="uk-margin" uk-margin>
             <div uk-form-custom="target: true">

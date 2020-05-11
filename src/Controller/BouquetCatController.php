@@ -4,8 +4,8 @@
 namespace App\Controller;
 
 use App\Model\BouquetCatManager;
-use App\Model\CatalogueUManager;
 use App\Model\ConceptManager;
+use App\Model\CatalogueUManager;
 
 class BouquetCatController extends AbstractController
 {
@@ -18,22 +18,31 @@ class BouquetCatController extends AbstractController
     }
 
     /**
-     * Add or update quantity
+     * Add an unit, or update quantity
      *
      * @param int $unit
+     * @return void
      */
-    public function add(int $unit)
+    public function add(int $unit) : void
     {
         $idConcept = $_SESSION['id_bouquet_concept'];
         $bouquetCatManager = new BouquetCatManager();
+        $conceptManager = new ConceptManager();
 
-        if (empty($bouquetCatManager->unitInConcept($unit))) {
+        if (empty($bouquetCatManager->unitInConcept($unit, $idConcept))) {
             $bouquetCatManager->insert($idConcept, $unit);
         } else {
             $bouquetCatManager->updateQuantUp($idConcept, $unit);
         }
 
-        header('location: /Concept/show/' . $_SESSION['id_bouquet_concept']);
+        $unitPrice = $conceptManager->getUnitPrice($unit);
+        $unitQuant = $bouquetCatManager->getUnitQuant($unit);
+        $price = ($unitPrice * $unitQuant);
+        $_SESSION['price'] = $price;
+
+        $conceptManager->updatePrice($price, $unit);
+
+        header('location: /Concept/show/' . $idConcept);
     }
 
     /**
@@ -45,7 +54,7 @@ class BouquetCatController extends AbstractController
     {
         $idConcept = $_SESSION['id_bouquet_concept'];
         $bouquetCatManager = new BouquetCatManager();
-        if ($bouquetCatManager->unitInConcept($unit)[0] > 1) {
+        if ($bouquetCatManager->unitInConcept($unit, $idConcept)[0] > 1) {
             $bouquetCatManager->updateQuantDwn($idConcept, $unit);
         } else {
             $bouquetCatManager->delete($idConcept, $unit);

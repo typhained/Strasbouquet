@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\BouquetManager;
+use App\Model\GalerieManager;
 
 class BouquetController extends AbstractController
 {
@@ -33,9 +34,17 @@ class BouquetController extends AbstractController
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (strlen($_POST['description'])>249) {
                     $message = "votre déscription est trop longue!";
-                    return $this->twig->render('Bouquet/add.html.twig', ['title'=>'créer un bouquet',
-                        'message'=>$message]);
+                    return $this->twig->render(
+                        'Bouquet/add.html.twig',
+                        ['title'=>'créer un bouquet','message'=>$message]
+                    );
                 } else {
+                    $galerieManager = new GalerieManager();
+                    $targetDir = "assets/uploads/";
+                    $image = $_FILES['fileToUpload']['name'];
+                    $imageFileType = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+                    $targetFile = $targetDir . uniqid(). '.' . $imageFileType;
+                    $uploadOk = 1;
                     $bouquetManager = new BouquetManager();
                     $bouquet = [
                         'nom' => $_POST['nom'],
@@ -44,6 +53,21 @@ class BouquetController extends AbstractController
                         'saisonnier' => $_POST['saisonnier'],
                     ];
                     $id = $bouquetManager->insert($bouquet);
+                    $bouquet = $bouquetManager->selectOneById($id);
+                    $galerieManager->insertBouquet($targetFile, $bouquet);
+                    if (file_exists($targetFile)) {
+                        echo "Sorry, file already exists.";
+                        $uploadOk = 0;
+                    }
+                    if ($_FILES["fileToUpload"]["size"] > 1000000) {
+                        echo "Sorry, your file is too large.";
+                        $uploadOk = 0;
+                    }
+                    if (($imageFileType != "jpg") && ($imageFileType != "png") && ($imageFileType != "jpeg")) {
+                        echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+                        $uploadOk = 0;
+                    }
+                    move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile);
                     header('Location:/bouquet/show/' . $id);
                 }
             }
@@ -58,8 +82,10 @@ class BouquetController extends AbstractController
         if ($_SESSION['role'] == 'admin') {
             $bouquetManager = new BouquetManager();
             $bouquet = $bouquetManager->selectOneById($id);
+            $galerieManager = new GalerieManager();
+            $image = $galerieManager->selectImageBouquet($id);
 
-            return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet]);
+            return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet, 'image' => $image]);
         } else {
             header('location:/Front/index/');
         }
@@ -73,6 +99,8 @@ class BouquetController extends AbstractController
     public function delete(int $id)
     {
         if ($_SESSION['role'] == 'admin') {
+            $galerieManager = new GalerieManager();
+            $galerieManager->delete($id);
             $bouquetManager = new BouquetManager();
             $bouquetManager->delete($id);
             header('Location:/Bouquet/index');
@@ -98,5 +126,12 @@ class BouquetController extends AbstractController
         } else {
             header('location:/Front/index/');
         }
+    }
+    public function filter(string $filter)
+    {
+        $bouquetManager = new BouquetManager();
+        $bouquets = $bouquetManager->filter($filter);
+
+        return $this->twig->render('Bouquet/index.html.twig', ['bouquets' => $bouquets]);
     }
 }

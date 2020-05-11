@@ -1,4 +1,7 @@
-{% extends 'layoutp.html.twig' %}
+{% extends session.role == "admin" and user.role != "admin" and session.id_panier != panier[0].id_panier
+    ? 'layout.html.twig'
+    : 'layoutp.html.twig' %}
+
 {% block title %}
     {{ parent()}} Accueil
 {% endblock %}
@@ -10,7 +13,7 @@
         <thead>
         <tr>
             <th>Nom du bouquet</th>
-            <th>Prix Total</th>
+            <th>Prix</th>
             <td>Quantité</td>
         </tr>
         </thead>
@@ -18,17 +21,29 @@
         {% for bouquet in panier %}
             <tr>
                 <td>{{ bouquet.nom }}</td>
-                <td>{% set priceB = bouquet.prix  * bouquet.quantite  %} {{ priceB }}</td>
-                <td>{{ bouquet.quantite }}</td>
+                <td>{% set priceBouquet = bouquet.prix  * bouquet.quantite  %} {{ priceBouquet }} € ({{ bouquet.prix }}€ unité)</td>
+                <td> <a href="/cart/addBouquetCart/{{ bouquet.id }}"><span uk-icon="plus-circle"></span></a>
+                    {{ bouquet.quantite }}
+                    <a href="/cart/deleteBouquet/{{ bouquet.id }} "><span uk-icon="minus-circle"></span></a>
+                </td>
             </tr>
-
         {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <td>Prix total des Bouquets</td>
+                <td>{{ priceB.total }}</td>
+            </tr>
+        </tfoot>
     </table>
 
-    <h3>Total: {{ price.total }} </h3>
+    <h3>Total du panier: {{ priceCart.total }}</h3>
+    <button action="/Cart/Validate">Valider panier</button>
 
-
-    <button><a href="/Cart/showBouquet">RETOUR</a></button>
+    {% if session.role == "admin" and user.id != 2 and session.id_panier != panier[0].id_panier %}
+        <button><a href="/Home/index/">RETOUR</a></button>
+    {% else %}
+        <button><a href="/Cart/showBouquet">RETOUR</a></button>
+    {% endif %}
 
 {% endblock %}

@@ -8,7 +8,7 @@
     <!-- Catalogue unitaire -->
     {% include 'Concept/create.html.twig' %}
     <!-- Création bouquet -->
-    <div class="uk-container uk-margin uk-width-1-2@m">
+    <div class="">
         <div class="uk-background-default uk-padding uk-box-shadow-large">
             <h3 class="uk-heading-line"><span>Mon bouquet</span></h3>
             <table class="uk-table uk-table-striped uk-table-hover">
@@ -29,14 +29,35 @@
                         <td>{{ unit.type }}</td>
                         <td>{{ unit.prix }}€</td>
                         <td>{{ unit.quantite }}</td>
-                        <td><a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: minus-circle"></a><a href="./../../BouquetCat/add/{{ unit.id_catalogue_unitaire }}" uk-icon="icon: plus-circle"></a></td>
+                        <td>
+                            <a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: minus-circle"></span></a>
+                            <a href="./../../BouquetCat/add/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: plus-circle"></span></a>
+                        </td>
                     </tr>
                 {% endfor %}
+                <tfoot>
+                    <tr>
+                        <th>Prix du bouquet</th>
+                        <td>{{ price.total }}</td>
+                    </tr>
+                </tfoot>
             </table>
             <div class="uk-flex uk-flex-between">
                 <a class="uk-button uk-button-default" href="../index">Retour</a>
-                <a class="uk-button uk-button-primary" href="#">Ajouter au panier</a>
-                <a class="uk-button uk-button-danger" href="../delete/{{ id }}">Supprimer</a>
+                <a class="uk-button uk-button-primary" href="../addToCart/{{ idConcept }}">Ajouter au panier</a>
+                <button type="button" class="uk-button uk-button-danger" uk-toggle="target: #delete-concept">Supprimer</button>
+                <!-- Modal -->
+                <div id="delete-concept" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body">
+                        <h3 class="uk-modal-title uk-text-center uk-text-danger">Suppression du bouquet</h3>
+                        <p class="uk-text-center">Attention cette action est irreversible</p>
+                        <div class="uk-flex uk-flex-around">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                            <a href="/Concept/delete/{{ idConcept }}" class="uk-button uk-button-danger">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End modal -->
             </div>
         </div>
     </div>

@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Model\CartManager;
+
 class HomeController extends AbstractController
 {
 
@@ -22,7 +24,9 @@ class HomeController extends AbstractController
     public function index()
     {
         if ($_SESSION['role'] == 'admin') {
-            return $this->twig->render('Home/index.html.twig');
+            $cartManager = new CartManager();
+            $commands = $cartManager->latestCart();
+            return $this->twig->render('Home/index.html.twig', ["commands" => $commands]);
         } else {
             header('location:/Front/index/');
         }
