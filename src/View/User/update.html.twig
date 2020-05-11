@@ -1,4 +1,6 @@
-{% extends "layoutp.html.twig" %}
+{% extends session.role == "admin" and user.role != "admin"
+    ? 'layout.html.twig'
+    : 'layoutp.html.twig' %}
 
 {% block content %}
     <h2 class="uk-text-center">Modification du profil</h2>

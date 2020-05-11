@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="uk-container uk-margin-top">
         <h3 class="uk-text-center">Mon profil</h3>
         <div class="uk-card uk-card-default uk-width-1-1@m">
@@ -18,8 +19,29 @@
             </div>
             <div class="uk-card-body">
                 <p class="uk-text-meta uk-margin-remove-top">Numéro de téléphone: {{ user.num_Tel }}</p>
-                <h3>Ma dernière commande</h3>
-                <p>Dernière commande affichée ici</p>
+                <h3>Commande la plus récente </h3>
+                <table class="uk-table">
+                    <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>PRIX</th>
+                    </tr>
+                    </thead>
+
+                    <tr>
+                        <td>{{ cart[0].date }}</td>
+                        <td>{{ cart[0].prix_total }}</td>
+
+                    </tr>
+                    <tr>
+                        <th>CONTENU</th>
+                    </tr>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{ item.quantite }} * {{ item.nom }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
             <div class="uk-card-footer uk-text-center">
                 <a href="../update/{{ user.id }}" class="uk-button">Modifier</a>

@@ -38,7 +38,12 @@ class CartBouquetManager extends AbstractManager
         }
     }
 
-    public function priceCartBouquet($id)
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function priceCartBouquet(int $id)
     {
         $statement = $this->pdo->prepare("SELECT SUM(b.prix*bp.quantite) as 
         total FROM " . self::TABLE . " bp INNER JOIN 
@@ -49,7 +54,11 @@ class CartBouquetManager extends AbstractManager
         return $statement->fetch();
     }
 
-    public function selectQuantiteBouquet($idBouquet)
+    /**
+     * @param int $idBouquet
+     * @return mixed
+     */
+    public function selectQuantiteBouquet(int $idBouquet)
     {
         $statement = $this->pdo->query("SELECT quantite FROM ".self::TABLE."
          WHERE `id_bouquet` ='".$idBouquet."'");
