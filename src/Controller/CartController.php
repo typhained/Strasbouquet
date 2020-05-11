@@ -70,7 +70,7 @@ class CartController extends AbstractController
             $cartBManager = new CartBouquetManager();
             $panier = $cartManager->showCartContent($id);
             $priceB = $cartBManager->priceCartBouquet($id);
-            $priceCart = $priceB + 0;
+            $priceCart = $priceB;
             return $this->twig->render(
                 'Front/cart.html.twig',
                 ["panier" => $panier, "priceB" => $priceB, "priceCart" => $priceCart]
