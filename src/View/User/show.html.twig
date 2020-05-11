@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="uk-container uk-margin-top">
         <h3 class="uk-text-center">Mon profil</h3>
         <div class="uk-card uk-card-default uk-width-1-1@m">
@@ -18,7 +19,7 @@
             </div>
             <div class="uk-card-body">
                 <p class="uk-text-meta uk-margin-remove-top">Numéro de téléphone: {{ user.num_Tel }}</p>
-                <h3>Ma dernière commande</h3>
+                <h3>Commande la plus récente </h3>
                 <table class="uk-table">
                     <thead>
                     <tr>
@@ -41,7 +42,6 @@
                         </tr>
                     {% endfor %}
                 </table>
-{{ dump(cartid) }}
             </div>
             <div class="uk-card-footer uk-text-center">
                 <a href="../update/{{ user.id }}" class="uk-button">Modifier</a>

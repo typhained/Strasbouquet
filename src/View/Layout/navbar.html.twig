@@ -27,9 +27,11 @@
               <li>
                     <a href="/Account/logout">Déconnexion</a>
               </li>
+                {% if session.id_panier != null %}
               <li>
                   <a href="/Cart/showCart/{{ session.id_panier }}">Panier</a>
               </li>
+                    {% endif %}
               <li>
                   <a href="/User/show/{{ session.user }}">Profil</a>
               </li>
