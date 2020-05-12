@@ -50,6 +50,14 @@ class CartManager extends AbstractManager
         $this->pdo->query("UPDATE ".self::TABLE." SET etat='confirme' WHERE id=$id ");
     }
 
+    public function updatePrice($id, $price)
+    {
+        $statement = $this->pdo->prepare("UPDATE ".self::TABLE." SET prix_total=:price WHERE id=:id ");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->bindValue('price', $price, \PDO::PARAM_INT);
+        $statement->execute();
+    }
+
     public function latestCart()
     {
         $statement = $this->pdo->query("SELECT p.id, p.prix_total, u.firstname, u.lastname 

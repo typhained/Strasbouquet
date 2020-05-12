@@ -58,24 +58,24 @@ class CartBouquetManager extends AbstractManager
      * @param int $idBouquet
      * @return mixed
      */
-    public function selectQuantiteBouquet(int $idBouquet)
+    public function selectQuantiteBouquet(int $idBouquet, int $idpanier)
     {
         $statement = $this->pdo->query("SELECT quantite FROM ".self::TABLE."
-         WHERE `id_bouquet` ='".$idBouquet."'");
+         WHERE `id_bouquet`=$idBouquet AND id_panier=$idpanier");
         return $statement->fetch();
     }
 
-    public function updateBouquetCart($idBouquet, $qte)
+    public function updateBouquetCart($idBouquet, $qte, $idpanier)
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET
-        quantite = $qte WHERE id_bouquet=$idBouquet");
+        quantite = $qte WHERE id_bouquet=$idBouquet AND id_panier=$idpanier ");
         $statement->execute();
     }
 
-    public function delete($idBouquet)
+    public function delete($idBouquet, $idpanier)
     {
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . "
-WHERE id_bouquet=$idBouquet");
+WHERE id_bouquet=$idBouquet AND id_panier=$idpanier");
         $statement->execute();
     }
 }

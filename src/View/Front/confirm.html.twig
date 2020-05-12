@@ -4,5 +4,29 @@
 {% endblock %}
 
 {% block content %}
+<h1 class="uk-text-center">Panier validé</h1>
+    <h2>Récapitulatif de votre commande</h2>
+    <h3>Vous allez bientôt reçevoir un mail de confirmation</h3>
+    <table class="uk-table">
+        <thead>
+        <tr>
+            <th>DATE</th>
+            <th>PRIX</th>
+        </tr>
+        </thead>
 
+        <tr>
+            <td>{{ cart[0].date }}</td>
+            <td>{{ cart[0].prix_total }}</td>
+
+        </tr>
+        <tr>
+            <th>CONTENU</th>
+        </tr>
+        {% for item in cart %}
+            <tr>
+                <td>{{ item.quantite }} * {{ item.nom }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
