@@ -46,7 +46,7 @@ class CartBouquetManager extends AbstractManager
     public function priceCartBouquet(int $id)
     {
         $statement = $this->pdo->prepare("SELECT SUM(b.prix*bp.quantite) as 
-        total FROM " . self::TABLE . " bp INNER JOIN 
+        totalBouquet FROM " . self::TABLE . " bp INNER JOIN 
         ". self::CART ." p ON p.id = bp.id_panier INNER JOIN ". self::BOUQUET." b 
         ON bp.id_bouquet=b.id WHERE bp.id_panier=:id GROUP BY bp.id_panier");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);

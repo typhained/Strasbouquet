@@ -29,9 +29,11 @@ class CartController extends AbstractController
                 $id = $cartManager->insert($user, $date);
                 $_SESSION['id_panier'] =  $id;
             }
+
             $panier = $_SESSION['id_panier'];
             if ($cartBManager->bouquetInCart($idBouquet, $panier) === false) {
                 $cartBManager->addBouquetCart($idBouquet, $panier);
+                header("location: /Front/bouquets");
             } else {
                 $qte = $cartBManager->selectQuantiteBouquet($idBouquet, $panier);
                 $qte['quantite']= $qte['quantite'] + 1;
@@ -39,7 +41,6 @@ class CartController extends AbstractController
                 $cartBManager->updateBouquetCart($idBouquet, $qte, $panier);
                 header("location: /Cart/showCart/$panier");
             }
-            header("location: /Front/bouquets");
         }
     }
 
@@ -52,11 +53,21 @@ class CartController extends AbstractController
             $cartManager = new CartManager();
             $cartBManager = new CartBouquetManager();
             $panier = $cartManager->showCartContent($id);
+            $concepts = $cartManager->conceptInCart($id);
+
             $priceB = $cartBManager->priceCartBouquet($id);
-            $priceCart = $cartManager->updatePrice($id, $priceB['total']);
+            $priceC = $cartManager->priceTotalConcept($id);
+            $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
+
             return $this->twig->render(
                 'Front/cart.html.twig',
-                ["panier" => $panier, "priceB" => $priceB, "priceCart" => $priceCart]
+                [
+                    "panier" => $panier,
+                    "priceB" => round($priceB, 2),
+                    "priceC" => round($priceC, 2),
+                    "priceTotal" => round($priceTotal, 2),
+                    "concepts" => $concepts
+                ]
             );
         }
     }

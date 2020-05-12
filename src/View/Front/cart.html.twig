@@ -12,7 +12,7 @@
     <table class="uk-table uk-table-divider uk-box-shadow-large">
         <thead>
         <tr>
-            <th>Nom du bouquet</th>
+            <th>Bouquets</th>
             <th>Prix</th>
             <td>Quantité</td>
         </tr>
@@ -37,7 +37,27 @@
         </tfoot>
     </table>
 
-    <h3>Total du panier: {{ priceCart.total }}</h3>
+    <table class="uk-table uk-table-divider uk-box-shadow-large">
+        <thead>
+        <tr>
+            <th>Bouquet Personnalisé</th>
+            <th>Contenu</th>
+            <th>Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for concept in concepts %}
+            <tr>
+                <td>{{ concept.id }}</td>
+                <td>{{ concept.produit }}</td>
+                <td>{{ concept.prix_total }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <h3>Total du panier: {{ priceTotal }}</h3>
     {% if session.role == "admin" and user.id != 2 and session.id_panier != panier[0].id_panier %}
        <a class="uk-button uk-button-secondary" href="/Home/index/">RETOUR</a>
     {% else %}

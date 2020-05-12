@@ -8,7 +8,9 @@ class CartManager extends AbstractManager
     const TABLE = "panier";
     const BOUQUETJOIN = "bouquet_panier";
     const BOUQUET = "bouquet";
-    const CONCEPT = "concept";
+    const CONCEPT = "bouquet_concept";
+    const CONCEPT_CAT = "bouquet_catalogue";
+    const CAT_U = "catalogue_unitaire";
     const USER = "user";
 
     /**
@@ -72,5 +74,21 @@ class CartManager extends AbstractManager
         $statement = $this->pdo->query("SELECT p.id FROM " . self::TABLE . " p 
         WHERE p.id_user=$id AND p.etat= 'confirme' ORDER BY date DESC limit 1");
         return $statement->fetch();
+    }
+
+    public function priceTotalConcept($id)
+    {
+        $statement = $this->pdo->query("SELECT SUM(prix_total) as totalConcept FROM " . self::CONCEPT . " bc
+        WHERE bc.id_panier=$id GROUP BY bc.id_panier");
+        return $statement->fetch();
+    }
+
+    public function conceptInCart($id)
+    {
+        $statement = $this->pdo->query("SELECT c.id, c.prix_total, 
+        GROUP_CONCAT(cu.nom SEPARATOR ' & ') as produit FROM ".self::CONCEPT." c 
+        JOIN ".self::CONCEPT_CAT." bc ON bc.id_bouquet_concept=c.id 
+        JOIN ".self::CAT_U." cu ON bc.id_catalogue_unitaire=cu.id WHERE c.id_panier=$id GROUP BY c.id ");
+        return $statement->fetchAll();
     }
 }
