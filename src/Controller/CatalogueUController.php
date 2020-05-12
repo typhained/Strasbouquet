@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Model\CatalogueUManager;
+use App\Model\GalerieManager;
 
 /**
  * Class ItemController
- *
+ * @SuppressWarnings(PHPMD)
  */
 class CatalogueUController extends AbstractController
 {
@@ -20,6 +21,8 @@ class CatalogueUController extends AbstractController
             header('location:/Front/index/');
         }
     }
+
+
 
     public function show(int $id)
     {
@@ -52,14 +55,36 @@ class CatalogueUController extends AbstractController
                     'prix' => $_POST['prix'],
                     'couleur' => $_POST['couleur'],
                 ];
-                $catalogueUManager->insert($catalogueU);
-                header('Location:/CatalogueU/index');
+                $galerieManager = new GalerieManager();
+                $targetDir = "assets/uploads/";
+                $image = $_FILES['fileToUpload']['name'];
+                $imageFileType = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+                $targetFile = $targetDir . uniqid() . '.' . $imageFileType;
+                $uploadOk = 1;
+                $id = $catalogueUManager->insert($catalogueU);
+                $galerieManager->insertCatalogueU($targetFile, $catalogueU, $id);
+
+                if (file_exists($targetFile)) {
+                    echo "Sorry, file already exists.";
+                    $uploadOk = 0;
+                }
+                if ($_FILES["fileToUpload"]["size"] > 1000000) {
+                    echo "Sorry, your file is too large.";
+                    $uploadOk = 0;
+                }
+                if (($imageFileType != "jpg") && ($imageFileType != "png") && ($imageFileType != "jpeg")) {
+                    echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+                    $uploadOk = 0;
+                }
+                move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile);
+                header('Location:/CatalogueU/show/' . $id);
             }
             return $this->twig->render('CatalogueU/add.html.twig');
         } else {
             header('location:/Front/index/');
         }
     }
+
 
     public function update(int $id): string
     {
