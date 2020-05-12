@@ -24,9 +24,6 @@ class CartController extends AbstractController
             $date = new DateTime("now");
             $date = $date->format("Y-m-d");
 
-            $bouquetManager= new BouquetManager();
-            $bouquets = $bouquetManager->selectAll();
-
             if (!isset($_SESSION['id_panier'])) {
                 $id = $cartManager->insert($user, $date);
                 $_SESSION['id_panier'] =  $id;
@@ -41,10 +38,7 @@ class CartController extends AbstractController
                 $cartBManager->updateBouquetCart($idBouquet, $qte);
                 header("location: /Cart/showCart/$panier");
             }
-            return $this->twig->render(
-                'Front/bouquets.html.twig',
-                ["bouquets" => $bouquets, "panier" => $panier]
-            );
+            header("location: /Front/bouquets");
         }
     }
 

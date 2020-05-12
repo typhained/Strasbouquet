@@ -16,6 +16,12 @@ class FrontController extends AbstractController
         return $this->twig->render('Front/index.html.twig', ['concepts' => $concepts]);
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function bouquets()
     {
         $galerieManager = new GalerieManager();
