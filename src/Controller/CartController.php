@@ -94,4 +94,10 @@ class CartController extends AbstractController
             header("Location: /cart/showCart/" . $idpanier);
         }
     }
+
+    public function confirmCart($id)
+    {
+        $cartManager = new CartManager();
+        $cartManager->confirmCart($id);
+    }
 }
