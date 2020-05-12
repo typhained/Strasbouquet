@@ -26,7 +26,12 @@ class ConceptController extends AbstractController
         $conceptManager = new ConceptManager();
         $concepts = $conceptManager->selectAll();
 
-        return $this->twig->render('Concept/index.html.twig', ['concepts' => $concepts]);
+
+
+        return $this->twig->render('Concept/index.html.twig', [
+            'concepts' => $concepts,
+            'session' => $_SESSION
+        ]);
     }
 
     /**
@@ -96,6 +101,10 @@ class ConceptController extends AbstractController
         $units = $catalogueUManager->selectAll();
 
         $price = $conceptManager->fetchPrice($id);
+
+        if ($price['total'] == null) {
+            $price['total'] = 0;
+        }
 
         $conceptManager->updatePrice($price['total'], $id);
 
