@@ -18,6 +18,16 @@ class ConceptManager extends AbstractManager
     }
 
     /**
+     * @param int $user
+     * @return array
+     */
+    public function selectByUserDate(int $user)
+    {
+        $query = $this->pdo->query("SELECT * FROM " . self::TABLE . " WHERE id_user=$user AND `date` = DATE(NOW())");
+        return $query->fetchAll();
+    }
+
+    /**
      * Select all the bouquets concepts
      *
      * @param int $id

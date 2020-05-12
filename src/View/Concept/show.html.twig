@@ -27,7 +27,7 @@
                         <td>{{ unit.nom }}</td>
                         <td>{{ unit.couleur }}</td>
                         <td>{{ unit.type }}</td>
-                        <td>{{ unit.prix }}€</td>
+                        <td>{{ unit.prix }} €</td>
                         <td>{{ unit.quantite }}</td>
                         <td>
                             <a href="./../../BouquetCat/add/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: plus-circle"></span></a>
@@ -41,7 +41,7 @@
             <div>
                 {% include 'Concept/_cardForm.html.twig' %}
             </div>
-            <h3 class="uk-heading-divider uk-text-light">Prix du bouquet : {{ price.total }}€</h3>
+            <h3 class="uk-heading-divider uk-text-light">Prix du bouquet : {{ price.total }} €</h3>
             <div class="uk-flex uk-flex-between">
                 <a class="uk-button uk-button-default" href="../index">Retour</a>
                 <button type="button" class="uk-button uk-button-primary" uk-toggle="target: #add-cart-concept">Ajouter au panier</button>
