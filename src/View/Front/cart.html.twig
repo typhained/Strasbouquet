@@ -38,12 +38,10 @@
     </table>
 
     <h3>Total du panier: {{ priceCart.total }}</h3>
-
     {% if session.role == "admin" and user.id != 2 and session.id_panier != panier[0].id_panier %}
        <a class="uk-button uk-button-secondary" href="/Home/index/">RETOUR</a>
     {% else %}
         <a class="uk-button uk-button-primary" href="/Cart/confirmCart/{{ session.id_panier }}">Valider le panier</a>
         <a class="uk-button uk-button-secondary" href="/Cart/showBouquet">RETOUR</a>
     {% endif %}
-
 {% endblock %}

@@ -1,4 +1,6 @@
-{% extends 'layout.html.twig' %}
+{% extends session.role == "admin"
+    ? 'layout.html.twig'
+    : 'layoutp.html.twig' %}
 
 {% block content %}
     <section class="uk-container uk-padding-large">
@@ -16,16 +18,22 @@
                         <li class="uk-margin">Description : {{ bouquet.description }}</li>
                         <li class="uk-margin">Saisonnier : {{ bouquet.saisonnier }}</li>
                     </ul>
+                    {% if session.role == 'admin' %}
                     <div>
                         <a href="/bouquet/update/{{ bouquet.id }}" class="uk-button uk-button-primary">Modifier</a>
                         <a href="#modal-example" class="uk-button uk-button-danger"
                            uk-toggle>Supprimer mon bouquet</a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="uk-text-right">
+            {% if session.role == 'admin' %}
             <a href="/Bouquet/index" class="uk-button uk-button-primary uk-margin">Retour</a>
+                {% else %}
+                    <a href="/front/bouquets" class="uk-button uk-button-primary uk-margin">Retour</a>
+            {% endif %}
         </div>
     </section>
     <!-- This is the modal -->

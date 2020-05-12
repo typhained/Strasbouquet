@@ -77,6 +77,13 @@ class BouquetController extends AbstractController
         }
     }
 
+    /**
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function show(int $id)
     {
         if ($_SESSION['role'] == 'admin') {
@@ -84,7 +91,6 @@ class BouquetController extends AbstractController
             $bouquet = $bouquetManager->selectOneById($id);
             $galerieManager = new GalerieManager();
             $image = $galerieManager->selectImageBouquet($id);
-
             return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet, 'image' => $image]);
         } else {
             header('location:/Front/index/');
