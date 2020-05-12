@@ -15,12 +15,21 @@ class FrontController extends AbstractController
         return $this->twig->render('Front/index.html.twig', ['concepts' => $concepts]);
     }
 
-    public function show(int $id)
+    public function bouquets()
     {
-        $conceptManager = new ConceptManager();
-        $concept = $conceptManager->selectOneById($id);
-        return $this->twig->render('Front/show.html.twig', ['concept' => $concept]);
+        $bouquetManager= new BouquetManager();
+        $bouquets = $bouquetManager->selectAll();
+        if (!isset($_SESSION['id_panier'])) {
+            $panier="";
+        } else {
+            $panier = $_SESSION['id_panier'];
+        }
+        return $this->twig->render(
+            'Front/bouquets.html.twig',
+            ["bouquets" => $bouquets, "panier" => $panier]
+        );
     }
+
     public function filter(string $filter)
     {
         $bouquetManager = new BouquetManager();

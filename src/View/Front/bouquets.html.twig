@@ -7,31 +7,19 @@
 {% block content %}
 
     <div class="uk-container">
-        <table class="uk-table">
-            <thead>
-            <tr>
-                <td>&nbsp;</td>
-                <td>ID</td>
-                <td>Nom</td>
-                <td>Prix</td>
-                <td>Description</td>
-                <td>Saisonnier</td>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
             {% for bouquet in bouquets %}
-            <tr>
-                <td>&nbsp;</td>
-                <td>{{ bouquet.id }}</td>
-                <td>{{ bouquet.nom}}</td>
-                <td>{{ bouquet.prix }}</td>
-                <td>{{ bouquet.description }}</td>
-                <td>{{ bouquet.saisonnier }}</td>
-                <td><a href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a></td>
-            </tr>
-            </tbody>
+            <div class="uk-card">
+                <div class="uk-card-header">
+                    <h3 class="uk-card-title">{{ bouquet.nom}}</h3>
+                </div>
+                <div class="uk-card-body"><p>{{ bouquet.prix }}</p></div>
+                <div class="uk-card-footer">
+                    <a href="/bouquet/show/{{bouquet.id}}">Voir plus</a> ||
+                    <a href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a></div>
+            </div>
             {% endfor %}
-        </table>
+        </div>
     </div>
 
     <button id="panier" class="{{ class }}"><a href="/Cart/showCart/{{ panier }}"> Voir le panier</a></button>

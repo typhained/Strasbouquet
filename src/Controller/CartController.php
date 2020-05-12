@@ -10,20 +10,7 @@ use DateTime;
 
 class CartController extends AbstractController
 {
-    public function showBouquet()
-    {
-        $bouquetManager= new BouquetManager();
-        $bouquets = $bouquetManager->selectAll();
-        if (!isset($_SESSION['id_panier'])) {
-            $panier="";
-        } else {
-            $panier = $_SESSION['id_panier'];
-        }
-        return $this->twig->render(
-            'Front/bouquets.html.twig',
-            ["bouquets" => $bouquets, "panier" => $panier]
-        );
-    }
+
 
     public function addBouquetCart($idBouquet)
     {
