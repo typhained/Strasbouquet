@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\ConceptManager;
 use App\Model\CatalogueUManager;
-use App\Model\BouquetCatManager;
 use App\Model\CartManager;
 use DateTime;
 
@@ -81,6 +80,14 @@ class ConceptController extends AbstractController
             $_SESSION['id_bouquet_concept'] = $id;
         }
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_POST['card'] == 'add-card') {
+                $conceptManager->updateCard(1, $id);
+            } else {
+                $conceptManager->updateCard(0, $id);
+            }
+        }
+
         $idConcept = $_SESSION['id_bouquet_concept'];
 
         $concept = $conceptManager->showConcept($id);
@@ -90,6 +97,9 @@ class ConceptController extends AbstractController
 
         $price = $conceptManager->fetchPrice($id);
 
+        $conceptManager->updatePrice($price['total'], $id);
+
+        $card = $conceptManager->getCard($id);
 
         return $this->twig->render(
             'Concept/show.html.twig',
@@ -97,7 +107,8 @@ class ConceptController extends AbstractController
                 'concept' => $concept,
                 'units' => $units,
                 'idConcept' => $idConcept,
-                'price' => $price
+                'price' => $price,
+                'carte' => $card
             ]
         );
     }
@@ -125,27 +136,27 @@ class ConceptController extends AbstractController
      */
     public function addToCart(int $idConcept)
     {
-        if (!isset($_SESSION['user'])) {    // Check if client is logged
+        if (!isset($_SESSION['user'])) {
             $message = "Vous devez vous inscrire ou vous connecter pour commmander";
-            return $this->twig->render('User/add.html.twig', ["message" => $message]);  // If not logged, sign in
-        } else {    // Log check passed
-            if (!isset($_SESSION['id_panier'])) {   // Check if cart ID is not defined
-                $cartManager = new CartManager();   // New CartManager object
+            return $this->twig->render('User/add.html.twig', ["message" => $message]);
+        } else {
+            if (!isset($_SESSION['id_panier'])) {
+                $cartManager = new CartManager();
 
-                $user = $_SESSION['user'];  // Define a user variable
-                $date = new DateTime("now");    // New current date object
-                $date = $date->format('Y-m-d'); // Passing date to the right format
+                $user = $_SESSION['user'];
+                $date = new DateTime("now");
+                $date = $date->format('Y-m-d');
 
-                $id = $cartManager->insert($user, $date);   // Create a cart and returning the ID
-                $_SESSION['id_panier'] = $id;   // Passing cart ID to SESSION global
+                $id = $cartManager->insert($user, $date);
+                $_SESSION['id_panier'] = $id;
             }
 
-            $conceptManager = new ConceptManager(); // New ConceptManager object
+            $conceptManager = new ConceptManager();
 
-            $cart = $_SESSION['id_panier']; // Define a cart ID
-            $conceptManager->updateCart($idConcept, $cart); // Assign the custom bouquet to the cart
+            $cart = $_SESSION['id_panier'];
+            $conceptManager->updateCart($idConcept, $cart);
 
-            header("location: /Cart/showCart/$cart");   // Redirect towards the cart
+            header("location: /Cart/showCart/$cart");
         }
     }
 }
