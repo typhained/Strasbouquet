@@ -5,6 +5,8 @@ namespace App\Model;
 class CatalogueUManager extends AbstractManager
 {
     const TABLE = 'catalogue_unitaire';
+    const GALERIE = 'galerie';
+    const BOUQUET = "bouquet";
 
     public function __construct()
     {
@@ -25,6 +27,17 @@ class CatalogueUManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+    public function selectOneById(int $id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . self::TABLE . " JOIN " . self::GALERIE .
+        " ON catalogue_unitaire.id = galerie.id_catalogue_unitaire WHERE catalogue_unitaire.id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
 
     public function delete(int $id): void
     {

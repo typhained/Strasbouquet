@@ -57,4 +57,17 @@ class GalerieManager extends AbstractManager
             return (int)$this->pdo->lastInsertId();
         }
     }
+
+    public function insertCatalogueU($galerie, $catalogueU, $id)
+    {
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+            " (nom, file1, id_catalogue_unitaire) VALUES (:nom, :file1, :id_catalogue_unitaire) ");
+        $statement->bindValue('nom', $catalogueU['nom'], \PDO::PARAM_STR);
+        $statement->bindValue('file1', $galerie, \PDO::PARAM_STR);
+        $statement->bindValue('id_catalogue_unitaire', $id, \PDO::PARAM_INT);
+
+        if ($statement->execute()) {
+            return (int)$this->pdo->lastInsertId();
+        }
+    }
 }
