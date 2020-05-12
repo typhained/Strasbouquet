@@ -84,13 +84,13 @@ class ConceptManager extends AbstractManager
      * Update the price of the custom bouquet
      *
      * @param int $price
-     * @param int $unit
+     * @param int $idConcept
      */
-    public function updatePrice(int $price, int $unit)
+    public function updatePrice(int $price, int $idConcept)
     {
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET prix_total = :price WHERE id = :unit");
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET prix_total = :price WHERE id = :idConcept");
         $statement->bindValue(':price', $price, \PDO::PARAM_INT);
-        $statement->bindValue(':unit', $unit, \PDO::PARAM_INT);
+        $statement->bindValue(':idConcept', $idConcept, \PDO::PARAM_INT);
 
         $statement->execute();
     }

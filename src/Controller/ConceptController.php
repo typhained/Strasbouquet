@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\ConceptManager;
 use App\Model\CatalogueUManager;
-use App\Model\BouquetCatManager;
 use App\Model\CartManager;
 use DateTime;
 
@@ -90,6 +89,7 @@ class ConceptController extends AbstractController
 
         $price = $conceptManager->fetchPrice($id);
 
+        $conceptManager->updatePrice($price['total'], $id);
 
         return $this->twig->render(
             'Concept/show.html.twig',
