@@ -84,7 +84,6 @@ class BouquetController extends AbstractController
             $bouquet = $bouquetManager->selectOneById($id);
             $galerieManager = new GalerieManager();
             $image = $galerieManager->selectImageBouquet($id);
-
             return $this->twig->render('Bouquet/show.html.twig', ['bouquet' => $bouquet, 'image' => $image]);
     }
 

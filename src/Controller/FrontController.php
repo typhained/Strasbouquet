@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\BouquetManager;
 use App\Model\ConceptManager;
+use App\Model\GalerieManager;
 use App\Model\UserManager;
 
 class FrontController extends AbstractController
@@ -17,8 +18,10 @@ class FrontController extends AbstractController
 
     public function bouquets()
     {
+        $galerieManager = new GalerieManager();
         $bouquetManager= new BouquetManager();
         $bouquets = $bouquetManager->selectAll();
+        $images = $galerieManager->selectAll();
         if (!isset($_SESSION['id_panier'])) {
             $panier="";
         } else {
@@ -26,7 +29,7 @@ class FrontController extends AbstractController
         }
         return $this->twig->render(
             'Front/bouquets.html.twig',
-            ["bouquets" => $bouquets, "panier" => $panier]
+            ["bouquets" => $bouquets, "panier" => $panier, "images"=>$images]
         );
     }
 
