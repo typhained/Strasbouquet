@@ -125,27 +125,41 @@ class ConceptController extends AbstractController
      */
     public function addToCart(int $idConcept)
     {
-        if (!isset($_SESSION['user'])) {    // Check if client is logged
+        // Check if client is logged
+        if (!isset($_SESSION['user'])) {
             $message = "Vous devez vous inscrire ou vous connecter pour commmander";
-            return $this->twig->render('User/add.html.twig', ["message" => $message]);  // If not logged, sign in
-        } else {    // Log check passed
-            if (!isset($_SESSION['id_panier'])) {   // Check if cart ID is not defined
-                $cartManager = new CartManager();   // New CartManager object
+            // If not logged, sign in
+            return $this->twig->render('User/add.html.twig', ["message" => $message]);
+        // Log check passed
+        } else {
+            // Check if cart ID is not defined
+            if (!isset($_SESSION['id_panier'])) {
+                // New CartManager object
+                $cartManager = new CartManager();
 
-                $user = $_SESSION['user'];  // Define a user variable
-                $date = new DateTime("now");    // New current date object
-                $date = $date->format('Y-m-d'); // Passing date to the right format
+                // Define a user variable
+                $user = $_SESSION['user'];
+                // New current date object
+                $date = new DateTime("now");
+                // Passing date to the right format
+                $date = $date->format('Y-m-d');
 
-                $id = $cartManager->insert($user, $date);   // Create a cart and returning the ID
-                $_SESSION['id_panier'] = $id;   // Passing cart ID to SESSION global
+                // Create a cart and returning the ID
+                $id = $cartManager->insert($user, $date);
+                // Passing cart ID to SESSION global
+                $_SESSION['id_panier'] = $id;
             }
 
-            $conceptManager = new ConceptManager(); // New ConceptManager object
+            // New ConceptManager object
+            $conceptManager = new ConceptManager();
 
-            $cart = $_SESSION['id_panier']; // Define a cart ID
-            $conceptManager->updateCart($idConcept, $cart); // Assign the custom bouquet to the cart
+            // Define a cart ID
+            $cart = $_SESSION['id_panier'];
+            // Assign the custom bouquet to the cart
+            $conceptManager->updateCart($idConcept, $cart);
 
-            header("location: /Cart/showCart/$cart");   // Redirect towards the cart
+            // Redirect towards the cart
+            header("location: /Cart/showCart/$cart");
         }
     }
 }
