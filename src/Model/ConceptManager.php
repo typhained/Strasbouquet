@@ -96,6 +96,31 @@ class ConceptManager extends AbstractManager
     }
 
     /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getCard(int $id)
+    {
+        $query = $this->pdo->query("SELECT carte FROM " . self::TABLE . " WHERE id= $id");
+        $result = $query->fetch(\PDO::FETCH_ASSOC);
+        return $result['carte'];
+    }
+
+    /**
+     * Add a card to the custom bouquet
+     * @param int $card
+     * @param int $idConcept
+     */
+    public function updateCard(int $card, int $idConcept)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET carte = :carte WHERE id = :idConcept");
+        $statement->bindValue(':carte', $card, \PDO::PARAM_INT);
+        $statement->bindValue(':idConcept', $idConcept, \PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
+    /**
      * Assign a bouquet concept to a cart
      *
      * @param int $id
