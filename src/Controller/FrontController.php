@@ -16,9 +16,6 @@ class FrontController extends AbstractController
 {
     public function index()
     {
-        $conceptManager = new ConceptManager();
-        $bouquetManager = new BouquetManager();
-        $galerieManager = new GalerieManager();
         $userManager = new UserManager();
 
         if (isset($_SESSION['user'])) {
@@ -27,16 +24,25 @@ class FrontController extends AbstractController
             $user = null;
         }
 
-        $concepts = $conceptManager->selectAll();
+        // Randomisation de 4 bouquets
+        $bouquetManager = new BouquetManager();
+        $galerieManager = new GalerieManager();
+
         $bouquets = $bouquetManager->selectAll();
+        shuffle($bouquets);
+        $bouquetsRand = [
+            $bouquets[0],
+            $bouquets[1],
+            $bouquets[2],
+            $bouquets[3]
+        ];
         $images = $galerieManager->selectAll();
 
         return $this->twig->render('Front/index.html.twig', [
-            'concepts' => $concepts,
-            "user" => $user,
-            'bouquets' => $bouquets,
+            'user' => $user,
+            'bouquets' => $bouquetsRand,
             'images' => $images,
-        ]);
+            ]);
     }
 
     /**

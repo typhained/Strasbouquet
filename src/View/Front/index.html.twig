@@ -15,29 +15,23 @@
         <p>Essayez maintenant !</p>
         <a href="/Concept/create" class="uk-button uk-button-primary">Je crée mon bouquet</a>
     </section>
-    <!-- Season -->
-    <section class="uk-section" id="index-season">
-        <h2>Le bouquet de saison</h2>
-    </section>
     <!-- Bouquets -->
     <section class="uk-section" id="index-bouquets">
         <h2>Nos bouquets</h2>
         <h3>Pour toutes les occasions</h3>
-        <div class="uk-child-width-1-4@s uk-grid-match" uk-grid>
+        <div class="uk-child-width-1-4@m" uk-grid>
             {% for bouquet in bouquets %}
-                <div class="uk-card uk-card-default">
-                    <div class="uk-card-header">
-                        <h3 class="uk-card-title">{{ bouquet.nom}}</h3>
-                        <div class="uk-card-badge uk-label">{{ bouquet.saisonnier }}</div>
-                    </div>
-                    <div class="uk-card-body">
-                        <img width="300" src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}">
-
-                        <p class="uk-text-center">{{ bouquet.prix }}€</p>
-                    </div>
-                    <div class="uk-card-footer uk-text-center">
-                        <a class="uk-button uk-button-default uk-button-small uk-margin" href="#modal-example-{{ bouquet.id }}" uk-toggle>Voir plus</a>
-                    </div>
+                <div>
+                    <a class="" href="#modal-example-{{ bouquet.id }}" uk-toggle>
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-media-top">
+                                <img src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}" alt="">
+                            </div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title">{{ bouquet.nom }}</h3>
+                            </div>
+                        </div>
+                    </a>
                 </div>
 
                 <div id="modal-example-{{ bouquet.id }}" uk-modal>
@@ -62,7 +56,9 @@
                 </div>
             {% endfor %}
         </div>
-        <a href="/Front/bouquets" class="uk-button uk-button-primary">Accéder au catalogue</a>
+        <div class="uk-margin">
+            <a href="/Front/bouquets" class="uk-button uk-button-primary">Accéder au catalogue</a>
+        </div>
     </section>
 {% endblock %}
 
