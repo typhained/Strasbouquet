@@ -1,0 +1,20 @@
+{% extends 'layoutp.html.twig' %}
+{% block title %}
+    {{ parent()}} Contact
+{% endblock %}
+{% block content %}
+<form id="contact" method="post" action="">
+    <fieldset><legend>Vos coordonnées</legend>
+        <p><label for="nom">Nom :</label><input type="text" id="nom" name="nom" /></p>
+        <p><label for="email">Email :</label><input type="text" id="email" name="email" /></p>
+        <p><label for="objet">Objet :</label><input type="text" id="objet" name="objet" /></p>
+        <p><label for="message">Message :</label>
+        <textarea id="message" name="message" cols="30" rows="8"></textarea></p>
+    </fieldset>
+            <div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer le formulaire !" /></div>
+</form>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4653.489536745072!2d7.761027912526487!3d48
+    .57386254576539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4fefbe61ce54f79a!
+    2sWild%20Code%20School%20-%20Formation%20d%C3%A9veloppeur%20web!5e0!3m2!1sfr!2sfr!4v1589355007461!5m2!1sfr!2sfr"
+    width="1200" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+{% endblock %}
