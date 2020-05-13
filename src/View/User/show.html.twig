@@ -1,11 +1,8 @@
 {% extends 'layoutp.html.twig' %}
-
 {% block title %}
     {{ parent()}} Profil
 {% endblock %}
-
 {% block content %}
-
     <div class="uk-container uk-margin-top">
         <h3 class="uk-text-center">Mon profil</h3>
         <div class="uk-card uk-card-default uk-width-1-1@m">
@@ -27,11 +24,9 @@
                         <th>PRIX</th>
                     </tr>
                     </thead>
-
                     <tr>
                         <td>{{ cart[0].date }}</td>
                         <td>{{ cart[0].prix_total }}</td>
-
                     </tr>
                     <tr>
                         <th>CONTENU</th>
@@ -50,8 +45,6 @@
             </div>
         </div>
     </div>
-    {{ dump(cart) }}
-
     <!-- This is the modal -->
     <div id="modal-example" uk-modal class="uk-modal-container">
         <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">

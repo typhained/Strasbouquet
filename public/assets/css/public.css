@@ -1,4 +1,17 @@
-/* Footer */
+/* Début de Classes global*/
+.uk-alert{
+    background-color: white;
+}
+/* Fin de Classes global*/
+/* Début de Navbar */
+nav img{
+    width: 36px;
+    height: 36px;
+}
+/* Fin de Navbar */
+
+/* Début de Footer */
+
 #footer-flex {
     display: flex;
     justify-content: space-around;
@@ -34,3 +47,4 @@ footer a img {
     text-decoration: none;
     color: white;
 }
+/* Fin de Footer */
