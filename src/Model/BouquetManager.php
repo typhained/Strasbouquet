@@ -62,4 +62,13 @@ class BouquetManager extends AbstractManager
         $statement = $this->pdo->query(" SELECT * FROM " . self::TABLE . " WHERE saisonnier = '" . $filter . "' ");
         return $statement->fetchAll();
     }
+
+    /**
+     * @return array
+     */
+    public function saisonnier(): array
+    {
+        $statement = $this->pdo->query("SELECT saisonnier FROM ".self::TABLE." GROUP by saisonnier");
+        return $statement->fetchAll();
+    }
 }
