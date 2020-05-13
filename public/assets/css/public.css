@@ -2,6 +2,9 @@
 .uk-alert{
     background-color: white;
 }
+.uk-button-primary {
+    background-color:  #708d23;
+}
 /* Fin de Classes global*/
 /* Début de Navbar */
 nav img{

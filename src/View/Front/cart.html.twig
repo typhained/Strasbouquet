@@ -1,66 +1,61 @@
-{% extends session.role == "admin" and user.role != "admin" and session.id_panier != panier[0].id_panier
+    {% extends session.role == "admin" and user.role != "admin" and session.id_panier != panier[0].id_panier
     ? 'layout.html.twig'
     : 'layoutp.html.twig' %}
-
 {% block title %}
-    {{ parent()}} Accueil
+    {{ parent()}} Panier
 {% endblock %}
-
-
 {% block content %}
-    <table class="uk-table uk-table-divider uk-box-shadow-large">
-        <thead>
-        <tr>
-            <th>Bouquets</th>
-            <th>Prix</th>
-            <td>Quantité</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for bouquet in panier %}
+    <h1 class="uk-text-center">Votre sélection d'articles</h1>
+    {% if priceB.totalBouquet != 0 %}
+        <table class="uk-table uk-table-divider uk-box-shadow-large">
+            <thead>
             <tr>
-                <td>{{ bouquet.nom }}</td>
-                <td>{% set priceBouquet = bouquet.prix  * bouquet.quantite  %} {{ priceBouquet }} € ({{ bouquet.prix }}€ unité)</td>
-                <td> <a href="/cart/addBouquetCart/{{ bouquet.id }}"><span uk-icon="plus-circle"></span></a>
-                    {{ bouquet.quantite }}
-                    <a href="/cart/deleteBouquet/{{ bouquet.id }} "><span uk-icon="minus-circle"></span></a>
-                </td>
+                <th>Bouquets</th>
+                <th>Prix</th>
+                <th>Quantité</th>
             </tr>
-        {% endfor %}
-        </tbody>
-        <tfoot>
+            </thead>
+            <tbody>
+            {% for bouquet in panier %}
+                <tr>
+                    <td>{{ bouquet.nom }}</td>
+                    <td>{% set priceBouquet = bouquet.prix  * bouquet.quantite  %} {{ priceBouquet }} € ({{ bouquet.prix }}€ unité)</td>
+                    <td> <a href="/cart/addBouquetCart/{{ bouquet.id }}">
+                            <span uk-icon="plus-circle"></span>
+                        </a>
+                        {{ bouquet.quantite }}
+                        <a href="/cart/deleteBouquet/{{ bouquet.id }} "><span uk-icon="minus-circle"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    {% if priceC.totalConcept != 0 %}
+        <table class="uk-table uk-table-divider uk-box-shadow-large">
+            <thead>
             <tr>
-                <td>Prix total des Bouquets</td>
-                <td>{{ priceB.total }}</td>
+                <th>Bouquet Personnalisé</th>
+                <th>Contenu</th>
+                <th>Prix</th>
             </tr>
-        </tfoot>
-    </table>
-
-    <table class="uk-table uk-table-divider uk-box-shadow-large">
-        <thead>
-        <tr>
-            <th>Bouquet Personnalisé</th>
-            <th>Contenu</th>
-            <th>Prix</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for concept in concepts %}
-            <tr>
-                <td>{{ concept.id }}</td>
-                <td>{{ concept.produit }}</td>
-                <td>{{ concept.prix_total }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-
-    <h3>Total du panier: {{ priceTotal }}</h3>
+            </thead>
+            <tbody>
+            {% for concept in concepts %}
+                <tr>
+                    <td>{{ concept.id }}</td>
+                    <td>{{ concept.produit }}</td>
+                    <td>{{ concept.prix_total }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <h3 class="uk-text-right">Total du panier: {{ priceTotal }}€</h3>
     {% if session.role == "admin" and user.id != 2 and session.id_panier != panier[0].id_panier %}
-       <a class="uk-button uk-button-secondary" href="/Home/index/">RETOUR</a>
+       <a class="uk-button uk-button-secondary uk-align-left" href="/Home/index/">Retour</a>
     {% else %}
-        <a class="uk-button uk-button-primary" href="/Cart/confirmCart/{{ session.id_panier }}">Valider le panier</a>
-        <a class="uk-button uk-button-secondary" href="/Front/bouquets">RETOUR</a>
+        <a class="uk-button uk-button-primary uk-align-right" href="/Cart/confirmCart/{{ session.id_panier }}">Valider le panier</a>
+        <a class="uk-button uk-button-secondary uk-align-left" href="/Front/bouquets">Retour</a>
     {% endif %}
 {% endblock %}
