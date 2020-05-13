@@ -7,3 +7,21 @@
 {% block content %}
     <h1>FRONT ACCUEIL</h1>
 {% endblock %}
+
+
+{% block javascript %}
+<script>
+var log = sessionStorage.getItem("log");
+var role = '{{ session.role }}';
+var user = '{{ session.user }}';
+if ( role === "disconnect") {
+    sessionStorage.clear();
+}
+if (log==null) {
+    if (role==='client'){
+        UIkit.notification("Bienvenue {{ user.firstname ~" "~ user.lastname }}", {status:'success'});
+        sessionStorage.setItem("log", "logged");
+    }
+}
+</script>
+{% endblock %}

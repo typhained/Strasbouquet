@@ -12,8 +12,17 @@ class FrontController extends AbstractController
     public function index()
     {
         $conceptManager = new ConceptManager();
+        $userManager = new UserManager();
+
+        if (isset($_SESSION['user'])) {
+            $user = $userManager->selectOneById($_SESSION['user']);
+        } else {
+            $user = null;
+        }
+
         $concepts = $conceptManager->selectAll();
-        return $this->twig->render('Front/index.html.twig', ['concepts' => $concepts]);
+
+        return $this->twig->render('Front/index.html.twig', ['concepts' => $concepts, "user" => $user]);
     }
 
     /**
