@@ -1,7 +1,7 @@
 {% extends 'layoutp.html.twig' %}
 
 {% block title %}
-{{ parent() }} Créer un bouquet personnalisé
+{{ parent() }} Bouquets personnalisés
 {% endblock %}
 
 {% block content %}
@@ -11,11 +11,19 @@
             <thead>
                 <tr>
                     <th>ID Bouquet</th>
+                    <th>Prix</th>
+                    <th>Carte</th>
                 </tr>
             </thead>
             {% for concept in concepts %}
             <tr>
                 <td>Bouquet {{ concept.id }}</td>
+                <td>{{ concept.prix_total }} €</td>
+                <td>
+                    {% if concept.carte == 1 %}
+                        <span class="uk-text-success" uk-icon="icon: check"></span>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="show/{{ concept.id }}"><span uk-icon="icon: file-edit"></span></a>
                     <a href="#delete-concept-{{ concept.id }}" title="Supprimer" uk-toggle><span uk-icon="icon: trash"></span></a>
@@ -35,6 +43,8 @@
             </tr>
             {% endfor %}
         </table>
-        <a href="create" class="uk-button uk-button-primary">Je crée mon bouquet</a>
+        <div class="uk-text-center">
+            <a href="create" class="uk-button uk-button-primary">Créer un nouveau bouquet</a>
+        </div>
     </div>
 {% endblock %}

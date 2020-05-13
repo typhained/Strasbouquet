@@ -46,7 +46,7 @@ class CartBouquetManager extends AbstractManager
     public function priceCartBouquet(int $id)
     {
         $statement = $this->pdo->prepare("SELECT SUM(b.prix*bp.quantite) as 
-        total FROM " . self::TABLE . " bp INNER JOIN 
+        totalBouquet FROM " . self::TABLE . " bp INNER JOIN 
         ". self::CART ." p ON p.id = bp.id_panier INNER JOIN ". self::BOUQUET." b 
         ON bp.id_bouquet=b.id WHERE bp.id_panier=:id GROUP BY bp.id_panier");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
@@ -58,24 +58,24 @@ class CartBouquetManager extends AbstractManager
      * @param int $idBouquet
      * @return mixed
      */
-    public function selectQuantiteBouquet(int $idBouquet)
+    public function selectQuantiteBouquet(int $idBouquet, int $idpanier)
     {
         $statement = $this->pdo->query("SELECT quantite FROM ".self::TABLE."
-         WHERE `id_bouquet` ='".$idBouquet."'");
+         WHERE `id_bouquet`=$idBouquet AND id_panier=$idpanier");
         return $statement->fetch();
     }
 
-    public function updateBouquetCart($idBouquet, $qte)
+    public function updateBouquetCart($idBouquet, $qte, $idpanier)
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET
-        quantite = $qte WHERE id_bouquet=$idBouquet");
+        quantite = $qte WHERE id_bouquet=$idBouquet AND id_panier=$idpanier ");
         $statement->execute();
     }
 
-    public function delete($idBouquet)
+    public function delete($idBouquet, $idpanier)
     {
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . "
-WHERE id_bouquet=$idBouquet");
+WHERE id_bouquet=$idBouquet AND id_panier=$idpanier");
         $statement->execute();
     }
 }

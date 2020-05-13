@@ -27,26 +27,36 @@
                         <td>{{ unit.nom }}</td>
                         <td>{{ unit.couleur }}</td>
                         <td>{{ unit.type }}</td>
-                        <td>{{ unit.prix }}€</td>
+                        <td>{{ unit.prix }} €</td>
                         <td>{{ unit.quantite }}</td>
                         <td>
-                            <a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: minus-circle"></span></a>
                             <a href="./../../BouquetCat/add/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: plus-circle"></span></a>
+                            <a href="./../../BouquetCat/delete/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: minus-circle"></span></a>
                         </td>
                     </tr>
                 {% endfor %}
                 <tfoot>
-                    <tr>
-                        <th>Prix du bouquet</th>
-                        <td>{{ price.total }}</td>
-                    </tr>
                 </tfoot>
             </table>
+            <div>
+                {% include 'Concept/_cardForm.html.twig' %}
+            </div>
+            <h3 class="uk-heading-divider uk-text-light">Prix du bouquet : {{ price.total }} €</h3>
             <div class="uk-flex uk-flex-between">
                 <a class="uk-button uk-button-default" href="../index">Retour</a>
-                <a class="uk-button uk-button-primary" href="../addToCart/{{ idConcept }}">Ajouter au panier</a>
+                <button type="button" class="uk-button uk-button-primary" uk-toggle="target: #add-cart-concept">Ajouter au panier</button>
                 <button type="button" class="uk-button uk-button-danger" uk-toggle="target: #delete-concept">Supprimer</button>
-                <!-- Modal -->
+                <!-- Cart modal -->
+                <div id="add-cart-concept" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body">
+                        <h3 class="uk-modal-title uk-text-center">Ajouter au panier</h3>
+                        <div class="uk-flex uk-flex-around">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                            <a href="../addToCart/{{ idConcept }}" class="uk-button uk-button-primary">Aller au panier</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete modal -->
                 <div id="delete-concept" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
                         <h3 class="uk-modal-title uk-text-center uk-text-danger">Suppression du bouquet</h3>
@@ -57,7 +67,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- End modal -->
             </div>
         </div>
     </div>

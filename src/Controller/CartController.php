@@ -6,24 +6,12 @@ namespace App\Controller;
 use App\Model\BouquetManager;
 use App\Model\CartManager;
 use App\Model\CartBouquetManager;
+use App\Model\UserManager;
 use DateTime;
 
 class CartController extends AbstractController
 {
-    public function showBouquet()
-    {
-        $bouquetManager= new BouquetManager();
-        $bouquets = $bouquetManager->selectAll();
-        if (!isset($_SESSION['id_panier'])) {
-            $panier="";
-        } else {
-            $panier = $_SESSION['id_panier'];
-        }
-        return $this->twig->render(
-            'Front/bouquets.html.twig',
-            ["bouquets" => $bouquets, "panier" => $panier]
-        );
-    }
+
 
     public function addBouquetCart($idBouquet)
     {
@@ -37,27 +25,22 @@ class CartController extends AbstractController
             $date = new DateTime("now");
             $date = $date->format("Y-m-d");
 
-            $bouquetManager= new BouquetManager();
-            $bouquets = $bouquetManager->selectAll();
-
             if (!isset($_SESSION['id_panier'])) {
                 $id = $cartManager->insert($user, $date);
                 $_SESSION['id_panier'] =  $id;
             }
+
             $panier = $_SESSION['id_panier'];
             if ($cartBManager->bouquetInCart($idBouquet, $panier) === false) {
                 $cartBManager->addBouquetCart($idBouquet, $panier);
+                header("location: /Front/bouquets");
             } else {
-                $qte = $cartBManager->selectQuantiteBouquet($idBouquet);
+                $qte = $cartBManager->selectQuantiteBouquet($idBouquet, $panier);
                 $qte['quantite']= $qte['quantite'] + 1;
                 $qte = $qte['quantite'];
-                $cartBManager->updateBouquetCart($idBouquet, $qte);
+                $cartBManager->updateBouquetCart($idBouquet, $qte, $panier);
                 header("location: /Cart/showCart/$panier");
             }
-            return $this->twig->render(
-                'Front/bouquets.html.twig',
-                ["bouquets" => $bouquets, "panier" => $panier]
-            );
         }
     }
 
@@ -70,11 +53,33 @@ class CartController extends AbstractController
             $cartManager = new CartManager();
             $cartBManager = new CartBouquetManager();
             $panier = $cartManager->showCartContent($id);
-            $priceB = $cartBManager->priceCartBouquet($id);
-            $priceCart = $priceB;
+            $concepts = $cartManager->conceptInCart($id);
+
+            if ($cartBManager->priceCartBouquet($id)==false) {
+                $priceB['totalBouquet'] = 0;
+            } else {
+                $priceB = $cartBManager->priceCartBouquet($id);
+            }
+            if ($cartManager->priceTotalConcept($id)==false) {
+                $priceC['totalConcept'] = 0;
+            } else {
+                $priceC = $cartManager->priceTotalConcept($id);
+            }
+            // $priceTotal = $priceC['totalConcept']+$priceB;
+
+            // $priceB = $cartBManager->priceCartBouquet($id);
+            // $priceC = $cartManager->priceTotalConcept($id);
+            $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
+
             return $this->twig->render(
                 'Front/cart.html.twig',
-                ["panier" => $panier, "priceB" => $priceB, "priceCart" => $priceCart]
+                [
+                    "panier" => $panier,
+                    "priceB" =>$priceB,
+                    "priceC" => $priceC,
+                    "priceTotal" => round($priceTotal, 2),
+                    "concepts" => $concepts
+                ]
             );
         }
     }
@@ -82,16 +87,31 @@ class CartController extends AbstractController
     public function deleteBouquet(int $id)
     {
         $cartBManager = new CartBouquetManager();
-        $qte = $cartBManager->selectQuantiteBouquet($id);
         $idpanier = $_SESSION['id_panier'];
+        $qte = $cartBManager->selectQuantiteBouquet($id, $idpanier);
         if ($qte['quantite'] > 1) {
             $newQte = $qte['quantite'] - 1;
             $qte['quantite'] = $newQte;
-            $cartBManager->updateBouquetCart($id, $qte['quantite']);
+            $cartBManager->updateBouquetCart($id, $qte['quantite'], $idpanier);
             header("Location: /cart/showCart/" . $idpanier);
         } else {
-            $cartBManager->delete($id);
+            $cartBManager->delete($id, $idpanier);
             header("Location: /cart/showCart/" . $idpanier);
         }
+    }
+
+    public function confirmCart($id)
+    {
+        $cartManager = new CartManager();
+        $cartBManager = new CartBouquetManager();
+        $priceB = $cartBManager->priceCartBouquet($id);
+        $priceC = $cartManager->priceTotalConcept($id);
+        $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
+        $cartManager->updatePrice($id, $priceTotal);
+        $cartManager->confirmCart($id);
+        $cart = $cartManager->showCartContent($id);
+        $concepts = $cartManager->conceptInCart($id);
+        $_SESSION['id_panier']=null;
+        return $this->twig->render("Front/confirm.html.twig", ["cart"=>$cart, "concepts"=>$concepts]);
     }
 }

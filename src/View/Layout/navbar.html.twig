@@ -1,19 +1,22 @@
 <nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
+    <div class="uk-navbar-center">
         <ul class="uk-navbar-nav">
             <li><a href="/Front/index">Stras'bouquet</a></li>
             <li>
-                <a href="/Cart/showBouquet">Bouquet</a>
+                <a href="/Front/bouquets">Bouquets</a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="#">Lien 1</a></li>
-                        <li><a href="#">Lien 2</a></li>
-                        <li><a href="#">Lien 3</a></li>
+                        <li><a href="/Front/filter/Mariage">Mariage</a></li>
+                        <li><a href="/Front/filter/Remerciement">Remerciement</a></li>
+                        <li><a href="/Front/filter/Anniversaire">Anniversaire</a></li>
                     </ul>
                 </div>
             </li>
             <li>
                 <a href="/Concept/index">Bouquet personnalisé</a>
+            </li>
+            <li>
+                <a href="/Front/contact">Contact</a>
             </li>
             {% if session.role == "disconnect" %}
                 <li>
@@ -27,14 +30,16 @@
               <li>
                     <a href="/Account/logout">Déconnexion</a>
               </li>
-                {% if session.id_panier != null %}
-              <li>
-                  <a href="/Cart/showCart/{{ session.id_panier }}">Panier</a>
-              </li>
-                    {% endif %}
               <li>
                   <a href="/User/show/{{ session.user }}">Profil</a>
               </li>
+                {% if session.id_panier != null %}
+                    <li>
+                        <a href="/Cart/showCart/{{ session.id_panier }}">
+                            <img src="/assets/images/panier.png" alt="panier" />
+                        </a>
+                    </li>
+                {% endif %}
             {% endif %}
 
             {% if session.role == "admin" %}

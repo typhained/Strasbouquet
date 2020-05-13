@@ -8,7 +8,9 @@ class CartManager extends AbstractManager
     const TABLE = "panier";
     const BOUQUETJOIN = "bouquet_panier";
     const BOUQUET = "bouquet";
-    const CONCEPT = "concept";
+    const CONCEPT = "bouquet_concept";
+    const CONCEPT_CAT = "bouquet_catalogue";
+    const CAT_U = "catalogue_unitaire";
     const USER = "user";
 
     /**
@@ -42,18 +44,47 @@ class CartManager extends AbstractManager
         return $statement->fetchAll();
     }
 
+    public function confirmCart($id)
+    {
+        $this->pdo->query("UPDATE ".self::TABLE." SET etat='confirme' WHERE id=$id ");
+    }
+
+    public function updatePrice($id, $price)
+    {
+        $statement = $this->pdo->prepare("UPDATE ".self::TABLE." SET prix_total=:price WHERE id=:id ");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->bindValue('price', $price, \PDO::PARAM_INT);
+        $statement->execute();
+    }
+
     public function latestCart()
     {
         $statement = $this->pdo->query("SELECT p.id, p.prix_total, u.firstname, u.lastname 
         FROM " . self::TABLE . " p JOIN " .self::USER. "
-        u ON u.id=p.id_user ORDER BY date DESC limit 5");
+        u ON u.id=p.id_user WHERE p.etat = 'confirme' ORDER BY date DESC limit 5");
         return $statement->fetchAll();
     }
 
     public function historiqueID($id)
     {
         $statement = $this->pdo->query("SELECT p.id FROM " . self::TABLE . " p 
-        WHERE p.id_user=$id ORDER BY date DESC limit 1");
+        WHERE p.id_user=$id AND p.etat= 'confirme' ORDER BY date DESC limit 1");
         return $statement->fetch();
+    }
+
+    public function priceTotalConcept($id)
+    {
+        $statement = $this->pdo->query("SELECT SUM(bc.prix_total) as totalConcept FROM " . self::CONCEPT . " bc
+        WHERE bc.id_panier=$id GROUP BY bc.id_panier");
+        return $statement->fetch();
+    }
+
+    public function conceptInCart($id)
+    {
+        $statement = $this->pdo->query("SELECT c.id, c.prix_total, 
+        GROUP_CONCAT(cu.nom SEPARATOR ' & ') as produit FROM ".self::CONCEPT." c 
+        JOIN ".self::CONCEPT_CAT." bc ON bc.id_bouquet_concept=c.id 
+        JOIN ".self::CAT_U." cu ON bc.id_catalogue_unitaire=cu.id WHERE c.id_panier=$id GROUP BY c.id ");
+        return $statement->fetchAll();
     }
 }

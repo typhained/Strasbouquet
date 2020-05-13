@@ -27,20 +27,12 @@ class BouquetCatController extends AbstractController
     {
         $idConcept = $_SESSION['id_bouquet_concept'];
         $bouquetCatManager = new BouquetCatManager();
-        $conceptManager = new ConceptManager();
 
         if (empty($bouquetCatManager->unitInConcept($unit, $idConcept))) {
             $bouquetCatManager->insert($idConcept, $unit);
         } else {
             $bouquetCatManager->updateQuantUp($idConcept, $unit);
         }
-
-        $unitPrice = $conceptManager->getUnitPrice($unit);
-        $unitQuant = $bouquetCatManager->getUnitQuant($unit);
-        $price = ($unitPrice * $unitQuant);
-        $_SESSION['price'] = $price;
-
-        $conceptManager->updatePrice($price, $unit);
 
         header('location: /Concept/show/' . $idConcept);
     }
