@@ -47,24 +47,28 @@ class ConceptController extends AbstractController
      */
     public function create()
     {
-        $conceptManager = new ConceptManager();
+        if (!empty($_SESSION['user'])) {
+            $conceptManager = new ConceptManager();
 
-        $user = $_SESSION['user'];
-        $date = new DateTime("now");
-        $date = $date->format('Y-m-d');
+            $user = $_SESSION['user'];
+            $date = new DateTime("now");
+            $date = $date->format('Y-m-d');
 
 
-        $concept = [
-            'id_user' => $user,
-            'date' => $date
-        ];
-        $id = $conceptManager->insert($concept);
+            $concept = [
+                'id_user' => $user,
+                'date' => $date
+            ];
+            $id = $conceptManager->insert($concept);
 
-        if (!empty($_SESSION['id_bouquet_concept'])) {
-            $_SESSION['id_bouquet_concept'] = $id;
+            if (!empty($_SESSION['id_bouquet_concept'])) {
+                $_SESSION['id_bouquet_concept'] = $id;
+            }
+
+            header('location: /Concept/show/' . $id);
+        } else {
+            header('location: /Account/login');
         }
-
-        header('location: /Concept/show/' . $id);
     }
 
     /**

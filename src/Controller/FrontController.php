@@ -12,6 +12,8 @@ class FrontController extends AbstractController
     public function index()
     {
         $conceptManager = new ConceptManager();
+        $bouquetManager = new BouquetManager();
+        $galerieManager = new GalerieManager();
         $userManager = new UserManager();
 
         if (isset($_SESSION['user'])) {
@@ -21,8 +23,15 @@ class FrontController extends AbstractController
         }
 
         $concepts = $conceptManager->selectAll();
+        $bouquets = $bouquetManager->selectAll();
+        $images = $galerieManager->selectAll();
 
-        return $this->twig->render('Front/index.html.twig', ['concepts' => $concepts, "user" => $user]);
+        return $this->twig->render('Front/index.html.twig', [
+            'concepts' => $concepts,
+            "user" => $user,
+            'bouquets' => $bouquets,
+            'images' => $images,
+        ]);
     }
 
     /**
