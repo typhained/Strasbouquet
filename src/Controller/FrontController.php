@@ -76,7 +76,6 @@ class FrontController extends AbstractController
             'Front/bouquets.html.twig',
             ['bouquets' => $bouquets, "saisonniers" => $saisonniers]
         );
-
     }
 
     public function contact()
