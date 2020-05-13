@@ -23,15 +23,18 @@ class ConceptController extends AbstractController
      */
     public function index()
     {
-        $conceptManager = new ConceptManager();
-        $concepts = $conceptManager->selectAll();
+        if (!empty($_SESSION['user'])) {
+            $user = $_SESSION['user'];
 
+            $conceptManager = new ConceptManager();
+            $concepts = $conceptManager->selectByUserDate($user);
 
-
-        return $this->twig->render('Concept/index.html.twig', [
-            'concepts' => $concepts,
-            'session' => $_SESSION
-        ]);
+            return $this->twig->render('Concept/index.html.twig', [
+                'concepts' => $concepts,
+            ]);
+        } else {
+            header('location: ../Account/login');
+        }
     }
 
     /**

@@ -55,16 +55,28 @@ class CartController extends AbstractController
             $panier = $cartManager->showCartContent($id);
             $concepts = $cartManager->conceptInCart($id);
 
-            $priceB = $cartBManager->priceCartBouquet($id);
-            $priceC = $cartManager->priceTotalConcept($id);
+            if ($cartBManager->priceCartBouquet($id)==false) {
+                $priceB['totalBouquet'] = 0;
+            } else {
+                $priceB = $cartBManager->priceCartBouquet($id);
+            }
+            if ($cartManager->priceTotalConcept($id)==false) {
+                $priceC['totalConcept'] = 0;
+            } else {
+                $priceC = $cartManager->priceTotalConcept($id);
+            }
+            // $priceTotal = $priceC['totalConcept']+$priceB;
+
+            // $priceB = $cartBManager->priceCartBouquet($id);
+            // $priceC = $cartManager->priceTotalConcept($id);
             $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
 
             return $this->twig->render(
                 'Front/cart.html.twig',
                 [
                     "panier" => $panier,
-                    "priceB" => round($priceB, 2),
-                    "priceC" => round($priceC, 2),
+                    "priceB" =>$priceB,
+                    "priceC" => $priceC,
                     "priceTotal" => round($priceTotal, 2),
                     "concepts" => $concepts
                 ]
