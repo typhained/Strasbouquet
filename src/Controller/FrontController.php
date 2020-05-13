@@ -43,7 +43,6 @@ class FrontController extends AbstractController
             $email = $_POST['email'];
             $objet = $_POST['objet'];
             $message = $_POST['message'];
-
             $from = "From: " . $nom . "<" . $email . "> \r\nMime-Version:\r\n";
             $from .= " 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n";
 
