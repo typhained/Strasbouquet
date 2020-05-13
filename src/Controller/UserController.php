@@ -154,10 +154,10 @@ class UserController extends AbstractController
 
             $user = $userManager->selectOneById($id);
             $cartid = $cartManager->historiqueID($id);
-            $cart = $cartManager->showCartContent($cartid['id']);
+            $cart = $cartManager->showCartContent($cartid);
 
             return $this->twig->render('User/show.html.twig', [
-                'user' => $user, "cart" => $cart, "cartid"=>$cartid
+                'user' => $user, "cart" => $cart
             ]);
         } else {
             header('location:/Account/login/');
