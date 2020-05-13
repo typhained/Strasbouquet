@@ -40,15 +40,13 @@ class AccountController extends AbstractController
                     $mdp = $v['password'];
                     $role = $v['role'];
                     $id = $v['id'];
-                    $firstname = $v['firstname'];
                     if (password_verify($_POST['password'], $mdp)) {
                         $_SESSION['user'] = $id;
                         $_SESSION['role'] = $role;
                         if ($_SESSION['role'] == 'admin') {
                             header('location:/Home/index/');
                         } else {
-                            $message = "Bonjour ". $firstname;
-                            return $this->twig->render('Account/login.html.twig', ['message' => $message]);
+                            header('Location: /Front/index');
                         }
                     } else {
                         $message = "Le Mot de passe et l'adresse email ne correspondent pas.";
