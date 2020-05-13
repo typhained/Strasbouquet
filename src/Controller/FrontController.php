@@ -109,4 +109,24 @@ class FrontController extends AbstractController
         }
             return $this->twig->render('Front/contact.html.twig');
     }
+
+    public function aPropos()
+    {
+        return $this->twig->render('Front/apropos.html.twig');
+    }
+
+    public function questionsFrequentes()
+    {
+        return $this->twig->render('Front/faq.html.twig');
+    }
+
+    public function cgv()
+    {
+        return $this->twig->render('Front/conditions.html.twig');
+    }
+
+    public function mentionsLegales()
+    {
+        return $this->twig->render('Front/mentions.html.twig');
+    }
 }
