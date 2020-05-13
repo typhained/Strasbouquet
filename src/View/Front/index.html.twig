@@ -19,7 +19,7 @@ if ( role === "disconnect") {
 }
 if (log==null) {
     if (role==='client'){
-        UIkit.notification("Bienvenue {{ user.firstname ~" "~ user.lastname }}", {status:'success'});
+        UIkit.notification("Bienvenue {{user.firstname}}");
         sessionStorage.setItem("log", "logged");
     }
 }
