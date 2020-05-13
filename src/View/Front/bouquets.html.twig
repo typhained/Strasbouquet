@@ -6,7 +6,18 @@
 
 {% block content %}
 
-    <div class="uk-container">
+    <div class="uk-container uk-grid">
+        <div>
+            <button class="uk-button uk-button-default" type="button">Filtrer</button>
+            <div uk-dropdown>
+                <ul class="uk-nav uk-dropdown-nav">
+                    {% for saisonnier in saisonniers %}
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="/Front/filter/{{ saisonnier.saisonnier }}">{{saisonnier.saisonnier}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
         <div class="uk-child-width-1-4@s uk-grid-match" uk-grid>
             {% for bouquet in bouquets %}
             <div class="uk-card uk-card-default">
@@ -49,6 +60,7 @@
 
         </div>
     </div>
+    {{ dump(saisonniers) }}
 
     {% if session.id_panier != null %}
  <a class="uk-button uk-button-secondary uk-margin" href="/Cart/showCart/{{ panier }}"> Voir le panier</a>

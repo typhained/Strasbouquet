@@ -37,6 +37,8 @@ class FrontController extends AbstractController
         $bouquetManager= new BouquetManager();
         $bouquets = $bouquetManager->selectAll();
         $images = $galerieManager->selectAll();
+        $saisonniers = $bouquetManager->saisonnier();
+
         if (!isset($_SESSION['id_panier'])) {
             $panier="";
         } else {
@@ -44,7 +46,10 @@ class FrontController extends AbstractController
         }
         return $this->twig->render(
             'Front/bouquets.html.twig',
-            ["bouquets" => $bouquets, "panier" => $panier, "images"=>$images]
+            ["bouquets" => $bouquets,
+                "panier" => $panier,
+                "images"=>$images,
+                "saisonniers"=>$saisonniers]
         );
     }
 
@@ -52,7 +57,10 @@ class FrontController extends AbstractController
     {
         $bouquetManager = new BouquetManager();
         $bouquets = $bouquetManager->filter($filter);
-
-        return $this->twig->render('Front/bouquets.html.twig', ['bouquets' => $bouquets]);
+        $saisonniers = $bouquetManager->saisonnier();
+        return $this->twig->render(
+            'Front/bouquets.html.twig',
+            ['bouquets' => $bouquets, "saisonniers" => $saisonniers]
+        );
     }
 }
