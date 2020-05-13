@@ -27,13 +27,11 @@ class CartManager extends AbstractManager
         $statement->bindValue('id_user', $user, \PDO::PARAM_INT);
         $statement->bindValue('date', $date, \PDO::PARAM_STR);
 
-
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
     }
 
-    //voir le panier complet
     public function showCartContent($id)
     {
         $statement = $this->pdo->prepare("SELECT *  FROM " . self::BOUQUETJOIN . " bp INNER JOIN 
@@ -53,11 +51,10 @@ class CartManager extends AbstractManager
         return $statement->fetchAll();
     }
 
-
     public function historiqueID($id)
     {
-                $statement = $this->pdo->query("SELECT p.id FROM " . self::TABLE . " p 
-                WHERE p.id_user=$id ORDER BY date DESC limit 1");
+        $statement = $this->pdo->query("SELECT p.id FROM " . self::TABLE . " p 
+        WHERE p.id_user=$id ORDER BY date DESC limit 1");
         return $statement->fetch();
     }
 }
