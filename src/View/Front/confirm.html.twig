@@ -7,11 +7,11 @@
 <h1 class="uk-text-center">Panier validé</h1>
     <h2>Récapitulatif de votre commande</h2>
     <h3>Vous allez bientôt reçevoir un mail de confirmation</h3>
-    <table class="uk-table">
+    <table class="uk-table uk-table-hover uk-table-divider uk-box-shadow-large">
         <thead>
-        <tr>
+        <tr class="uk-background-muted ">
             <th>DATE</th>
-            <th>PRIX</th>
+            <th>PRIX TOTAL</th>
         </tr>
         </thead>
 
@@ -20,12 +20,18 @@
             <td>{{ cart[0].prix_total }}</td>
 
         </tr>
-        <tr>
+        <tr class="uk-background-muted">
             <th>CONTENU</th>
+            <th></th>
         </tr>
         {% for item in cart %}
             <tr>
                 <td>{{ item.quantite }} * {{ item.nom }}</td>
+            </tr>
+        {% endfor %}
+        {% for concept in concepts %}
+            <tr>
+                <td>Bouquet Perso contenant:  {{ concept.produit }}</td>
             </tr>
         {% endfor %}
     </table>
