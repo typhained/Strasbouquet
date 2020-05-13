@@ -2,38 +2,53 @@
 {% block title %}
     {{ parent()}} Validation du Panier
 {% endblock %}
-
 {% block content %}
-<h1 class="uk-text-center">Panier validé</h1>
-    <h2>Récapitulatif de votre commande</h2>
-    <h3>Vous allez bientôt reçevoir un mail de confirmation</h3>
-    <table class="uk-table uk-table-hover uk-table-divider uk-box-shadow-large">
-        <thead>
-        <tr class="uk-background-muted ">
-            <th>DATE</th>
-            <th>PRIX TOTAL</th>
-        </tr>
-        </thead>
-
-        <tr>
-            <td>{{ cart[0].date }}</td>
-            <td>{{ cart[0].prix_total }}</td>
-
-        </tr>
-        <tr class="uk-background-muted">
-            <th>CONTENU</th>
-            <th></th>
-        </tr>
-        {% for item in cart %}
+    <h1 class="uk-text-center">Récapitulatif de votre commande</h1>
+    <p class="uk-text-center">Vous allez reçevoir un mail récapitulatif de votre commande.</p>
+    <table class="titre-th uk-table uk-table-hover uk-table-divider uk-box-shadow-large">
             <tr>
-                <td>{{ item.quantite }} * {{ item.nom }}</td>
+                <th class="uk-text-center uk-background-secondary" >Quantité</th>
+                <th class="uk-text-center uk-background-secondary" >Articles</th>
             </tr>
-        {% endfor %}
+            {% for item in cart %}
+                <tr>
+                    <td class="uk-text-center">
+                        {{ item.quantite }}
+                    </td>
+                    <td class="uk-text-center">
+                        {{ item.nom }}
+                    </td>
+                </tr>
+            {% endfor %}
         {% for concept in concepts %}
             <tr>
-                <td>Bouquet Perso contenant:  {{ concept.produit }}</td>
+                <th colspan="2" class="uk-text-center uk-background-secondary">Votre bouquet personnalisé</th>
+            </tr>
+            <tr>
+                <td class="uk-text-center">1</td>
+                <td class="uk-text-center">
+                    {{ concept.produit }}
+                </td>
             </tr>
         {% endfor %}
+        <tr class="uk-background-muted ">
+            <th class="uk-text-center uk-background-secondary">
+                DATE
+            </th>
+            <th class="uk-text-center uk-background-secondary">
+                PRIX TOTAL
+            </th>
+        </tr>
+
+        <tr>
+            <td class="uk-text-center">
+                {{ cart[0].date }}
+            </td>
+            <td class="uk-text-center">
+                {{ cart[0].prix_total }}€
+            </td>
+        </tr>
+
     </table>
-    <a href="/Front/index" class="uk-button">RETOUR A L'ACCUEIL</a>
+    <a href="/Front/index" class="uk-button uk-button-secondary uk-align-right">RETOUR A L'ACCUEIL</a>
 {% endblock %}
