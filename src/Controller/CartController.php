@@ -110,7 +110,8 @@ class CartController extends AbstractController
         $cartManager->updatePrice($id, $priceTotal);
         $cartManager->confirmCart($id);
         $cart = $cartManager->showCartContent($id);
+        $concepts = $cartManager->conceptInCart($id);
         $_SESSION['id_panier']=null;
-        return $this->twig->render("Front/confirm.html.twig", ["cart"=>$cart]);
+        return $this->twig->render("Front/confirm.html.twig", ["cart"=>$cart, "concepts"=>$concepts]);
     }
 }
