@@ -91,6 +91,11 @@ class CartController extends AbstractController
     public function confirmCart($id)
     {
         $cartManager = new CartManager();
+        $cartBManager = new CartBouquetManager();
+        $priceB = $cartBManager->priceCartBouquet($id);
+        $priceC = $cartManager->priceTotalConcept($id);
+        $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
+        $cartManager->updatePrice($id, $priceTotal);
         $cartManager->confirmCart($id);
         $cart = $cartManager->showCartContent($id);
         $_SESSION['id_panier']=null;
