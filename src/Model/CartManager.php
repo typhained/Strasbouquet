@@ -78,7 +78,7 @@ class CartManager extends AbstractManager
 
     public function priceTotalConcept($id)
     {
-        $statement = $this->pdo->query("SELECT SUM(prix_total) as totalConcept FROM " . self::CONCEPT . " bc
+        $statement = $this->pdo->query("SELECT SUM(bc.prix_total) as totalConcept FROM " . self::CONCEPT . " bc
         WHERE bc.id_panier=$id GROUP BY bc.id_panier");
         return $statement->fetch();
     }
