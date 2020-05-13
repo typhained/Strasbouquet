@@ -11,9 +11,15 @@ class FrontController extends AbstractController
 {
     public function index()
     {
-        $conceptManager = new ConceptManager();
-        $concepts = $conceptManager->selectAll();
-        return $this->twig->render('Front/index.html.twig', ['concepts' => $concepts]);
+        $bouquetManager = new BouquetManager();
+        $galerieManager = new GalerieManager();
+        $bouquets = $bouquetManager->selectAll();
+        $images = $galerieManager->selectAll();
+
+        return $this->twig->render('Front/index.html.twig', [
+            'bouquets' => $bouquets,
+            'images' => $images,
+        ]);
     }
 
     /**
