@@ -8,6 +8,7 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.0/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="/assets/css/public.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
 
     {% block stylesheet %}{% endblock %}
     <link rel="icon" href="/assets/images/favicon.png">
@@ -15,7 +16,7 @@
 </head>
 <body>
 {% include ('./Layout/navbar.html.twig') %}
-<section class="uk-container uk-padding-large">
+<section id="layout-section" class="uk-container uk-padding-large">
     {% block content %}{% endblock %}
 </section>
 {% include ('./Layout/footer.html.twig') %}
