@@ -33,7 +33,6 @@
               <li>
                   <a href="/User/show/{{ session.user }}">Profil</a>
               </li>
-
                 {% if session.id_panier != null %}
                     <li>
                         <a href="/Cart/showCart/{{ session.id_panier }}">
@@ -42,7 +41,6 @@
                     </li>
                 {% endif %}
             {% endif %}
-
             {% if session.role == "admin" %}
               <li>
                   <a href="/Home/index/">Panel admin</a>
