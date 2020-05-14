@@ -34,10 +34,17 @@ class CatalogueUManager extends AbstractManager
         " ON catalogue_unitaire.id = galerie.id_catalogue_unitaire WHERE catalogue_unitaire.id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
-
         return $statement->fetch();
     }
 
+    public function selectAll(): array
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . self::TABLE . " JOIN " . self::GALERIE .
+            " ON catalogue_unitaire.id = galerie.id_catalogue_unitaire ORDER BY catalogue_unitaire.nom ASC");
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 
     public function delete(int $id): void
     {
@@ -49,7 +56,6 @@ class CatalogueUManager extends AbstractManager
 
     public function update(array $catalogueU):bool
     {
-
         // prepared request
         $prix = $catalogueU['prix'];
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE ."
@@ -76,7 +82,7 @@ class CatalogueUManager extends AbstractManager
 
     public function filterNom()
     {
-        $statement = $this->pdo->query("SELECT nom FROM ".self::TABLE." GROUP by nom");
+        $statement = $this->pdo->query("SELECT nom FROM ".self::TABLE." WHERE type='fleurs' GROUP by nom ");
         return $statement->fetchAll();
     }
 }
