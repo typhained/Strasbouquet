@@ -70,25 +70,28 @@
     <div class="uk-navbar-center">
         <a href="/Front/index" class="uk-navbar-item uk-logo"><img class="logo" src="/assets/images/logo.png" /></a>
     </div>
-    <ul class="uk-navbar-right">
+    <ul class="uk-navbar-right uk-margin-right">
         <ul class="uk-navbar-nav">
             {% if session.role == "disconnect" %}
                 <li>
-                    <a href="/User/add">Inscription</a>
+                    <span class="uk-margin-right uk-margin-top" uk-toggle="target: #modaleIndex" uk-icon="icon: sign-in;  ratio: 2"></span>
                 </li>
-                <li>
-                    <a href="/Account/login">Connexion</a>
-                </li>
-            {% else %}
-                <span uk-icon="icon: user;  ratio: 2"></span>
-                <div uk-dropdown="mode: click">
-                    <li>
-                        <a href="/Account/logout">Déconnexion</a>
-                    </li>
-                    <li>
-                        <a href="/User/show/{{ session.user }}">Profil</a>
-                    </li>
+                <!-- This is the modal -->
+                <div id="modaleIndex" class="uk-flex-top" uk-modal>
+                    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" >
+                        <div class="uk-position-center">
+                            <a class="uk-button uk-button-primary" href="/User/add">Inscription</a>
+                            <a class="uk-button uk-button-default" href="/Account/login/">Se connecter</a>
+                        </div>
+                    </div>
                 </div>
+            {% else %}
+                <a href="/User/show/{{ session.user }}">
+                    <span class="uk-margin-right uk-margin-top" uk-icon="icon: user;  ratio: 2"></span>
+                </a>
+                <a href="/Account/logout">
+                    <span class="uk-margin-right uk-margin-top" uk-icon="icon: sign-out;  ratio: 2"></span>
+                </a>
             {% endif %}
         </ul>
     </ul>
