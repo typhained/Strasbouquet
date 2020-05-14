@@ -77,7 +77,7 @@ if ( role === "disconnect") {
 }
 if (log==null) {
     if (role==='client'){
-        UIkit.notification("Bienvenue {{user.firstname}}");
+        UIkit.notification("Bienvenue {{user.firstname}}", {pos: 'top-left'});
         sessionStorage.setItem("log", "logged");
     }
 }
