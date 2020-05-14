@@ -1,27 +1,59 @@
 {% extends 'layoutp.html.twig' %}
+
 {% block title %}
     {{ parent()}} Contact
 {% endblock %}
+
 {% block content %}
-<form id="contact" method="post" action="">
-    <fieldset><legend>Vos coordonnées</legend>
-        <p><label for="nom">Nom :</label><input type="text" id="nom" name="nom" /></p>
-        <p><label for="email">Email :</label><input type="text" id="email" name="email" /></p>
-        <p><label for="objet">Objet :</label><input type="text" id="objet" name="objet" /></p>
-        <p><label for="message">Message :</label>
-        <textarea id="message" name="message" cols="30" rows="8"></textarea></p>
-    </fieldset>
-            <div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer le formulaire !" /></div>
-</form>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4653.489536745072!2d7.761027912526487!3d48
-    .57386254576539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4fefbe61ce54f79a!
-    2sWild%20Code%20School%20-%20Formation%20d%C3%A9veloppeur%20web!5e0!3m2!1sfr!2sfr!4v1589355007461!5m2!1sfr!2sfr"
-    width="1200" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        <img src="https://zupimages.net/up/20/20/624b.png">
-        <h3>Stras'bouquet</h3>
-        <p>32 Rue du Bassin d'Austerlitz</p>
-        <p>67100 Strasbourg</p>
-        <p>Yavuz KUTUK</p>
-        <p>+33 (0)6 58 70 53 99</p>
-        <p>strasbourg@wildcodeschool.com</p>
+    <div class="uk-margin-small uk-card uk-card-default uk-card-body uk-box-shadow-large uk-border-rounded">
+        <form id="contact" class="uk-form-horizontal" method="post" action="">
+            <h2>N'hésitez pas à nous contacter</h2>
+            <fieldset class="uk-card-default uk-border-rounded">
+                <legend>Vos coordonnées</legend>
+                <div class="uk-flex">
+                    <div>
+                        <p><label class="uk-form-label" for="nom">Nom :</label>
+                            <input class="uk-input"  type="text" id="nom" name="nom" /></p>
+                        <p><label class="uk-form-label" for="email">Email :</label>
+                            <input class="uk-input"  type="text" id="email" name="email" /></p>
+                        <p><label class="uk-form-label" for="objet">Objet :</label>
+                            <input class="uk-input"  type="text" id="objet" name="objet" /></p>
+                    </div>
+                    <div class="uk-margin-left">
+                        <p><label class="uk-form-label" for="message">Message :</label>
+                            <textarea class="uk-textarea" id="message" name="message" cols="30" rows="8"></textarea></p>
+                    </div>
+                </div>
+            </fieldset>
+            <input class="uk-button-primary uk-button-large uk-border-rounded uk-position-relative uk-position-bottom-center" type="submit" name="envoi" value="Envoyer le formulaire !"/>
+        </form>
+
+
+        <h2 class="uk-margin-top-large">Et à venir en Boutique</h2>
+        <div class="uk-card  uk-grid-collapse uk-child-width-1-2@s" uk-grid>
+            <div class="uk-card-media-left uk-cover-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4653.489536745072!2d7.761027912526487!3d48
+                    .57386254576539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4fefbe61ce54f79a!
+                    2sWild%20Code%20School%20-%20Formation%20d%C3%A9veloppeur%20web!5e0!3m2!1sfr!2sfr!4v1589355007461!5m2!1sfr!2sfr"
+                        width="900" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+            <div class="uk-card-body uk-padding-small">
+                <div class="uk-flex uk-text-center uk-flex-column">
+                    <img class="uk-border-circle uk-position-relative uk-position-bottom-center" width="180" src="https://zupimages.net/up/20/20/624b.png" alt="Yavuz le fleuriste">
+                    <div class="uk-text-small">
+                        <h3>Stras'bouquet</h3>
+                        <p class="uk-margin-remove">32 Rue du Bassin d'Austerlitz</p>
+                        <p class="uk-margin-remove">67100 Strasbourg</p>
+                        <p class="uk-margin-remove"> Yavuz KUTUK</p>
+                        <p class="uk-margin-remove">+33 (0)6 58 70 53 99</p>
+                        <p class="uk-margin-remove">strasbourg@wildcodeschool.com</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
 {% endblock %}
