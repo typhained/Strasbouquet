@@ -12,6 +12,9 @@
     color:  #a7d627;
     font-weight: bold;
 }
+.uk-button-default, .uk-button-default:hover {
+    background-color: white;
+}
 .card-perso{
     padding: 0;
     margin: 0 10px;
@@ -67,11 +70,14 @@ h1, h2, h3 {
 }
  .card-perso:hover #details{
     opacity: 1;
+     color: black;
 }
  #recherche{
      margin :0 0 50px 0;
  }
-
+#filter-inline li{
+    display: inline-block;
+}
  .modal-img-arround{
      border-radius: 5px;
  }
