@@ -137,4 +137,25 @@ class FrontController extends AbstractController
     {
         return $this->twig->render('Front/mentions.html.twig');
     }
+
+    public function recherche()
+    {
+        $mot = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $mot = $_POST['mot'];
+            explode(' ', $_POST['mot']);
+        }
+        $galerieManager = new GalerieManager();
+        $images = $galerieManager->selectAll();
+        $bouquetManager = new BouquetManager();
+        $bouquets = $bouquetManager->recherche($mot);
+        return $this->twig->render(
+            'Front/bouquets.html.twig',
+            [
+                'bouquets' => $bouquets,
+                'mot' => $mot,
+                'images' => $images
+            ]
+        );
+    }
 }
