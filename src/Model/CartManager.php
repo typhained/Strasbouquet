@@ -59,7 +59,7 @@ class CartManager extends AbstractManager
 
     public function latestCart()
     {
-        $statement = $this->pdo->query("SELECT p.id, p.prix_total, u.firstname, u.lastname 
+        $statement = $this->pdo->query("SELECT p.id, p.prix_total, u.firstname, u.lastname, p.date
         FROM " . self::TABLE . " p JOIN " .self::USER. "
         u ON u.id=p.id_user WHERE p.etat = 'confirme' ORDER BY date DESC limit 5");
         return $statement->fetchAll();
@@ -86,5 +86,10 @@ class CartManager extends AbstractManager
         JOIN ".self::CONCEPT_CAT." bc ON bc.id_bouquet_concept=c.id 
         JOIN ".self::CAT_U." cu ON bc.id_catalogue_unitaire=cu.id WHERE c.id_panier=$id GROUP BY c.id ");
         return $statement->fetchAll();
+    }
+
+    public function showPriceCart($id)
+    {
+        return $this->pdo->query("SELECT date, prix_total FROM ".self::TABLE." WHERE id=$id")->fetch();
     }
 }

@@ -48,14 +48,13 @@
             {% endif %}
         </ul>
     </div>
+
     <div class="uk-navbar-right">
-        <div class="uk-margin ">
-            <form class="uk-search uk-search-default" action="/Front/recherche" method="post">
-                <div uk-grid>
-                    <input class="uk-search-input" type="text" name="mot" placeholder="recherche...">
-                    <input class="uk-button" type="submit" name="form" value="Rechercher">
-                </div>
-            </form>
+        <div class="uk-navbar-item">
+                <form action="/Front/recherche" method="post">
+                    <input class="uk-input uk-form-width-small uk-form-small uk-border-rounded" type="text" name="mot" placeholder="ex: Bouquet">
+                    <button class="uk-button uk-button-primary uk-border-rounded uk-button-small" type="submit" name="form" value="Rechercher">Rechercher</button>
+                </form>
         </div>
     </div>
 </nav>

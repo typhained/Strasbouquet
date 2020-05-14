@@ -65,10 +65,6 @@ class CartController extends AbstractController
             } else {
                 $priceC = $cartManager->priceTotalConcept($id);
             }
-            // $priceTotal = $priceC['totalConcept']+$priceB;
-
-            // $priceB = $cartBManager->priceCartBouquet($id);
-            // $priceC = $cartManager->priceTotalConcept($id);
             $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
 
             return $this->twig->render(
@@ -78,7 +74,8 @@ class CartController extends AbstractController
                     "priceB" =>$priceB,
                     "priceC" => $priceC,
                     "priceTotal" => round($priceTotal, 2),
-                    "concepts" => $concepts
+                    "concepts" => $concepts,
+                    "id" => $id
                 ]
             );
         }
@@ -123,7 +120,11 @@ class CartController extends AbstractController
         $cartManager->confirmCart($id);
         $cart = $cartManager->showCartContent($id);
         $concepts = $cartManager->conceptInCart($id);
+        $recap = $cartManager->showPriceCart($id);
         $_SESSION['id_panier']=null;
-        return $this->twig->render("Front/confirm.html.twig", ["cart"=>$cart, "concepts"=>$concepts]);
+        return $this->twig->render(
+            "Front/confirm.html.twig",
+            ["cart"=>$cart, "concepts"=>$concepts, "recap"=>$recap]
+        );
     }
 }

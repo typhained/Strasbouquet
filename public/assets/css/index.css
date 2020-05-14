@@ -52,11 +52,36 @@ strong {
 }
 
 #index-bouquets {
-    background-color: rgba(245, 230, 232, 1);
+    background-color: rgb(251, 247, 220);
 }
 
 #index-bouquets a:hover {
     text-decoration: none;
+}
+
+
+@media only screen and (max-width: 375px) {
+    #title {
+        display: none;
+    }
+
+    #index-concept p {
+        font-size: 1.3em;
+        line-height: 1.8em;
+    }
+}
+
+
+@media only screen and (max-width: 474px){
+    #title {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #title > h1{
+        font-size: 4em;
+    }
 }
 
 @media only screen and (max-width: 1300px) {
