@@ -18,6 +18,10 @@
                 <p class="uk-text-meta uk-margin-remove-top">Numéro de téléphone: {{ user.num_Tel }}</p>
                 <h3>Commande la plus récente </h3>
                 <table class="uk-table">
+                    {% if recap == null %}
+                    <tr> Aucune commande récente </tr>
+                    {% else %}
+
                     <thead>
                     <tr>
                         <th>DATE</th>
@@ -25,8 +29,8 @@
                     </tr>
                     </thead>
                     <tr>
-                        <td>{{ cart[0].date }}</td>
-                        <td>{{ cart[0].prix_total }}</td>
+                        <td>{{ recap.date }}</td>
+                        <td>{{ recap.prix_total }}</td>
                     </tr>
                     <tr>
                         <th>CONTENU</th>
@@ -36,6 +40,21 @@
                             <td>{{ item.quantite }} * {{ item.nom }}</td>
                         </tr>
                     {% endfor %}
+                        {% if concepts != null %}
+                            <tr>
+                                <th colspan="2" class="uk-text-center uk-background-secondary">Bouquet personnalisé</th>
+                            </tr>
+                            {% for concept in concepts %}
+
+                                <tr>
+                                    <td class="uk-text-center">1</td>
+                                    <td class="uk-text-center">
+                                        {{ concept.produit }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
                 </table>
             </div>
             <div class="uk-card-footer uk-text-center">
@@ -56,4 +75,6 @@
             </p>
         </div>
     </div>
+
+
 {% endblock %}
