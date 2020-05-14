@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 14 Mai 2020 à 17:43
+-- Généré le :  Jeu 14 Mai 2020 à 17:56
 -- Version du serveur :  5.7.30-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.30-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -91,17 +91,6 @@ CREATE TABLE `bouquet_concept` (
   `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Contenu de la table `bouquet_concept`
---
-
-INSERT INTO `bouquet_concept` (`id`, `id_user`, `id_panier`, `prix_total`, `carte`, `date`) VALUES
-(1, 1, NULL, 0, NULL, '2020-05-14'),
-(2, 2, NULL, 0, NULL, '2020-05-14'),
-(3, 2, NULL, 0, NULL, '2020-05-14'),
-(4, 2, NULL, 0, NULL, '2020-05-14'),
-(5, 2, NULL, 0, NULL, '2020-05-14');
-
 -- --------------------------------------------------------
 
 --
@@ -113,14 +102,6 @@ CREATE TABLE `bouquet_panier` (
   `id_bouquet` int(11) NOT NULL,
   `quantite` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Contenu de la table `bouquet_panier`
---
-
-INSERT INTO `bouquet_panier` (`id_panier`, `id_bouquet`, `quantite`) VALUES
-(1, 7, 1),
-(1, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -240,13 +221,6 @@ CREATE TABLE `panier` (
   `etat` varchar(255) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Contenu de la table `panier`
---
-
-INSERT INTO `panier` (`id`, `id_bouquet`, `prix_total`, `id_user`, `date`, `etat`) VALUES
-(1, NULL, NULL, 2, '2020-05-14', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -344,7 +318,7 @@ ALTER TABLE `bouquet`
 -- AUTO_INCREMENT pour la table `bouquet_concept`
 --
 ALTER TABLE `bouquet_concept`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `catalogue_unitaire`
 --
