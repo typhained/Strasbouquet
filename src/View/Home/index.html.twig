@@ -25,7 +25,7 @@
                            <td>{{ command.firstname}} {{ command.lastname }}</td>
                            <td class="uk-table-expand">{{command.prix_total }}</td>
                            <td class="uk-table-expand">{{command.date }}</td>
-                           <td class="uk-table-expand"><a href="/Cart/showCart/{{ command.id }}">voir plus</a></td>
+                           <td class="uk-table-expand"><a class="uk-button uk-button-secondary" href="/Cart/showCart/{{ command.id }}">voir plus</a></td>
                        </tr>
                 {% endfor %}
                 </tbody>

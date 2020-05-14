@@ -5,7 +5,11 @@
     {{ parent()}} Panier
 {% endblock %}
 {% block content %}
-    <h1 class="uk-text-center">Votre sélection d'articles</h1>
+    {% if session.role == "admin" and session.id_panier != id %}
+        <h1 class="uk-text-center">Détails de la commande</h1>
+    {% else %}
+        <h1 class="uk-text-center">Votre sélection d'articles</h1>
+    {% endif %}
     {% if priceB.totalBouquet != 0 %}
         <table class="titre-th uk-table uk-table-divider uk-box-shadow-large">
             <thead>
@@ -22,11 +26,18 @@
                     <td>{{ bouquet.nom }}</td>
                     <td>{% set priceBouquet = bouquet.prix  * bouquet.quantite  %} {{ priceBouquet }}€</td>
                     <td>{{ bouquet.prix }}€</td>
-                    <td> <a href="/cart/addBouquetCart/{{ bouquet.id }}">
-                            <span uk-icon="plus-circle"></span>
-                        </a>
-                        {{ bouquet.quantite }}
-                        <a href="/cart/deleteBouquet/{{ bouquet.id }} "><span uk-icon="minus-circle"></span></a>
+                    <td>
+                        {% if session.role != "admin" and session.id_panier == id %}
+                            <a href="/cart/addBouquetCart/{{ bouquet.id }}">
+                                <span uk-icon="plus-circle"></span>
+                            </a>
+                        {% endif %}
+                            {{ bouquet.quantite }}
+                        {% if session.role != "admin" and session.id_panier == id %}
+                            <a href="/cart/deleteBouquet/{{ bouquet.id }} ">
+                                <span uk-icon="minus-circle"></span>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
@@ -37,9 +48,13 @@
         <table class="titre-th uk-table uk-table-divider uk-box-shadow-large">
             <thead>
             <tr>
-                <th class="uk-background-secondary">Votre bouquet</th>
-                <th class="uk-text-center uk-background-secondary">Contenu</th>
-                <th class="uk-background-secondary">Prix</th>
+        {% if session.role == "admin" and session.id_panier != id %}
+            <th class="uk-background-secondary">Bouquet personnalisé</th>
+        {% else %}
+            <th class="uk-background-secondary">Votre bouquet</th>
+        {% endif %}
+            <th class="uk-text-center uk-background-secondary">Contenu</th>
+            <th class="uk-background-secondary">Prix</th>
             </tr>
             </thead>
             <tbody>
