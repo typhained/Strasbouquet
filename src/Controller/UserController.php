@@ -99,7 +99,7 @@ class UserController extends AbstractController
                 et contenir au moins une majuscule et un chiffre";
                         return $this->twig->render('User/update.html.twig', ['user' => $user, 'message' => $message]);
                     } else {
-                        $user['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+                        $user['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
                         $userManager->update($user);
                         $user = $userManager->selectOneById($id);
                         $cartid = $cartManager->historiqueID($id);
