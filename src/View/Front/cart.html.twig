@@ -7,19 +7,21 @@
 {% block content %}
     <h1 class="uk-text-center">Votre sélection d'articles</h1>
     {% if priceB.totalBouquet != 0 %}
-        <table class="uk-table uk-table-divider uk-box-shadow-large">
+        <table class="titre-th uk-table uk-table-divider uk-box-shadow-large">
             <thead>
             <tr>
-                <th>Bouquets</th>
-                <th>Prix</th>
-                <th>Quantité</th>
+                <th class="uk-background-secondary">Bouquets</th>
+                <th class="uk-background-secondary">Prix</th>
+                <th class="uk-background-secondary">Prix unitaire</th>
+                <th class="uk-background-secondary">Quantité</th>
             </tr>
             </thead>
             <tbody>
             {% for bouquet in panier %}
                 <tr>
                     <td>{{ bouquet.nom }}</td>
-                    <td>{% set priceBouquet = bouquet.prix  * bouquet.quantite  %} {{ priceBouquet }} € ({{ bouquet.prix }}€ unité)</td>
+                    <td>{% set priceBouquet = bouquet.prix  * bouquet.quantite  %} {{ priceBouquet }}€</td>
+                    <td>{{ bouquet.prix }}€</td>
                     <td> <a href="/cart/addBouquetCart/{{ bouquet.id }}">
                             <span uk-icon="plus-circle"></span>
                         </a>
@@ -32,12 +34,12 @@
         </table>
     {% endif %}
     {% if priceC.totalConcept != 0 %}
-        <table class="uk-table uk-table-divider uk-box-shadow-large">
+        <table class="titre-th uk-table uk-table-divider uk-box-shadow-large">
             <thead>
             <tr>
-                <th>Bouquet Personnalisé</th>
-                <th>Contenu</th>
-                <th>Prix</th>
+                <th class="uk-background-secondary">Votre bouquet</th>
+                <th class="uk-text-center uk-background-secondary">Contenu</th>
+                <th class="uk-background-secondary">Prix</th>
             </tr>
             </thead>
             <tbody>
@@ -45,7 +47,7 @@
                 <tr>
                     <td>{{ concept.id }}</td>
                     <td>{{ concept.produit }}</td>
-                    <td>{{ concept.prix_total }}</td>
+                    <td>{{ concept.prix_total }}€</td>
                 </tr>
             {% endfor %}
             </tbody>

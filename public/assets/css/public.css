@@ -2,8 +2,11 @@
 .uk-alert{
     background-color: white;
 }
-.uk-button-primary {
-    background-color:  #708d23;
+.uk-button-primary, .uk-button-primary:hover, .uk-background-primary {
+    background-color:  #a7d627;
+}
+.titre-th th{
+    color: white;
 }
 /* Fin de Classes global*/
 /* Début de Navbar */
@@ -31,6 +34,11 @@ footer li {
 }
 footer li a {
     color: white;
+}
+footer a:hover{
+    text-decoration: none;
+    color: black;
+    transition-duration: 0.5s;
 }
 #logo-footer {
     width: 10%;
