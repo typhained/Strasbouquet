@@ -106,6 +106,18 @@ class CartController extends AbstractController
         $cartBManager = new CartBouquetManager();
         $priceB = $cartBManager->priceCartBouquet($id);
         $priceC = $cartManager->priceTotalConcept($id);
+
+        if ($cartBManager->priceCartBouquet($id)==false) {
+            $priceB['totalBouquet'] = 0;
+        } else {
+            $priceB = $cartBManager->priceCartBouquet($id);
+        }
+        if ($cartManager->priceTotalConcept($id)==false) {
+            $priceC['totalConcept'] = 0;
+        } else {
+            $priceC = $cartManager->priceTotalConcept($id);
+        }
+
         $priceTotal = $priceC['totalConcept']+$priceB['totalBouquet'];
         $cartManager->updatePrice($id, $priceTotal);
         $cartManager->confirmCart($id);
