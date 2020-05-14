@@ -2,10 +2,7 @@
 {% block title %}
     {{ parent()}} Accueil
 {% endblock %}
-
-
 {% block content %}
-
     <div class="uk-container uk-grid">
         <div>
             <button class="uk-button uk-button-default" type="button">Filtrer</button>
@@ -20,22 +17,17 @@
         </div>
         <div class="uk-child-width-1-4@s uk-grid-match" uk-grid>
             {% for bouquet in bouquets %}
-                <div class="uk-card uk-card-default">
-                    <div class="uk-card-header">
-                        <h3 class="uk-card-title">{{ bouquet.nom}}</h3>
-                        <div class="uk-card-badge uk-label">{{ bouquet.saisonnier }}</div>
+                <div class="card-perso uk-padding uk-box-shadow-large">
+                    <h3>{{ bouquet.nom}}</h3>
+                    <img width="300" src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}">
+                    <div class="card-perso-ban"><i>{{ bouquet.saisonnier }}</i></div>
+                    <div class="card-perso-ctn">
+                        <p>Prix : {{ bouquet.prix }}€</p>
+                        <a class="uk-button uk-button-primary" href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a>
+                        <a id="details" class="uk-button uk-button-small" href="#modal-example-{{ bouquet.id }}" uk-toggle>Voir plus</a>
                     </div>
-                    <div class="uk-card-body">
-                        <img width="300" src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}">
 
-                        <p class="uk-text-center">{{ bouquet.prix }}€</p>
-                    </div>
-                    <div class="uk-card-footer uk-text-center">
-                        <a class="uk-button uk-button-default uk-button-small uk-margin" href="#modal-example-{{ bouquet.id }}" uk-toggle>Voir plus</a>
-                        <a class="uk-button uk-button-primary uk-button-small" href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a>
-                    </div>
                 </div>
-
                 <div id="modal-example-{{ bouquet.id }}" uk-modal>
                     <div class="uk-modal-dialog uk-text-center">
                         <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -59,9 +51,7 @@
             {% endfor %}
         </div>
     </div>
-
     {% if session.id_panier != null %}
  <a class="uk-button uk-button-secondary uk-margin" href="/Cart/showCart/{{ panier }}"> Voir le panier</a>
     {% endif %}
-
 {% endblock %}
