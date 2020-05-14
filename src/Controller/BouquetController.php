@@ -106,7 +106,7 @@ class BouquetController extends AbstractController
     {
         if ($_SESSION['role'] == 'admin') {
             $galerieManager = new GalerieManager();
-            $galerieManager->delete($id);
+            $galerieManager->deleteBouquet($id);
             $bouquetManager = new BouquetManager();
             $bouquetManager->delete($id);
             header('Location:/Bouquet/index');

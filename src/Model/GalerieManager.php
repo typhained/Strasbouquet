@@ -36,7 +36,7 @@ class GalerieManager extends AbstractManager
      *
      * @param int $id
      */
-    public function delete(int $id): void
+    public function deleteBouquet(int $id): void
     {
         // prepared request
         $statement = $this->pdo->query("DELETE FROM ". self::TABLE . " WHERE id_bouquet = $id");
@@ -69,5 +69,11 @@ class GalerieManager extends AbstractManager
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
+    }
+
+    public function deleteCatalogueU($id)
+    {
+        $statement = $this->pdo->query("DELETE FROM ". self::TABLE . " WHERE id_catalogue_unitaire = $id");
+        $statement->execute();
     }
 }
