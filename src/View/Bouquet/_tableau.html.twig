@@ -2,15 +2,16 @@
     <div class="uk-text-right">
         <a href="/Bouquet/add" title="Ajouter un bouquet" class="uk-button uk-button-primary uk-margin">Ajouter</a>
     </div>
-    <table class="uk-table uk-table-striped uk-box-shadow-large">
+    <table class="uk-table uk-table-striped uk-box-shadow-large uk-table-responsive">
     <caption class="uk-text-center uk-margin uk-text-bold">Liste des bouquets</caption>
-        <thead>
+        <thead class="uk-background-secondary uk-light">
             <tr>
-                <td>ID</td>
+                <td >ID</td>
                 <td>Nom</td>
                 <td>Prix</td>
                 <td>Description</td>
                 <td>Evenements</td>
+                <td class="uk-text-nowrap">Actions</td>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +33,7 @@
                 <td>{{ bouquet.prix }}</td>
                 <td>{{ bouquet.description }}</td>
                 <td>{{ bouquet.saisonnier }}</td>
-                <td><a href="/Bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
+                <td class="uk-text-nowrap uk-width-small"><a href="/Bouquet/update/{{bouquet.id}}"><span uk-icon="pencil"></span></a>
                     <a href="#modal-example-{{ bouquet.id }}" uk-toggle><span uk-icon="trash"></span></a>
                     <a href="/Bouquet/show/{{bouquet.id}}"><span uk-icon="info"></span></a></td>
             </tr>

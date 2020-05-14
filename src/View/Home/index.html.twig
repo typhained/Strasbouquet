@@ -15,6 +15,7 @@
                 <thead class="uk-background-muted ">
                 <th class="uk-table-expand">Nom du client</th>
                 <th class="uk-table-expand">Total de la commande</th>
+                <th class="uk-table-expand">Date</th>
                 <th class="uk-table-expand">Fiche récap</th>
                 </thead>
                 <tbody>
@@ -23,7 +24,8 @@
                        <tr>
                            <td>{{ command.firstname}} {{ command.lastname }}</td>
                            <td class="uk-table-expand">{{command.prix_total }}</td>
-                           <td><a href="/Cart/showCart/{{ command.id }}">voir plus</a></td>
+                           <td class="uk-table-expand">{{command.date }}</td>
+                           <td class="uk-table-expand"><a class="uk-button uk-button-secondary" href="/Cart/showCart/{{ command.id }}">voir plus</a></td>
                        </tr>
                 {% endfor %}
                 </tbody>
