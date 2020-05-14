@@ -50,7 +50,7 @@ class CatalogueUController extends AbstractController
                     return $this->twig->render('CatalogueU/add.html.twig', ['message' => $message]);
                 }
                 $catalogueU = [
-                    'nom' => $_POST['nom'],
+                    'nom' => ucfirst($_POST['nom']),
                     'type' => $_POST['type'],
                     'prix' => $_POST['prix'],
                     'couleur' => $_POST['couleur'],
@@ -118,6 +118,8 @@ class CatalogueUController extends AbstractController
     {
         if ($_SESSION['role'] == 'admin') {
             $catalogueUManager = new CatalogueUManager();
+            $galerieManager = new GalerieManager();
+            $galerieManager->deleteCatalogueU($id);
             $catalogueUManager->delete($id);
             header('Location:/CatalogueU/index');
         } else {

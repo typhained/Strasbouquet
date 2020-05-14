@@ -106,6 +106,9 @@ class ConceptController extends AbstractController
 
         $catalogueUManager = new CatalogueUManager();
         $units = $catalogueUManager->selectAll();
+        $types = $catalogueUManager->filterType();
+        $names = $catalogueUManager->filterNom();
+        $colors = $catalogueUManager->filterColor();
 
         $price = $conceptManager->fetchPrice($id);
 
@@ -124,7 +127,10 @@ class ConceptController extends AbstractController
                 'units' => $units,
                 'idConcept' => $idConcept,
                 'price' => $price,
-                'carte' => $card
+                'carte' => $card,
+                'colors' => $colors,
+                'types' => $types,
+                'names' => $names
             ]
         );
     }
