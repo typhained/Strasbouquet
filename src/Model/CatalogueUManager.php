@@ -61,4 +61,22 @@ class CatalogueUManager extends AbstractManager
 
         return $statement->execute();
     }
+
+    public function filterType()
+    {
+        $statement = $this->pdo->query("SELECT type FROM ".self::TABLE." GROUP by type");
+        return $statement->fetchAll();
+    }
+
+    public function filterColor()
+    {
+        $statement = $this->pdo->query("SELECT couleur FROM ".self::TABLE." GROUP by couleur");
+        return $statement->fetchAll();
+    }
+
+    public function filterNom()
+    {
+        $statement = $this->pdo->query("SELECT nom FROM ".self::TABLE." GROUP by nom");
+        return $statement->fetchAll();
+    }
 }
