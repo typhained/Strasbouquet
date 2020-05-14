@@ -76,11 +76,13 @@ class FrontController extends AbstractController
     public function filter(string $filter)
     {
         $bouquetManager = new BouquetManager();
+        $galerieManager = new GalerieManager();
         $bouquets = $bouquetManager->filter($filter);
+        $images = $galerieManager->selectAll();
         $saisonniers = $bouquetManager->saisonnier();
         return $this->twig->render(
             'Front/bouquets.html.twig',
-            ['bouquets' => $bouquets, "saisonniers" => $saisonniers]
+            ['bouquets' => $bouquets, "saisonniers" => $saisonniers, "images"=>$images]
         );
     }
 
