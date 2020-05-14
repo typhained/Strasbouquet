@@ -77,9 +77,9 @@ class BouquetManager extends AbstractManager
         if (empty($mot)) {
             return null;
         } else {
-            return $this->pdo->query("SELECT * FROM ".self::TABLE." WHERE description
-            LIKE '%" . $mot . "%' OR saisonnier
-            LIKE '%" . $mot . "%' OR nom
+            return $this->pdo->query("SELECT * FROM ".self::TABLE." WHERE UPPER(description)
+            LIKE '%" . $mot . "%' OR UPPER(saisonnier)
+            LIKE '%" . $mot . "%' OR UPPER(nom)
             LIKE '%" . $mot . "%' ")->fetchAll();
         }
     }
