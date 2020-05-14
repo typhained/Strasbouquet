@@ -3,21 +3,24 @@ body {
     min-height: 100vh;
     display: flex;
 }
-
 table {
     background: white;
 }
-
 #logo {
     width: 4vw;
     margin-top: -3vh;
 }
-
+.uk-alert{
+    background-color: white;
+}
 section {
     width: 100%;
 }
 .uk-button-primary, .uk-button-primary:hover, .uk-background-primary {
     background-color:  #a7d627;
+}
+.uk-icon{
+    color: #a7d627;
 }
 #navbar #admin {
     list-style-type: none;
