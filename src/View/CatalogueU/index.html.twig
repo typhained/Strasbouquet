@@ -17,7 +17,6 @@
             <caption class="uk-text-center uk-margin uk-text-bold">Liste des produits unitaires</caption>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nom</th>
                     <th>Type</th>
                     <th>Prix</th>
@@ -28,7 +27,7 @@
             <tbody>
                 {% for catalogueU in catalogueUs %}
                     <tr>
-                        <div id="modal-example-{{ catalogueU.id }}" uk-modal class="uk-modal-container">
+                        <div id="modal-example-{{ catalogueU.id_catalogue_unitaire }}" uk-modal class="uk-modal-container">
                             <div class="uk-modal-dialog uk-modal-body uk-text-center uk-overflow-auto>">
                                 <h3 class="uk-modal-title uk-text-danger ">Suppression de votre produit</h3>
                                 <p class="uk-text-center">Attention, cette action est irréversible</p>
@@ -40,15 +39,14 @@
                                 </p>
                             </div>
                         </div>
-                        <td>{{ catalogueU.id }}</td>
                         <td>{{ catalogueU.nom }}</td>
                         <td>{{ catalogueU.type }}</td>
                         <td>{{ catalogueU.prix }} €</td>
                         <td>{{ catalogueU.couleur }}</td>
                         <td>
-                            <a href="/CatalogueU/update/{{ catalogueU.id }}" title="Modifier"><span uk-icon="pencil"></span></a>
-                            <a href="#modal-example-{{ catalogueU.id }}" title="Supprimer" uk-toggle><span uk-icon="trash"></span></a>
-                            <a href="/CatalogueU/show/{{ catalogueU.id }}" title="Détails"><span uk-icon="info"></span></a>
+                            <a href="/CatalogueU/update/{{ catalogueU.id_catalogue_unitaire }}" title="Modifier"><span uk-icon="pencil"></span></a>
+                            <a href="#modal-example-{{ catalogueU.id_catalogue_unitaire }}" title="Supprimer" uk-toggle><span uk-icon="trash"></span></a>
+                            <a href="/CatalogueU/show/{{ catalogueU.id_catalogue_unitaire }}" title="Détails"><span uk-icon="info"></span></a>
                         </td>
                     </tr>
                 {% else %}

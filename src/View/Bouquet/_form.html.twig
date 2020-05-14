@@ -4,9 +4,9 @@
         <legend class="uk-legend">{{title}}</legend><br>
         <input class="uk-inline uk-input uk-margin" type="hidden" value="{{ bouquet.id }}" name="id">
         <label for="nom">Nom:</label>
-        <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.nom }}" name="nom">
+        <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.nom }}" name="nom" required>
         <label for="prix">Prix:</label>
-        <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.prix }}" name="prix">
+        <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.prix }}" name="prix" required>
         <label for="description">Description:</label>
         <input class="uk-inline uk-input uk-margin" type="text" value="{{ bouquet.description }}" name="description">
         <select class="uk-select uk-margin uk-inline" name="saisonnier">
