@@ -7,15 +7,12 @@
         <h3>Désolé, la recherche n'a rien retourné. Veuillez réessayer avec d'autres termes.</h3>
     {% else %}
     <div id="recherche">
-        <button class="uk-button uk-button-primary" type="button">Filtrer</button>
-        <div uk-dropdown>
-            <ul class="uk-nav uk-dropdown-nav">
+            <ul id="filter-inline">
+                <li><a class="uk-button uk-button-default" href="/Front/bouquets">Tout afficher</a></li>
                 {% for saisonnier in saisonniers %}
-                <li class="uk-nav-divider"></li>
-                <li><a href="/Front/filter/{{ saisonnier.saisonnier }}">{{saisonnier.saisonnier}}</a></li>
+                <li><a class="uk-button uk-button-default" href="/Front/filter/{{ saisonnier.saisonnier }}">{{saisonnier.saisonnier}}</a></li>
                 {% endfor %}
             </ul>
-        </div>
     </div>
         <div class="uk-child-width-1-4@s uk-grid-match" uk-grid>
             {% for bouquet in bouquets %}
