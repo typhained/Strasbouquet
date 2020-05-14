@@ -87,4 +87,9 @@ class CartManager extends AbstractManager
         JOIN ".self::CAT_U." cu ON bc.id_catalogue_unitaire=cu.id WHERE c.id_panier=$id GROUP BY c.id ");
         return $statement->fetchAll();
     }
+
+    public function showPriceCart($id)
+    {
+        return $this->pdo->query("SELECT date, prix_total FROM ".self::TABLE." WHERE id=$id")->fetch();
+    }
 }
