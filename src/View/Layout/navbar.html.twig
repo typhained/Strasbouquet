@@ -80,22 +80,18 @@
                     <a href="/Account/login">Connexion</a>
                 </li>
             {% else %}
-            <li>
-                <div class="uk-inline">
-                    <button class="uk-button uk-button-default" type="button"><span uk-icon="icon: user"></span></button>
-                            <div uk-dropdown="mode: click">
-                                <li>
-                                    <a href="/Account/logout">Déconnexion</a>
-                                </li>
-                                <li>
-                                    <a href="/User/show/{{ session.user }}"></a>
-                                </li>
-                    </div>
-                </li>
+                <span uk-icon="icon: user;  ratio: 2"></span>
+                <div uk-dropdown="mode: click">
+                    <li>
+                        <a href="/Account/logout">Déconnexion</a>
+                    </li>
+                    <li>
+                        <a href="/User/show/{{ session.user }}">Profil</a>
+                    </li>
+                </div>
             {% endif %}
         </ul>
     </ul>
-    </div>
 </nav>
 <div class="uk-offcanvas-content">
     <div id="menu-mobile" uk-offcanvas="overlay: true">
@@ -135,8 +131,6 @@
                     </li>
                 {% endif %}
             </ul>
-
-
         </div>
     </div>
 </div>
