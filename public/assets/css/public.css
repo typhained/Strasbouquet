@@ -2,7 +2,7 @@
 .uk-alert{
     background-color: white;
 }
-.uk-button-primary, .uk-button-primary:hover, .uk-background-primary {
+.uk-button-primary, .uk-button-primary:hover, .uk-background-primary, .uk-active {
     background-color:  #a7d627;
 }
 .uk-open {
@@ -12,9 +12,47 @@
     color:  #a7d627;
     font-weight: bold;
 }
+.uk-icon{
+    color: #a7d627;
+}
 .uk-button-default, .uk-button-default:hover {
     background-color: white;
 }
+#btn-reset li{
+    list-style: none;
+}
+#btn-reset a{
+    padding: 10px 20px;
+    border-radius: 7px;
+    text-decoration: none;
+}
+#nav-interne-a{
+    position: fixed;
+    top:20%;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+#nav-interne-a {
+    padding: 5px;
+    background-color: white;
+    border-radius: 7px;
+    border: 1px solid #a7d627;
+}
+#nav-interne-b{
+    position: fixed;
+    top:80%;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+#nav-interne-b {
+    padding: 5px;
+    background-color: white;
+    border-radius: 7px;
+    border: 1px solid #a7d627;
+}
+
 .card-perso{
     padding: 0;
     margin: 0 10px;
