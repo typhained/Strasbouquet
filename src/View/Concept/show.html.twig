@@ -8,9 +8,8 @@
     <!-- Catalogue unitaire -->
     {% include 'Concept/create.html.twig' %}
     <!-- Création bouquet -->
-    <div class="">
         <div class="uk-background-default uk-padding uk-box-shadow-large">
-            <h3 class="uk-heading-line"><span>Mon bouquet</span></h3>
+            <h3 id="mon-bouquet" class="uk-heading-line"><span>Mon bouquet</span></h3>
             <table class="uk-table uk-table-striped uk-table-hover">
                 <thead>
                     <tr>
@@ -19,7 +18,7 @@
                         <th>TYPE</th>
                         <th>PRIX</th>
                         <th>QUANTITÉ</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 {% for unit in concept %}
@@ -69,5 +68,8 @@
                 </div>
             </div>
         </div>
+    <div id="nav-interne">
+        <a id="nav-interne-a" href="#produit-dispo" title="up"><span uk-icon="icon: chevron-up; ratio: 2"></span></a>
+        <a id="nav-interne-b" href="#mon-bouquet" title="down"><span uk-icon="icon: chevron-down; ratio: 2"></span></a>
     </div>
 {% endblock %}

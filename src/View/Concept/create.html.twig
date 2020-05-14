@@ -1,11 +1,12 @@
     <div class="uk-margin-bottom">
         <div class="uk-background-default uk-padding uk-box-shadow-large">
-            <h3 class="uk-heading-line"><span>Produits disponibles</span></h3>
+            <h3 id="produit-dispo" class="uk-heading-line"><span>Produits disponibles</span></h3>
             <div uk-filter="target: .js-filter">
-                <div class="uk-grid-small uk-grid-divider uk-child-width-auto" uk-grid>
+                <div class="uk-grid-small uk-grid-divider uk-child-width-auto " uk-grid>
+                    <div class="uk-align-center">
                     <div>
-                        <ul class="uk-subnav uk-subnav-pill" uk-margin>
-                            <li class="uk-active" uk-filter-control><a href="#">RESET</a></li>
+                        <ul id="btn-reset">
+                            <li><a class="uk-button-primary" href="#">RESET</a></li>
                         </ul>
                     </div>
                     <div>
@@ -29,20 +30,16 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    </div>
                     <ul class="uk-child-width-1-4@s uk-grid-match js-filter" uk-grid>
                         {% for unit in units %}
                             <li data-color="{{ unit.couleur }}" data-type="{{ unit.type }}" data-name="{{ unit.nom }}">
-                                <div class="uk-card uk-card-default">
-                                    <div class="uk-card-title">
-                                        <div class="uk-text-center uk-position-top uk-margin-large">{{ unit.nom}}</div>
-                                    </div>
-                                    <div class="uk-card-body uk-text-center">
-                                        <canvas width="600" height="500"></canvas>
+                                <div class="card-perso uk-padding uk-box-shadow-large">
+                                    <h3>{{ unit.nom}}</h3>
                                         <img width="300" src="/{{ unit.file1 }}">
-                                        <div class="uk-label">{{ unit.type }}</div>
-                                    </div>
-                                    <div class="uk-card-footer uk-text-center">
-                                        <p class="uk-text-center">{{ unit.prix }}€</p>
+                                        <div class="card-perso-ban">{{ unit.type }}</div>
+                                    <div class="card-perso-ctn">
+                                        <p>Prix : {{ unit.prix }}€</p>
                                         <a href="./../../BouquetCat/add/{{ unit.id_catalogue_unitaire }}"><span uk-icon="icon: plus-circle"></span></a>
                                     </div>
                                 </div>
