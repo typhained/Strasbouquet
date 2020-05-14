@@ -3,6 +3,9 @@
     {{ parent()}} Accueil
 {% endblock %}
 {% block content %}
+    {% if bouquets == null %}
+        <h3>Désolé, la recherche n'a rien retourné. Veuillez réessayer avec d'autres termes.</h3>
+    {% else %}
     <div id="recherche">
         <button class="uk-button uk-button-primary" type="button">Filtrer</button>
         <div uk-dropdown>
@@ -48,7 +51,8 @@
                 </div>
             {% endfor %}
         </div>
-    {% if session.id_panier != null %}
- <a class="uk-button uk-button-secondary uk-margin" href="/Cart/showCart/{{ panier }}"> Voir le panier</a>
+        {% if session.id_panier != null %}
+     <a class="uk-button uk-button-secondary uk-margin" href="/Cart/showCart/{{ panier }}"> Voir le panier</a>
+        {% endif %}
     {% endif %}
 {% endblock %}

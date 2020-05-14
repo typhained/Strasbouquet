@@ -145,16 +145,18 @@ class FrontController extends AbstractController
             $mot = $_POST['mot'];
             explode(' ', $_POST['mot']);
         }
+        $bouquetManager = new BouquetManager();
         $galerieManager = new GalerieManager();
         $images = $galerieManager->selectAll();
-        $bouquetManager = new BouquetManager();
+        $saisonniers = $bouquetManager->saisonnier();
         $bouquets = $bouquetManager->recherche($mot);
         return $this->twig->render(
             'Front/bouquets.html.twig',
             [
                 'bouquets' => $bouquets,
                 'mot' => $mot,
-                'images' => $images
+                'images' => $images,
+                'saisonniers' => $saisonniers
             ]
         );
     }
