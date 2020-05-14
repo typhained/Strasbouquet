@@ -13,7 +13,7 @@
     font-weight: bold;
 }
 .card-perso{
-    padding: 0%;
+    padding: 0;
     margin: 0 10px;
     width: 23%;
     align-items: center;
@@ -23,9 +23,14 @@
     color: white;
 }
 /* Fin de Classes global*/
+@import url('fonts.css');
 
 body{
     background-color: rgba(248, 239, 186, 0.50);
+}
+h1, h2, h3 {
+    font-family: 'Merienda', cursive;
+    color: rgb(52, 52, 74);
 }
 
 .card-perso h3{
@@ -62,6 +67,20 @@ body{
 }
  .card-perso:hover #details{
     opacity: 1;
+}
+ #recherche{
+     margin :0 0 50px 0;
+ }
+
+ .modal-img-arround{
+     border-radius: 5px;
+ }
+
+@media screen and (max-width: 1117px) {
+    .card-perso {
+        width: 40%;
+        margin: 0 auto;
+    }
 }
 /* Début de Navbar */
 nav img{
