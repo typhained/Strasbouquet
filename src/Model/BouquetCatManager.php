@@ -83,8 +83,8 @@ class BouquetCatManager extends AbstractManager
 
     public function delete(int $idConcept, int $unit)
     {
-        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " bc 
-            WHERE bc.id_bouquet_concept = :id_concept AND bc.id_catalogue_unitaire = :unit");
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " 
+            WHERE id_bouquet_concept = :id_concept AND id_catalogue_unitaire = :unit");
         $statement->bindValue('id_concept', $idConcept, \PDO::PARAM_INT);
         $statement->bindValue('unit', $unit, \PDO::PARAM_INT);
         $statement->execute();

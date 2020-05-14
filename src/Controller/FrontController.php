@@ -142,7 +142,7 @@ class FrontController extends AbstractController
     {
         $mot = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $mot = $_POST['mot'];
+            $mot = strtoupper($_POST['mot']);
             explode(' ', $_POST['mot']);
         }
         $bouquetManager = new BouquetManager();
