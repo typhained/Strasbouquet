@@ -76,4 +76,10 @@ class GalerieManager extends AbstractManager
         $statement = $this->pdo->query("DELETE FROM ". self::TABLE . " WHERE id_catalogue_unitaire = $id");
         $statement->execute();
     }
+
+    public function delete($id)
+    {
+        $statement = $this->pdo->query("DELETE FROM ". self::TABLE . " WHERE id= $id");
+        $statement->execute();
+    }
 }
