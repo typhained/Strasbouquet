@@ -1,14 +1,87 @@
-/* Début de Classes global*/
+/* Début de Classes et id global*/
 .uk-alert{
     background-color: white;
 }
 .uk-button-primary, .uk-button-primary:hover, .uk-background-primary {
     background-color:  #a7d627;
 }
+.uk-open {
+    padding: 10px;
+}
+.uk-open .uk-accordion-title {
+    color:  #a7d627;
+    font-weight: bold;
+}
+.card-perso{
+    padding: 0;
+    margin: 0 10px;
+    width: 23%;
+    align-items: center;
+    border-radius: 7px;
+}
 .titre-th th{
     color: white;
 }
 /* Fin de Classes global*/
+@import url('fonts.css');
+
+body{
+    background-color: rgba(248, 239, 186, 0.50);
+}
+h1, h2, h3 {
+    font-family: 'Merienda', cursive;
+    color: rgb(52, 52, 74);
+}
+
+.card-perso h3{
+    text-align: center;
+    color: #34344A;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 5px;
+    border-radius: 7px 7px 0 0;
+}
+.card-perso p {
+    font-weight: bold;
+    margin: 0;
+}
+.card-perso-ctn  {
+    text-align: center;
+    padding: 5% 5% 5% 5%;
+    background-color: white;
+    border-radius: 0 0 7px 7px;
+}
+.card-perso-ctn a {
+    margin: 10px;
+}
+.card-perso-ban{
+    background-color: #F5E6E8;
+    text-align: center;
+    padding: 2%;
+}
+#details {
+    opacity: 0;
+    transition-duration: 1s;
+    margin: 0;
+    background-color: #F5E6E8;
+}
+ .card-perso:hover #details{
+    opacity: 1;
+}
+ #recherche{
+     margin :0 0 50px 0;
+ }
+
+ .modal-img-arround{
+     border-radius: 5px;
+ }
+
+@media screen and (max-width: 1117px) {
+    .card-perso {
+        width: 40%;
+        margin: 0 auto;
+    }
+}
 /* Début de Navbar */
 nav img{
     width: 36px;

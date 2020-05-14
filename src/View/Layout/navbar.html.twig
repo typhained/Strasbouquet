@@ -41,12 +41,21 @@
                     </li>
                 {% endif %}
             {% endif %}
-
             {% if session.role == "admin" %}
               <li>
                   <a href="/Home/index/">Panel admin</a>
               </li>
             {% endif %}
         </ul>
+    </div>
+    <div class="uk-navbar-right">
+        <div class="uk-margin ">
+            <form class="uk-search uk-search-default" action="/Front/recherche" method="post">
+                <div uk-grid>
+                    <input class="uk-search-input" type="text" name="mot" placeholder="recherche...">
+                    <input class="uk-button" type="submit" name="form" value="Rechercher">
+                </div>
+            </form>
+        </div>
     </div>
 </nav>

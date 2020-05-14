@@ -76,11 +76,13 @@ class FrontController extends AbstractController
     public function filter(string $filter)
     {
         $bouquetManager = new BouquetManager();
+        $galerieManager = new GalerieManager();
         $bouquets = $bouquetManager->filter($filter);
+        $images = $galerieManager->selectAll();
         $saisonniers = $bouquetManager->saisonnier();
         return $this->twig->render(
             'Front/bouquets.html.twig',
-            ['bouquets' => $bouquets, "saisonniers" => $saisonniers]
+            ['bouquets' => $bouquets, "saisonniers" => $saisonniers, "images"=>$images]
         );
     }
 
@@ -134,5 +136,26 @@ class FrontController extends AbstractController
     public function mentionsLegales()
     {
         return $this->twig->render('Front/mentions.html.twig');
+    }
+
+    public function recherche()
+    {
+        $mot = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $mot = $_POST['mot'];
+            explode(' ', $_POST['mot']);
+        }
+        $galerieManager = new GalerieManager();
+        $images = $galerieManager->selectAll();
+        $bouquetManager = new BouquetManager();
+        $bouquets = $bouquetManager->recherche($mot);
+        return $this->twig->render(
+            'Front/bouquets.html.twig',
+            [
+                'bouquets' => $bouquets,
+                'mot' => $mot,
+                'images' => $images
+            ]
+        );
     }
 }
