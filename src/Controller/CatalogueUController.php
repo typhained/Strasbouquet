@@ -22,14 +22,12 @@ class CatalogueUController extends AbstractController
         }
     }
 
-
-
     public function show(int $id)
     {
         if ($_SESSION['role'] == 'admin') {
             $catalogueUManager = new CatalogueUManager();
             $catalogueU = $catalogueUManager->selectOneById($id);
-            $catalogueU['prix'] = number_format($catalogueU['prix'], 2, '.', '');
+//                $catalogueU['prix'] = number_format($catalogueU['prix'], 2, '.', '');
             return $this->twig->render('CatalogueU/show.html.twig', ['catalogueU' => $catalogueU]);
         } else {
             header('location:/Front/index/');
