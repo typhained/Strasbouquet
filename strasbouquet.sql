@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 14 Mai 2020 à 17:56
+-- Généré le :  Jeu 14 Mai 2020 à 23:08
 -- Version du serveur :  5.7.30-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.30-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -318,7 +318,7 @@ ALTER TABLE `bouquet`
 -- AUTO_INCREMENT pour la table `bouquet_concept`
 --
 ALTER TABLE `bouquet_concept`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `catalogue_unitaire`
 --
@@ -333,7 +333,7 @@ ALTER TABLE `galerie`
 -- AUTO_INCREMENT pour la table `panier`
 --
 ALTER TABLE `panier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
