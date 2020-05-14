@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 14 Mai 2020 à 17:56 
+-- Généré le :  Jeu 14 Mai 2020 à 17:56
 -- Version du serveur :  5.7.30-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.30-1+ubuntu18.04.1+deb.sury.org+1
 
