@@ -187,3 +187,5 @@ footer a img {
 #icon-search {
     color: white;
 }
+
+.uk-subnav-pill>.uk-active>a{background-color:#a7d627;color:#fff}
