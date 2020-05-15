@@ -138,9 +138,10 @@ nav img{
 #footer-flex {
     display: flex;
     justify-content: space-around;
-    background-color: #a2a2a2;
+    background-color: #34344A;
     padding: 20px 0;
 }
+
 footer ul {
    padding: 20px 0;
     margin-top: 0;
@@ -176,3 +177,8 @@ footer a img {
     color: white;
 }
 /* Fin de Footer */
+
+/* Force icon navbar */
+#icon-search {
+    color: white;
+}

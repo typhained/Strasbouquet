@@ -1,5 +1,12 @@
 <!-- Menu Desktop -->
 <nav class="uk-navbar-container uk-visible@m" uk-navbar>
+    <div class="uk-navbar-left">
+        <div class="uk-margin-large-left">
+            <a href="/Front/index">
+                <img src="/assets/images/logo.png" />
+            </a>
+        </div>
+    </div>
     <div class="uk-navbar-center">
         <ul class="uk-navbar-nav">
             <li><a href="/Front/index">Strasbouquet</a></li>
@@ -54,7 +61,7 @@
         <div class="uk-navbar-item">
                 <form action="/Front/recherche" method="post">
                     <input class="uk-input uk-form-width-small uk-border-rounded" type="text" name="mot" placeholder="ex: Bouquet">
-                    <button class="uk-button uk-button-primary uk-border-rounded uk-button-small uk-visible@m" type="submit" name="form" value="Rechercher"><span uk-icon="icon: search"></span></button>
+                    <button class="uk-button uk-button-primary uk-border-rounded uk-button-small uk-visible@m" type="submit" name="form" value="Rechercher"><span id="icon-search" uk-icon="icon: search"></span></button>
                 </form>
         </div>
     </div>
