@@ -138,7 +138,7 @@ nav img{
 #footer-flex {
     display: flex;
     justify-content: space-around;
-    background-color: #f8f8f8;
+    background-color: #34344A;
     padding: 20px 0;
 }
 
@@ -151,7 +151,7 @@ footer li {
     list-style: none;
 }
 footer li a {
-    color: #999;
+    color: white;
 }
 footer a:hover{
     text-decoration: none;
