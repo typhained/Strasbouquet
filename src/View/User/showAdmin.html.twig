@@ -1,0 +1,68 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    {{ parent()}} Profil
+{% endblock %}
+{% block content %}
+    <div class="uk-container uk-margin-top">
+        <h3 class="uk-text-center">Profil de {{ user.firstname }} {{ user.lastname }}</h3>
+        <div class="uk-card uk-card-default uk-width-1-1@m">
+            <div class="uk-card-header uk-background-muted">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="uk-width-expand">
+                        <p class="uk-text-meta uk-margin-remove-top">Adresse mail: {{ user.mail }}</p>
+                        <p class="uk-text-meta uk-margin-remove-top">Numéro de téléphone: {{ user.num_Tel }}</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="uk-card-body">
+                <h3>Commande la plus récente </h3>
+                <table class="uk-table ">
+                    {% if recap == null %}
+                    <tr> Aucune commande récente </tr>
+                    {% else %}
+
+                    <thead class="uk-background-muted">
+                    <tr>
+                        <th>DATE</th>
+                        <th>PRIX</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>{{ recap.date }}</td>
+                        <td>{{ recap.prix_total }}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="uk-background-muted">CONTENU</th>
+                    </tr>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{ item.quantite }} * {{ item.nom }}</td>
+                        </tr>
+                    {% endfor %}
+                        {% if concepts != null %}
+                            <tr>
+                                <th colspan="2" class="uk-text-center">Bouquet personnalisé</th>
+                            </tr>
+                            {% for concept in concepts %}
+
+                                <tr>
+                                    <td class="uk-text-center">1</td>
+                                    <td class="uk-text-center">
+                                        {{ concept.produit }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                </table>
+            </div>
+            <div class="uk-card-footer uk-text-center">
+                <a class="uk-button uk-button-secondary" href="/User/index">Retour</a>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
