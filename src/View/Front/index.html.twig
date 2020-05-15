@@ -21,50 +21,60 @@
             <a href="/Concept/create" class="uk-button uk-button-primary">Je crée mon bouquet</a>
         </section>
     </div>
-        <!-- Bouquets -->
-        <section class="uk-section uk-padding-large" id="index-bouquets">
-            <h2>Nos bouquets</h2>
-            <div class="uk-child-width-1-4@m uk-child-width-1-2@s" uk-grid>
-                {% for bouquet in bouquets %}
-                    <div>
-                        <a class="" href="#modal-example-{{ bouquet.id }}" uk-toggle>
-                            <div class="uk-card uk-card-default">
-                                <div class="uk-card-media-top">
-                                    <img src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}" alt="">
-                                </div>
-                                <div class="uk-card-body">
-                                    <h3 class="uk-card-title">{{ bouquet.nom }}</h3>
-                                </div>
+    <!-- Bouquets -->
+    <section class="uk-section uk-padding-large" id="index-bouquets">
+        <h2>Nos bouquets</h2>
+        <div class="uk-grid-match uk-child-width-1-4@m uk-child-width-1-2@s" uk-grid>
+            {% for bouquet in bouquets %}
+                <div>
+                    <a class="" href="#modal-example-{{ bouquet.id }}" uk-toggle>
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-media-top">
+                                <img src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}" alt="">
                             </div>
-                        </a>
-                    </div>
-
-                    <div id="modal-example-{{ bouquet.id }}" uk-modal>
-                        <div class="uk-modal-dialog uk-text-center">
-                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <div class="uk-modal-header">
-                                <h2 class="uk-modal-title">{{ bouquet.nom }}</h2>
-                                <img width="400" src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}">
-                            </div>
-                            <div class="uk-modal-body">
-                                <dl class="uk-description-list">
-                                    <dt>Description</dt>
-                                    <dd>{{ bouquet.description }}</dd>
-                                </dl>
-                                <h3>Prix: {{ bouquet.prix }}€</h3>
-                            </div>
-                            <div class="uk-modal-footer">
-                                <a  class="uk-button uk-button-primary" href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a>
-                                <button class="uk-button uk-button-default uk-modal-close" type="button">Retour</button>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title">{{ bouquet.nom }}</h3>
                             </div>
                         </div>
+                    </a>
+                </div>
+
+                <div id="modal-example-{{ bouquet.id }}" uk-modal>
+                    <div class="uk-modal-dialog uk-text-center">
+                        <button class="uk-modal-close-default" type="button" uk-close></button>
+                        <div class="uk-modal-header">
+                            <h2 class="uk-modal-title">{{ bouquet.nom }}</h2>
+                            <img width="400" src="/{% for image in images %}{% if image.id_bouquet == bouquet.id %}{{ image.file1 }}{% endif %}{% endfor %}">
+                        </div>
+                        <div class="uk-modal-body">
+                            <dl class="uk-description-list">
+                                <dt>Description</dt>
+                                <dd>{{ bouquet.description }}</dd>
+                            </dl>
+                            <h3>Prix: {{ bouquet.prix }}€</h3>
+                        </div>
+                        <div class="uk-modal-footer">
+                            <a  class="uk-button uk-button-primary" href="/cart/addBouquetCart/{{bouquet.id}}">Ajouter au Panier</a>
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Retour</button>
+                        </div>
                     </div>
-                {% endfor %}
-            </div>
-            <div class="uk-margin">
-                <a href="/Front/bouquets" class="uk-button uk-button-primary">Accéder au catalogue</a>
-            </div>
-        </section>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="uk-margin-medium">
+            <a href="/Front/bouquets" class="uk-button uk-button-primary">Accéder au catalogue</a>
+        </div>
+    </section>
+    <section class="uk-section uk-padding-large uk-child-width-expand@s uk-text-center" id="index-log" uk-grid>
+        <div class="uk-text-center">
+            <p>Vous avez déjà un compte ?</p>
+            <a href="/Account/login" class="uk-button uk-button-primary">Connexion</a>
+        </div>
+        <div class="uk-text-center">
+            <p>Pas encore de compte ?</p>
+            <a href="/User/add" class="uk-button uk-button-secondary">Inscrivez-vous</a>
+        </div>
+    </section>
 {% endblock %}
 
 
