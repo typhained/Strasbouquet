@@ -17,8 +17,7 @@
         <th>Prénom</th>
         <th>Mail</th>
         <th>Téléphone</th>
-        <th>Dernière commande</th>
-        <th class="uk-table-expand"></th>
+        <th class="uk-table-expand">Actions</th>
         </thead>
         <tbody>
 
@@ -42,8 +41,9 @@
             <td>{{ user.firstname }}</td>
             <td>{{ user.mail }}</td>
             <td>{{ user.num_Tel }}
-            <td class="uk-table-expand">{{ user.historique }}</td>
-            <td><a href="/User/update/{{ user.id }}"><span uk-icon="pencil"></span></a>
+            <td>
+                <a href="/User/showAd/{{user.id}}"><span uk-icon="info"></span></a>
+                <a href="/User/update/{{ user.id }}"><span uk-icon="pencil"></span></a>
                 <a href="#modal-example-{{ user.id }}" uk-toggle><span uk-icon="trash"></span></a>
             </td>
         </tr>

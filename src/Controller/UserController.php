@@ -175,6 +175,35 @@ class UserController extends AbstractController
         }
     }
 
+    public function showAd($id)
+    {
+        if ($_SESSION["role"] == "admin") {
+            $userManager = new UserManager();
+            $cartManager = new CartManager();
+
+            $user = $userManager->selectOneById($id);
+            $cartid = $cartManager->historiqueID($id);
+            if ($cartid) {
+                $cartid = $cartid['id'];
+                $cart = $cartManager->showCartContent($cartid);
+                $concepts = $cartManager->conceptInCart($cartid);
+                $recap = $cartManager->showPriceCart($cartid);
+                return $this->twig->render('User/showAdmin.html.twig', [
+                    'user' => $user,
+                    "cart" => $cart,
+                    "concepts"=>$concepts,
+                    "recap"=>$recap,
+                ]);
+            } else {
+                return $this->twig->render('User/showAdmin.html.twig', [
+                    'user' => $user,
+                ]);
+            }
+        } else {
+            header('location:/Account/login/');
+        }
+    }
+
     /**
      * @param int $id
      */
