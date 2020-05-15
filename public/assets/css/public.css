@@ -131,6 +131,11 @@ nav img{
     width: 36px;
     height: 36px;
 }
+
+#logoNav {
+    width: auto;
+}
+
 /* Fin de Navbar */
 
 /* Début de Footer */
@@ -182,3 +187,5 @@ footer a img {
 #icon-search {
     color: white;
 }
+
+.uk-subnav-pill>.uk-active>a{background-color:#a7d627;color:#fff}
