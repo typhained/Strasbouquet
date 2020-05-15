@@ -61,7 +61,7 @@ class CartManager extends AbstractManager
     {
         $statement = $this->pdo->query("SELECT p.id, p.prix_total, u.firstname, u.lastname, p.date
         FROM " . self::TABLE . " p JOIN " .self::USER. "
-        u ON u.id=p.id_user WHERE p.etat = 'confirme' ORDER BY date DESC limit 5");
+        u ON u.id=p.id_user WHERE p.etat = 'confirme' ORDER BY date DESC, id DESC limit 5");
         return $statement->fetchAll();
     }
 
