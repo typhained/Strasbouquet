@@ -1,10 +1,10 @@
 <form method="post">
     <fieldset class="uk-fieldset">
         {% if carte == 1 %}
-            <p class="uk-text-success"><span uk-icon="icon: tag"></span> Une carte est associée à ce bouquet</p>
+            <p class="uk-text-success"><span uk-icon="icon: tag" class="uk-text-success"></span> Une carte est associée à ce bouquet</p>
             <button type="submit" value="delete-card" name="card" class="uk-button uk-button-default">Retirer la carte</button>
         {% else %}
-            <p class="uk-text-danger"><span uk-icon="icon: tag"></span> Il n'y a pas de carte</p>
+            <p class="uk-text-danger"><span uk-icon="icon: tag" class="uk-text-danger"></span> Il n'y a pas de carte</p>
             <button type="submit" value="add-card" name="card" class="uk-button uk-button-default">Ajouter une carte</button>
         {% endif %}
     </fieldset>
