@@ -68,7 +68,7 @@ class CartManager extends AbstractManager
     public function historiqueID($id)
     {
         $statement = $this->pdo->query("SELECT p.id FROM " . self::TABLE . " p 
-        WHERE p.id_user=$id AND p.etat= 'confirme' ORDER BY date DESC limit 1");
+        WHERE p.id_user=$id AND p.etat= 'confirme' ORDER BY date DESC, id DESC limit 1");
         return $statement->fetch();
     }
 
