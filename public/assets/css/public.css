@@ -131,6 +131,11 @@ nav img{
     width: 36px;
     height: 36px;
 }
+
+#logoNav {
+    width: auto;
+}
+
 /* Fin de Navbar */
 
 /* Début de Footer */
