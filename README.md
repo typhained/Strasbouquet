@@ -10,7 +10,7 @@ Cahier des charges non fournis.
  - LeadDev : Typhaine (https://github.com/karapuce)
  - Backend Developper & Designer : Yann (https://gist.github.com/mozbiat)
  - Backend Developper : Franck (https://github.com/Jeffo7980)
- - Backend Developper : Pierre (https://github.com/kiw808)
+ - Backend Developper & réalisation du logo : Pierre (https://github.com/kiw808)
 
 ### Etapes
 
