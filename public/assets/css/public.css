@@ -1,4 +1,5 @@
 @import url('fonts.css');
+
 /* Début de Classes et id global*/
 .uk-alert{
     background-color: white;
@@ -193,3 +194,7 @@ footer a img {
 }
 
 .uk-subnav-pill>.uk-active>a{background-color:#a7d627;color:#fff}
+
+.uk-container {
+    min-height: 70vh;
+}

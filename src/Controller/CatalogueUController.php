@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\CatalogueUManager;
 use App\Model\GalerieManager;
+use spec\GrumPHP\Task\AntSpec;
 
 /**
  * Class ItemController
@@ -88,6 +89,7 @@ class CatalogueUController extends AbstractController
     {
         if ($_SESSION['role'] == 'admin') {
             $catalogueUManager = new CatalogueUManager();
+            $galerieManager = new GalerieManager();
             $catalogueU = $catalogueUManager->selectOneById($id);
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (empty($_POST['nom']) || !is_string($_POST['nom'])) {
@@ -99,10 +101,13 @@ class CatalogueUController extends AbstractController
                     $message = "Veuillez remplir correctement le champ Prix s'il vous plaît";
                     return $this->twig->render('CatalogueU/edit.html.twig', ['message' => $message]);
                 }
+                $catalogueU['id_cat'] = $_POST['id_cat'];
                 $catalogueU['nom'] = $_POST['nom'];
                 $catalogueU['type'] = $_POST['type'];
                 $catalogueU['prix'] = number_format($_POST['prix'], 2, ".", "");
                 $catalogueU['couleur'] = $_POST['couleur'];
+                $type = "catalogue_unitaire";
+                $galerieManager->update($id, $type, $catalogueU['nom']);
                 $catalogueUManager->update($catalogueU);
                 header('Location:/CatalogueU/index');
             }

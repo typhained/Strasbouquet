@@ -60,7 +60,7 @@ class CatalogueUManager extends AbstractManager
         $prix = $catalogueU['prix'];
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE ."
              SET nom=:nom, type=:type, prix=".$prix.", couleur=:couleur WHERE id=:id");
-        $statement->bindValue('id', $catalogueU['id'], \PDO::PARAM_INT);
+        $statement->bindValue('id', $catalogueU['id_cat'], \PDO::PARAM_INT);
         $statement->bindValue('nom', $catalogueU['nom'], \PDO::PARAM_STR);
         $statement->bindValue('type', $catalogueU['type'], \PDO::PARAM_STR);
         $statement->bindValue('couleur', $catalogueU['couleur'], \PDO::PARAM_STR);

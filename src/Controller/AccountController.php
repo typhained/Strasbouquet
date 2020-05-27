@@ -50,7 +50,7 @@ class AccountController extends AbstractController
                         }
                     } else {
                         $message = "Le Mot de passe et l'adresse email ne correspondent pas.";
-                        return $this->twig->render('Account/login.html.twig', ['message' => $message]);
+                        return $this->twig->render('Account/index.html.twig', ['message' => $message]);
                     }
                 }
             }

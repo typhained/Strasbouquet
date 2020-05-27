@@ -8,7 +8,7 @@
         de {{ user.firstname ~" "~ user.lastname }}
     {% endif %}</h2>
     {% if session['role'] != 'admin' %}
-    <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
+    <div class="uk-text-center uk-text-danger uk-text-bolder">
         {{ message }}
     </div>
     {% endif %}

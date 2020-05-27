@@ -82,4 +82,11 @@ class GalerieManager extends AbstractManager
         $statement = $this->pdo->query("DELETE FROM ". self::TABLE . " WHERE id= $id");
         $statement->execute();
     }
+
+    public function update($id, $type, $name)
+    {
+        $statement = $this->pdo->prepare("UPDATE ".self::TABLE." SET nom=:nom WHERE id_".$type." = $id");
+        $statement->bindValue('nom', $name, \PDO::PARAM_STR);
+        $statement->execute();
+    }
 }

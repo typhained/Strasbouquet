@@ -8,7 +8,7 @@
            <!-- Affichage du produit  -->
         <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-height-medium" uk-grid>
             <div class="uk-card-media-left uk-cover-container uk-height-medium">
-                <img src="https://getuikit.com/docs/images/light.jpg" alt="" uk-cover>
+                <img  src="/{{ catalogueU.file1 }}" alt="{{ catalogueU.nom }}" uk-cover>
                 <canvas width="600" height="400"></canvas>
             </div>
             <div>
@@ -33,7 +33,7 @@
                    <p>
                        <button class="uk-button uk-button-default uk-modal-close" title="Annuler la suppréssion du produit" type="button">Annuler</button>
                        <button class="uk-button uk-button-danger " type="button">
-                           <a class="uk-text-secondary" title="Supprimer le produit" href="/catalogueU/delete/{{ catalogueU.id }}">Supprimer</a>
+                           <a class="uk-text-secondary" title="Supprimer le produit" href="/catalogueU/delete/{{ catalogueU.id_catalogue_unitaire }}">Supprimer</a>
                        </button>
                    </p>
                </div>
@@ -46,7 +46,7 @@
             <div class="uk-alert uk-text-center uk-text-danger uk-text-bolder">
                 {{ message }}
             </div>
-            <input type="hidden" name="id" value="{{ catalogueU.id }}">
+            <input type="hidden" name="id_cat" value="{{ catalogueU.id_catalogue_unitaire }}">
             <input class="uk-inline uk-input uk-margin" value="{{ catalogueU.nom }}" type="text" name="nom" placeholder="Nom" required>
             <select class="uk-select uk-margin uk-inline" name="type" required>
                 <option value="">Veuillez selectionner un type de produit</option>
@@ -78,4 +78,5 @@
             <a href="/CatalogueU/index" title="Retour vers le catalogue unitaire" class="uk-button uk-button-primary uk-margin">Retour</a>
         </div>
     </section>
+    {{ dump(catalogueU) }}
 {% endblock %}
